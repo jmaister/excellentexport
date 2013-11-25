@@ -1,0 +1,33 @@
+﻿<html>
+    <head>
+        <title>Export to excel test</title>
+        <script src="excellentexport.js"></script>
+    </head>
+    <body>
+
+        <input type="button" onclick="tableToExcel('datatable', 'W3C Example Table')" value="Export to Excel">
+        <br/>
+        
+        <input type="button" onclick="ExcellentExport.excel('datatable', 'W3C Example Table')" value="Excel">
+        <input type="button" onclick="ExcellentExport.csv('datatable', 'W3C Example Table')" value="CSV">
+        <input type="button" onclick="ExcellentExport.csv64('datatable', 'W3C Example Table')" value="CSV64">
+
+        <a download="somedata.xls" href="data:application/vnd.ms-excel;base64,PGh0bWwgeG1sbnM6bz0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6b2ZmaWNlIiB4bWxuczp4PSJ1cm46c2NoZW1hcy1taWNyb3NvZnQtY29tOm9mZmljZTpleGNlbCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnL1RSL1JFQy1odG1sNDAiPjxoZWFkPjwhLS1baWYgZ3RlIG1zbyA5XT48eG1sPjx4OkV4Y2VsV29ya2Jvb2s+PHg6RXhjZWxXb3Jrc2hlZXRzPjx4OkV4Y2VsV29ya3NoZWV0Pjx4Ok5hbWU+VzNDIEV4YW1wbGUgVGFibGU8L3g6TmFtZT48eDpXb3Jrc2hlZXRPcHRpb25zPjx4OkRpc3BsYXlHcmlkbGluZXMvPjwveDpXb3Jrc2hlZXRPcHRpb25zPjwveDpFeGNlbFdvcmtzaGVldD48L3g6RXhjZWxXb3Jrc2hlZXRzPjwveDpFeGNlbFdvcmtib29rPjwveG1sPjwhW2VuZGlmXS0tPjwvaGVhZD48Ym9keT48dGFibGU+CiAgICAgICAgICAgIDx0Ym9keT48dHI+CiAgICAgICAgICAgICAgICA8dGQ+MTAwPC90ZD4KICAgICAgICAgICAgICAgIDx0ZD4yMDA8L3RkPgogICAgICAgICAgICAgICAgPHRkPjMwMDwvdGQ+CiAgICAgICAgICAgIDwvdHI+CiAgICAgICAgICAgIDx0cj4KICAgICAgICAgICAgICAgIDx0ZD40MDA8L3RkPgogICAgICAgICAgICAgICAgPHRkPjUwMDwvdGQ+CiAgICAgICAgICAgICAgICA8dGQ+NjAwPC90ZD4KICAgICAgICAgICAgPC90cj4KICAgICAgICA8L3Rib2R5PjwvdGFibGU+PC9ib2R5PjwvaHRtbD4=">export excel</a>
+        <a download="somedata.csv" href="data:application/csv;charset=UTF-8,col1%2Ccol2%2Ccol3%0A100%2C200%2C300%0A123%2C456%2C789">Export CSV</a>
+        <a download="somedata.csv" href="data:application/csv;base64,Y29sMSxjb2wyLGNvbDMKMTAwLDIwMCwzMDAKMTIzLDQ1Niw3ODk=">Export csv 64</a>
+        
+        <table id="datatable">
+            <tr>
+                <td>100</td>
+                <td>200</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>400</td>
+                <td>500</td>
+                <td>600</td>
+            </tr>
+        </table>
+
+    </body>
+</html>
