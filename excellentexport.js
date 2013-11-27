@@ -11,8 +11,8 @@
  */
 window.ExcellentExport = (function() {
     var version = "1.1";
-    var uri = { excel: 'data:application/vnd.ms-excel;base64,', csv: 'data:application/csv;base64,' };
-    var template = { excel: '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>' };
+    var uri = {excel: 'data:application/vnd.ms-excel;base64,', csv: 'data:application/csv;base64,'};
+    var template = {excel: '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'};
     var base64 = function(s) {
         return window.btoa(unescape(encodeURIComponent(s)));
     };
@@ -30,7 +30,15 @@ window.ExcellentExport = (function() {
     };
 
     var tableToCSV = function(table) {
-        return "COL1,COL2,COL3\n100,200,300\n400,500,600";
+        var data = "";
+        for (var i = 0, row; row = table.rows[i]; i++) {
+            for (var j = 0, col; col = row.cells[j]; j++) {
+                data = data + (j ? ',' : '') + col.innerHTML;
+            }
+            data = data + "\n";
+        }
+        // return "COL1,COL2,COL3\n100,200,300\n400,500,600";
+        return data;
     };
 
     var ee = {
@@ -42,7 +50,7 @@ window.ExcellentExport = (function() {
             // Return true to allow the link to work
             return true;
         },
-        csv : function(anchor, table) {
+        csv: function(anchor, table) {
             table = get(table);
             var csvData = tableToCSV(table);
             var hrefvalue = uri.csv + base64(csvData);
