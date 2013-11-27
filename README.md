@@ -26,4 +26,5 @@ Usage
 Revision history:
 
 1.0 Added Excel data export
+
 1.1 Added CSV data export
