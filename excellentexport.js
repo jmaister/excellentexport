@@ -25,7 +25,6 @@ window.ExcellentExport = (function() {
             }
             var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
             var hrefvalue = uri + base64(format(template, ctx));
-            console.log(hrefvalue);
             anchor.href = hrefvalue;
             // Return true to allow the link to work
             return true;
