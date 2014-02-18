@@ -8,6 +8,11 @@ A quick Javascript librery to create export to Excel/CSV from HTML tables automa
 Check my blog page for testing:
 [Javascript export to Excel](http://jordiburgos.com/post/2013/javascript-export-to-excel.html)
 
+Compatibility
+-------------
+
+Firefox, Chrome, IE6+
+
 Usage
 =====
 
@@ -28,3 +33,5 @@ Revision history:
 1.0 Added Excel data export
 
 1.1 Added CSV data export
+
+1.3 Added support for IE6, IE7, IE8, IE9 
