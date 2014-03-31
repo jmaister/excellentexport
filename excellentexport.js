@@ -1,13 +1,13 @@
 /**
  * ExcellentExport.
  * A client side Javascript export to Excel.
- * 
+ *
  * @author: Jordi Burgos (jordiburgos@gmail.com)
- * 
+ *
  * Based on:
  * https://gist.github.com/insin/1031969
  * http://jsfiddle.net/insin/cmewv/
- * 
+ *
  * CSV: http://en.wikipedia.org/wiki/Comma-separated_values
  */
 
@@ -84,7 +84,7 @@ window.atob || (window.atob = function(string) {
 ExcellentExport = (function() {
     var version = "1.3";
     var uri = {excel: 'data:application/vnd.ms-excel;base64,', csv: 'data:application/csv;base64,'};
-    var template = {excel: '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'};
+    var template = {excel: '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'};
     var base64 = function(s) {
         return window.btoa(unescape(encodeURIComponent(s)));
     };
@@ -105,7 +105,7 @@ ExcellentExport = (function() {
         var fixedValue = value;
         var addQuotes = (value.indexOf(',') !== -1) || (value.indexOf('\r') !== -1) || (value.indexOf('\n') !== -1);
         var replaceDoubleQuotes = (value.indexOf('"') !== -1);
-        
+
         if (replaceDoubleQuotes) {
             fixedValue = fixedValue.replace(/"/g, '""');
         }
