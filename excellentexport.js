@@ -142,6 +142,7 @@ ExcellentExport = (function() {
             var csvData = tableToCSV(table);
             var hrefvalue = uri.csv + base64(csvData);
             anchor.href = hrefvalue;
+            return true;
         }
     };
 
