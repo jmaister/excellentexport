@@ -37,4 +37,10 @@ Revision history:
 
 1.1 Added CSV data export
 
-1.3 Added support for IE6, IE7, IE8, IE9. Added minified version.
+1.3 Added support for ---IE6---, ---IE7---, ---IE8---, IE9+. Added minified version.
+
+1.4 Add LICENSE.txt with GPL v3. UTF-8 characters fixed.
+
+**Note:**
+
+IE8 or lower do not support *data:* url schema.
