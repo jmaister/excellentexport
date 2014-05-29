@@ -44,11 +44,13 @@ Revision history:
 1.4 Add LICENSE.txt with GPL v3. UTF-8 characters fixed.
 
 
-**TODO:**
+TODO
+====
 
 Make it work on Internet Explorer. Any ideas are welcome.
 
-**Note:**
+Notes
+=====
 
 IE8 or lower do not support *data:* url schema.
 IE9 and upper do not support *data:* url schema on links.
