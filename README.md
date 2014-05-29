@@ -43,7 +43,8 @@ Revision history:
 
 1.4 Add LICENSE.txt with GPL v3. UTF-8 characters fixed.
 
-** TODO: **
+
+**TODO:**
 
 Make it work on Internet Explorer. Any ideas are welcome.
 
