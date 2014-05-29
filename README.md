@@ -14,7 +14,9 @@ Check my blog page for testing:
 Compatibility
 -------------
 
-Firefox, Chrome, IE6+
+Firefox, Chrome
+
+It does not work on Internet Explorer yet. Internet Explorer does not allow to use url data schema on links.
 
 Usage
 =====
@@ -37,10 +39,15 @@ Revision history:
 
 1.1 Added CSV data export
 
-1.3 Added support for ---IE6---, ---IE7---, ---IE8---, IE9+. Added minified version.
+1.3 Added minified version.
 
 1.4 Add LICENSE.txt with GPL v3. UTF-8 characters fixed.
+
+** TODO: **
+
+Make it work on Internet Explorer. Any ideas are welcome.
 
 **Note:**
 
 IE8 or lower do not support *data:* url schema.
+IE9 and upper do not support *data:* url schema on links.
