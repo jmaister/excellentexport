@@ -85,7 +85,9 @@ ExcellentExport = (function() {
     var version = "1.3";
     var uri = {excel: 'data:application/vnd.ms-excel;base64,', csv: 'data:application/csv;base64,'};
     var template = {excel: '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'};
-    var base64 = function(s) {
+    var csvDelimiter = ",";
+	var csvNewLine = "\r\n";
+	var base64 = function(s) {
         return window.btoa(unescape(encodeURIComponent(s)));
     };
     var format = function(s, c) {
@@ -103,7 +105,7 @@ ExcellentExport = (function() {
 
     var fixCSVField = function(value) {
         var fixedValue = value;
-        var addQuotes = (value.indexOf(',') !== -1) || (value.indexOf('\r') !== -1) || (value.indexOf('\n') !== -1);
+        var addQuotes = (value.indexOf(csvDelimiter) !== -1) || (value.indexOf('\r') !== -1) || (value.indexOf('\n') !== -1);
         var replaceDoubleQuotes = (value.indexOf('"') !== -1);
 
         if (replaceDoubleQuotes) {
@@ -119,9 +121,9 @@ ExcellentExport = (function() {
         var data = "";
         for (var i = 0, row; row = table.rows[i]; i++) {
             for (var j = 0, col; col = row.cells[j]; j++) {
-                data = data + (j ? ',' : '') + fixCSVField(col.textContent.trim());
+                data = data + (j ? csvDelimiter : '') + fixCSVField(col.textContent.trim());
             }
-            data = data + "\r\n";
+            data = data + csvNewLine;
         }
         return data;
     };
@@ -137,7 +139,13 @@ ExcellentExport = (function() {
             return true;
         },
         /** @expose */
-        csv: function(anchor, table) {
+        csv: function(anchor, table, delimiter, newLine) {
+			if(delimiter !== undefined && delimiter) {
+				csvDelimiter = delimiter;
+			}
+			if(newLine !== undefined && newLine) {
+				csvNewLine = newLine;
+			}
             table = get(table);
             var csvData = tableToCSV(table);
             var hrefvalue = uri.csv + base64(csvData);
