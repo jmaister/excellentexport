@@ -28,17 +28,19 @@ Get [Composer](http://getcomposer.org):
 
 Create a composer.json file for your project:
 
-```"repositories": [
+```JSON
+{
+    "repositories": [
         {
             "type": "vcs",
             "url": "https://github.com/jmaister/excellentexport"
         }
     ],
-	{
-	"require": {
-		"jmaister/excellentexport": "~1.4.0"
-	}
-}```
+    "require": {
+        "jmaister/excellentexport": "~1.4.0"
+    }
+}
+```
 
 Run `composer install`.
 
