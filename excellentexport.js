@@ -119,7 +119,7 @@ ExcellentExport = (function() {
         var data = "";
         for (var i = 0, row; row = table.rows[i]; i++) {
             for (var j = 0, col; col = row.cells[j]; j++) {
-                data = data + (j ? ',' : '') + fixCSVField(col.innerHTML);
+                data = data + (j ? ',' : '') + fixCSVField(col.textContent.trim());
             }
             data = data + "\r\n";
         }
