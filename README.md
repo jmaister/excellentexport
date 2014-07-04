@@ -44,6 +44,12 @@ Create a composer.json file for your project:
 
 Run `composer install`.
 
+Include script in your HTML:
+
+```HTML
+<script type="text/javascript" src="/components/excellentexport/excellentexport.min.js"></script>
+```
+
 Usage
 =====
 
