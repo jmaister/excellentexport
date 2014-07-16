@@ -83,6 +83,7 @@ window.atob || (window.atob = function(string) {
 
 ExcellentExport = (function() {
     var version = "1.3";
+    var csvSeparator = ',';
     var uri = {excel: 'data:application/vnd.ms-excel;base64,', csv: 'data:application/csv;base64,'};
     var template = {excel: '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'};
     var base64 = function(s) {
@@ -103,7 +104,7 @@ ExcellentExport = (function() {
 
     var fixCSVField = function(value) {
         var fixedValue = value;
-        var addQuotes = (value.indexOf(',') !== -1) || (value.indexOf('\r') !== -1) || (value.indexOf('\n') !== -1);
+        var addQuotes = (value.indexOf(csvSeparator) !== -1) || (value.indexOf('\r') !== -1) || (value.indexOf('\n') !== -1);
         var replaceDoubleQuotes = (value.indexOf('"') !== -1);
 
         if (replaceDoubleQuotes) {
@@ -119,7 +120,7 @@ ExcellentExport = (function() {
         var data = "";
         for (var i = 0, row; row = table.rows[i]; i++) {
             for (var j = 0, col; col = row.cells[j]; j++) {
-                data = data + (j ? ',' : '') + fixCSVField(col.innerHTML);
+                data = data + (j ? csvSeparator : '') + fixCSVField(col.innerHTML);
             }
             data = data + "\r\n";
         }
