@@ -90,7 +90,7 @@ if (!window.atob) {
 }
 
 
-var ExcellentExport = (function() {
+ExcellentExport = (function() {
     "use strict";
     var version = "1.3";
     var csvSeparator = ',';
