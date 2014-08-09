@@ -10,6 +10,19 @@ Check my blog page for testing:
 
 [ExcellentExport.js update: Javascript export to Excel and CSV](http://jordiburgos.com/post/2014/excellentexport-javascript-export-to-excel-csv.html)
 
+Revision history:
+=================
+
+1.0 Added Excel data export
+
+1.1 Added CSV data export
+
+1.3 Added minified version.
+
+1.4 Add LICENSE.txt with GPL v3. UTF-8 characters fixed.
+
+1.5 Posibility to select a CSV delimiter. Bower package available. Compose package available.
+
 
 Compatibility
 -------------
@@ -18,8 +31,14 @@ Firefox, Chrome
 
 It does not work on Internet Explorer yet. Internet Explorer does not allow to use url data schema on links.
 
-Install
-=====
+Install: Bower
+==============
+
+    bower install excellentexport
+
+
+Install: Composer
+=================
 
 Get [Composer](http://getcomposer.org):
 
@@ -64,16 +83,6 @@ Usage
 
     <a download="somedata.xls" href="#" onclick="return ExcellentExport.excel(this, 'datatable', 'Sheet Name Here');">Export to Excel</a>
     <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable');">Export to CSV</a>
-
-Revision history:
-
-1.0 Added Excel data export
-
-1.1 Added CSV data export
-
-1.3 Added minified version.
-
-1.4 Add LICENSE.txt with GPL v3. UTF-8 characters fixed.
 
 
 TODO
