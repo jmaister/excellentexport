@@ -1,4 +1,4 @@
-﻿<html>
+<html>
     <head>
         <title>Export to excel test</title>
         <script src="excellentexport.js"></script>
@@ -20,7 +20,9 @@
         <a download="somedata.xls" href="#" onclick="return ExcellentExport.excel(this, 'datatable', 'Sheet Name Here');">Export to Excel</a>
         <br/>
 
-        <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable');">Export to CSV</a>
+        <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable');">Export to CSV - UTF8</a>
+        <br/>
+        <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable', ';');">Export to CSV - Using semicolon ";" separator - UTF8</a>
         <br/>
 
         <table id="datatable">
