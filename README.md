@@ -21,7 +21,7 @@ Revision history:
 
 1.4 Add LICENSE.txt with GPL v3. UTF-8 characters fixed.
 
-1.5 Posibility to select a CSV delimiter. Bower package available. Compose package available.
+1.5 Possibility to select a CSV delimiter. Bower package available. Compose package available.
 
 
 Compatibility
