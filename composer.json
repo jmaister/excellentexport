@@ -1,0 +1,27 @@
+{
+	"name": "jmaister/excellentexport",
+	"type": "component",
+	"description": "A quick Javascript library to create export to Excel/CSV from HTML tables automatically in the browser. No server required.",
+	"license": "GPLv3",
+	"authors":
+	[
+		{
+			"name": "Jordi Burgos",
+			"homepage": "http://jordiburgos.com/"
+		}
+	],
+	"require":
+	{
+		"robloach/component-installer": "*"
+	},
+	"extra":
+	{
+		"component":
+		{
+			"files":
+			[
+				"*.js"
+			]
+		}
+	}
+}

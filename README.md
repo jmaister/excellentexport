@@ -18,6 +18,38 @@ Firefox, Chrome
 
 It does not work on Internet Explorer yet. Internet Explorer does not allow to use url data schema on links.
 
+Install
+=====
+
+Get [Composer](http://getcomposer.org):
+
+	$ curl -s http://getcomposer.org/installer | php
+	$ php composer.phar install
+
+Create a composer.json file for your project:
+
+```JSON
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/jmaister/excellentexport"
+        }
+    ],
+    "require": {
+        "jmaister/excellentexport": "~1.4.0"
+    }
+}
+```
+
+Run `composer install`.
+
+Include script in your HTML:
+
+```HTML
+<script type="text/javascript" src="/components/excellentexport/excellentexport.min.js"></script>
+```
+
 Usage
 =====
 
