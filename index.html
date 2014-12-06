@@ -24,6 +24,10 @@
         <br/>
         <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable', ';');">Export to CSV - Using semicolon ";" separator - UTF8</a>
         <br/>
+        <a download="somedata.csv" href="#" onclick="return generateCsv(this);">Export to CSV - UTF8 from a Javascript array</a>
+        <br/>
+        <a download="somedata.xls" href="#" onclick="return generateExcel(this);">Export to Excel from a Javascript array</a>
+        <br/>
 
         <table id="datatable">
             <tr>
@@ -52,6 +56,21 @@
                 <td>ç ñ ÄËÏÖÜ äëïöü</td>
             </tr>
         </table>
+
+        <script language="JavaScript">
+          var dataArr = [
+            ["a", "b", "c"],
+            ["a1", "b1", "c1"],
+            ["a2", "b2", "c2"],
+            ["a3", "b3", "c3"]
+          ];
+          function generateCsv(anchor) {
+            return ExcellentExport.fromData(dataArr).downloadCsv(anchor);
+          }
+          function generateExcel(anchor) {
+            return ExcellentExport.fromData(dataArr).downloadExcel(anchor);
+          }
+        </script>
 
     </body>
 </html>

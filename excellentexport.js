@@ -142,15 +142,73 @@ ExcellentExport = (function() {
         return data;
     };
 
+    var contentManagers = {
+      dom: {
+        getContentAsHtml: function (input) {
+          return get(input.table).innerHTML;
+        },
+        getContentAsCsv: function (input) {
+          return tableToCSV(input.table);
+        },
+        getContentAsArray: function (input) {
+          return input.table.rows.map(function (row) { return row.cells; });
+        }
+      },
+      data: {
+        getContentAsHtml: function (input) {
+          input.table = input.table.map(function (row) {
+            return '<tr>'+row.map(function (cell) { return '<td>'+cell+'</td>'; })+'</tr>';
+          }).join('');
+          return input;
+        },
+        getContentAsCsv: function (input) {
+          input.table = input.table.map(function (row) {
+            return row.map(function (cell, ind) {
+              return (ind ? csvDelimiter : '') + fixCSVField(cell)
+            }).join('') + csvNewLine;
+          }).join('');
+          return input;
+        },
+        getContentAsArray: function (input) {
+          return input;
+        }
+      },
+    };
+
     var ee = {
+        input: {},
+        /** @expose */
+        fromDom: function (domId) {
+          this.input = {table: domId};
+          this.manager = contentManagers.dom;
+          return this;
+        },
+        /** @expose */
+        fromData: function (domId) {
+          this.input = {table: domId};
+          this.manager = contentManagers.data;
+          return this;
+        },
+        /** @expose */
+        downloadExcel: function (anchor, name) {
+          this.input.worksheet = name || 'Worksheet';
+          anchor.href = uri.excel + base64(
+            format(template.excel, this.manager.getContentAsHtml(this.input)).table
+          );
+          // Return true to allow the link to work
+          return true;
+        },
+        /** @expose */
+        downloadCsv: function (anchor) {
+          anchor.href = uri.csv + base64(
+            this.manager.getContentAsCsv(this.input).table
+          );
+          // Return true to allow the link to work
+          return true;
+        },
         /** @expose */
         excel: function(anchor, table, name) {
-            table = get(table);
-            var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
-            var hrefvalue = uri.excel + base64(format(template.excel, ctx));
-            anchor.href = hrefvalue;
-            // Return true to allow the link to work
-            return true;
+            return this.fromDom(table).downloadExcel(anchor, name);
         },
         /** @expose */
         csv: function(anchor, table, delimiter, newLine) {
@@ -160,11 +218,7 @@ ExcellentExport = (function() {
             if (newLine !== undefined && newLine) {
                 csvNewLine = newLine;
             }
-            table = get(table);
-            var csvData = tableToCSV(table);
-            var hrefvalue = uri.csv + base64(csvData);
-            anchor.href = hrefvalue;
-            return true;
+            return this.fromDom(table).downloadExcel(anchor);
         }
     };
 
