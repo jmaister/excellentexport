@@ -1,14 +1,14 @@
 ExcellentExport.js
 ==================
 
-Javascript export to Excel or CSV
+JavaScript export to Excel or CSV
 
-A quick Javascript librery to create export to Excel/CSV from HTML tables automatically in the browser. No server required.
+A quick JavaScript library to create export to Excel/CSV from HTML tables automatically in the browser. No server required.
 
 Check my blog page for testing:
-[Javascript export to Excel](http://jordiburgos.com/post/2013/javascript-export-to-excel.html)
+[JavaScript export to Excel](http://jordiburgos.com/post/2013/javascript-export-to-excel.html)
 
-[ExcellentExport.js update: Javascript export to Excel and CSV](http://jordiburgos.com/post/2014/excellentexport-javascript-export-to-excel-csv.html)
+[ExcellentExport.js update: JavaScript export to Excel and CSV](http://jordiburgos.com/post/2014/excellentexport-javascript-export-to-excel-csv.html)
 
 Revision history:
 =================
