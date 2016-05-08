@@ -1,0 +1,19 @@
+{
+  "name": "excellentexport",
+  "version": "1.5.0",
+  "description": "Client side JavaScript export to Excel or CSV",
+  "license": "GPL-3.0",
+  "homepage": "http://jordiburgos.com/post/2014/excellentexport-javascript-export-to-excel-csv.html",
+  "author": "Jordi Burgos <jordiburgos@gmail.com>",
+  "bugs": "https://github.com/jmaister/excellentexport/issues",
+  "repository": "https://github.com/jmaister/excellentexport/issues",
+  "keywords": [
+    "excel",
+    "export",
+    "csv",
+    "javascript",
+    "client",
+    "side"
+  ],
+  "dependencies": {}
+}
