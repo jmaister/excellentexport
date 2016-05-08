@@ -129,7 +129,7 @@ ExcellentExport = (function() {
     };
 
     var tableToCSV = function(table) {
-        var data = "";
+        var data = "\ufeff";
         var i, j, row, col;
         for (i = 0; i < table.rows.length; i++) {
             row = table.rows[i];
