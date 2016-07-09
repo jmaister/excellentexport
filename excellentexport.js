@@ -3,6 +3,7 @@
  * A client side Javascript export to Excel.
  *
  * @author: Jordi Burgos (jordiburgos@gmail.com)
+ * @author: jiasm (jiashunming@outlook.com)
  *
  * Based on:
  * https://gist.github.com/insin/1031969
@@ -162,7 +163,7 @@ ExcellentExport = (function() {
             }
             table = get(table);
             var csvData = tableToCSV(table);
-            var hrefvalue = uri.csv + base64(csvData);
+            var hrefvalue = uri.csv + '77u/' + base64(csvData);
             anchor.href = hrefvalue;
             return true;
         }
