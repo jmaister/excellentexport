@@ -3,7 +3,6 @@
  * A client side Javascript export to Excel.
  *
  * @author: Jordi Burgos (jordiburgos@gmail.com)
- * @author: jiasm (jiashunming@outlook.com)
  *
  * Based on:
  * https://gist.github.com/insin/1031969
