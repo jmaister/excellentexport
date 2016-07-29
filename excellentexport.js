@@ -94,7 +94,6 @@ ExcellentExport = (function() {
     "use strict";
     var version = "1.3";
     var csvSeparator = ',';
-    var uri = {excel: 'data:application/vnd.ms-excel;base64,', csv: 'data:application/csv;base64,'};
     var template = {excel: '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'};
     var csvDelimiter = ",";
     var csvNewLine = "\r\n";
@@ -144,16 +143,30 @@ ExcellentExport = (function() {
         return data;
     };
 
+    function createDownloadLink(anchor, data, type, filename){
+        if(window.navigator.msSaveBlob) {
+            var blobObject = new Blob([data], type);
+            window.navigator.msSaveBlob(blobObject, filename);
+            return false;
+        } else if(window.URL.createObjectURL) {
+            var url = window.URL.createObjectURL(new Blob([data]), type);
+            anchor.download = filename;
+            anchor.href = url;
+        } else {
+            var hrefvalue = "data:" + type.type + ";base64," + base64(data);
+            anchor.download = filename; 
+            anchor.href = hrefvalue;
+        }
+        // Return true to allow the link to work
+        return true;            
+     };
+
     var ee = {
         /** @expose */
         excel: function(anchor, table, name) {
             table = get(table);
             var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
-            var excelObject = window.URL.createObjectURL(new Blob([format(template.excel, ctx)]), { type: 'application/vnd.ms-excel'});
-            anchor.href = excelObject
-         
-            // Return true to allow the link to work
-            return true;
+            return createDownloadLink(anchor, format(template.excel, ctx), { type: 'application/vnd.ms-excel'}, "export.xls");
         },
         /** @expose */
         csv: function(anchor, table, delimiter, newLine) {
@@ -164,10 +177,7 @@ ExcellentExport = (function() {
                 csvNewLine = newLine;
             }
             table = get(table);
-            var csvData = tableToCSV(table);
-            var csvObject = window.URL.createObjectURL(new Blob([csvData]), { type: 'application/csv'});
-            anchor.href = csvObject
-            return true;
+            return createDownloadLink(anchor, tableToCSV(table), { type: 'application/csv'}, "export.csv");
         }
     };
 
