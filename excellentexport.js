@@ -16,10 +16,9 @@
  */
 
 /*jslint browser: true, bitwise: true, plusplus: true, vars: true, white: true */
-
-// function taken from http://stackoverflow.com/a/16245768/2591950
-// author Jeremy Banks http://stackoverflow.com/users/1114/jeremy-banks
 function b64toBlob(b64Data, contentType, sliceSize) {
+    // function taken from http://stackoverflow.com/a/16245768/2591950
+    // author Jeremy Banks http://stackoverflow.com/users/1114/jeremy-banks
   contentType = contentType || '';
   sliceSize = sliceSize || 512;
 
@@ -189,12 +188,13 @@ ExcellentExport = (function() {
             if (newLine !== undefined && newLine) {
                 csvNewLine = newLine;
             }
+            
             table = get(table);
             var csvData = tableToCSV(table);
             var b64 = base64(csvData);
             var blob = b64toBlob(b64);
-            
-            anchor.href = var blobUrl = URL.createObjectURL(blob,'application/csv')
+
+            anchor.href = URL.createObjectURL(blob,'application/csv')
             return true;
         }
     };
