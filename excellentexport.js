@@ -174,7 +174,6 @@ ExcellentExport = (function() {
             table = get(table);
             var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
             var b64 = base64(format(template.excel, ctx));
-            var hrefvalue = uri.excel + b64;
             var blob = b64toBlob(b64);
             var blobUrl = URL.createObjectURL(blob,'application/vnd.ms-excel');
             
@@ -192,8 +191,10 @@ ExcellentExport = (function() {
             }
             table = get(table);
             var csvData = tableToCSV(table);
-            var hrefvalue = uri.csv + base64(csvData);
-            anchor.href = hrefvalue;
+            var b64 = base64(csvData);
+            var blob = b64toBlob(b64);
+            
+            anchor.href = var blobUrl = URL.createObjectURL(blob,'application/csv')
             return true;
         }
     };
