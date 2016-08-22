@@ -150,6 +150,7 @@ ExcellentExport = (function() {
         if (addQuotes || replaceDoubleQuotes) {
             fixedValue = '"' + fixedValue + '"';
         }
+
         return fixedValue;
     };
 
@@ -167,18 +168,32 @@ ExcellentExport = (function() {
         return data;
     };
 
+    function createDownloadLink(anchor, base64data, exporttype, filename){
+        if(window.navigator.msSaveBlob) {
+            var blob = b64toBlob(base64data, exporttype);
+            window.navigator.msSaveBlob(blob, filename);
+            return false;
+        } else if(window.URL.createObjectURL) {
+            var blob = b64toBlob(base64data, exporttype);
+            var blobUrl = URL.createObjectURL(blob, exporttype, filename);
+            anchor.href = blobUrl;
+        } else {
+            var hrefvalue = "data:" + type + ";base64," + base64data;
+            anchor.download = filename; 
+            anchor.href = hrefvalue;
+        }
+
+        // Return true to allow the link to work
+        return true;
+    };
+
     var ee = {
         /** @expose */
         excel: function(anchor, table, name) {
             table = get(table);
             var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
             var b64 = base64(format(template.excel, ctx));
-            var blob = b64toBlob(b64);
-            var blobUrl = URL.createObjectURL(blob,'application/vnd.ms-excel');
-            
-            anchor.href = blobUrl;
-            // Return true to allow the link to work
-            return true;
+            return createDownloadLink(anchor, b64, 'application/vnd.ms-excel','export.xls');
         },
         /** @expose */
         csv: function(anchor, table, delimiter, newLine) {
@@ -192,10 +207,7 @@ ExcellentExport = (function() {
             table = get(table);
             var csvData = tableToCSV(table);
             var b64 = base64(csvData);
-            var blob = b64toBlob(b64);
-
-            anchor.href = URL.createObjectURL(blob,'application/csv')
-            return true;
+            return createDownloadLink(anchor,b64,'application/csv','export.csv');
         }
     };
 
