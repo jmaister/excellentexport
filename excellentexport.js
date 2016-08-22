@@ -17,6 +17,32 @@
 
 /*jslint browser: true, bitwise: true, plusplus: true, vars: true, white: true */
 
+// function taken from http://stackoverflow.com/a/16245768/2591950
+// author Jeremy Banks http://stackoverflow.com/users/1114/jeremy-banks
+function b64toBlob(b64Data, contentType, sliceSize) {
+  contentType = contentType || '';
+  sliceSize = sliceSize || 512;
+
+  var byteCharacters = atob(b64Data);
+  var byteArrays = [];
+
+  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+    var byteNumbers = new Array(slice.length);
+    for (var i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+
+    var byteArray = new Uint8Array(byteNumbers);
+
+    byteArrays.push(byteArray);
+  }
+
+  var blob = new Blob(byteArrays, {type: contentType});
+  return blob;
+}
+
 var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
 var fromCharCode = String.fromCharCode;
 var INVALID_CHARACTER_ERR = (function () {
@@ -147,8 +173,12 @@ ExcellentExport = (function() {
         excel: function(anchor, table, name) {
             table = get(table);
             var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
-            var hrefvalue = uri.excel + base64(format(template.excel, ctx));
-            anchor.href = hrefvalue;
+            var b64 = base64(format(template.excel, ctx));
+            var hrefvalue = uri.excel + b64;
+            var blob = b64toBlob(b64);
+            var blobUrl = URL.createObjectURL(blob,'application/vnd.ms-excel');
+            
+            anchor.href = blobUrl;
             // Return true to allow the link to work
             return true;
         },
