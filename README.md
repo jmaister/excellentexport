@@ -19,9 +19,15 @@ Revision history:
 
 1.3 Added minified version.
 
-1.4 Add LICENSE.txt with GPL v3. UTF-8 characters fixed.
+1.4 Add LICENSE.txt with GPL v3.
+    UTF-8 characters fixed.
 
-1.5 Possibility to select a CSV delimiter. Bower package available. Compose package available.
+1.5 Possibility to select a CSV delimiter.
+    Bower package available.
+    Compose package available.
+
+2.0 --not released--
+    NPM package available.
 
 
 Compatibility
@@ -36,6 +42,11 @@ Install: Bower
 
     bower install excellentexport
 
+
+Install: NPM
+==============
+
+    npm install excellentexport
 
 Install: Composer
 =================
