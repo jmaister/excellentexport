@@ -27,6 +27,7 @@ Revision history:
     Compose package available.
 
 2.0 --not released--
+    Minimum IE 11.
     NPM package available.
 
 
@@ -106,3 +107,9 @@ Notes
 
 IE8 or lower do not support *data:* url schema.
 IE9 and upper do not support *data:* url schema on links.
+
+Test
+====
+
+    python -m SimpleHTTPServer 8000
+
