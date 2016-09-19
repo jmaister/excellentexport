@@ -14,7 +14,7 @@
 
 window.ExcellentExport = (function() {
     "use strict";
-    var version = "2.0";
+    var version = "1.5.0";
     var uri = {excel: 'data:application/vnd.ms-excel;base64,', csv: 'data:application/csv;base64,'};
     var template = {excel: '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta name=ProgId content=Excel.Sheet> <meta name=Generator content="Microsoft Excel 11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'};
     var csvDelimiter = ",";
@@ -64,7 +64,7 @@ window.ExcellentExport = (function() {
     };
 
     var ee = {
-        /** @expose */
+        /** @export */
         excel: function(anchor, table, name) {
             table = get(table);
             var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
@@ -73,7 +73,7 @@ window.ExcellentExport = (function() {
             // Return true to allow the link to work
             return true;
         },
-        /** @expose */
+        /** @export */
         csv: function(anchor, table, delimiter, newLine) {
             if (delimiter !== undefined && delimiter) {
                 csvDelimiter = delimiter;
