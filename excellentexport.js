@@ -14,6 +14,37 @@
 
 window.ExcellentExport = (function() {
     "use strict";
+
+    function b64toBlob(b64Data, contentType, sliceSize) {
+        // function taken from http://stackoverflow.com/a/16245768/2591950
+        // author Jeremy Banks http://stackoverflow.com/users/1114/jeremy-banks
+        contentType = contentType || '';
+        sliceSize = sliceSize || 512;
+
+        var byteCharacters = window.atob(b64Data);
+        var byteArrays = [];
+
+        var offset;
+        for (offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            var i;
+            for (i = 0; i < slice.length; i = i + 1) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new window.Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+
+        var blob = new window.Blob(byteArrays, {
+            type: contentType
+        });
+        return blob;
+    }
+
     var version = "1.5.0";
     var uri = {excel: 'data:application/vnd.ms-excel;base64,', csv: 'data:application/csv;base64,'};
     var template = {excel: '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta name=ProgId content=Excel.Sheet> <meta name=Generator content="Microsoft Excel 11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'};
@@ -46,6 +77,7 @@ window.ExcellentExport = (function() {
         if (addQuotes || replaceDoubleQuotes) {
             fixedValue = '"' + fixedValue + '"';
         }
+
         return fixedValue;
     };
 
@@ -63,15 +95,33 @@ window.ExcellentExport = (function() {
         return data;
     };
 
+    function createDownloadLink(anchor, base64data, exporttype, filename) {
+        var blob;
+        if (window.navigator.msSaveBlob) {
+            blob = b64toBlob(base64data, exporttype);
+            window.navigator.msSaveBlob(blob, filename);
+            return false;
+        } else if(window.URL.createObjectURL) {
+            blob = b64toBlob(base64data, exporttype);
+            var blobUrl = window.URL.createObjectURL(blob, exporttype, filename);
+            anchor.href = blobUrl;
+        } else {
+            var hrefvalue = "data:" + exporttype + ";base64," + base64data;
+            anchor.download = filename;
+            anchor.href = hrefvalue;
+        }
+
+        // Return true to allow the link to work
+        return true;
+    }
+
     var ee = {
         /** @export */
         excel: function(anchor, table, name) {
             table = get(table);
             var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
-            var hrefvalue = uri.excel + base64(format(template.excel, ctx));
-            anchor.href = hrefvalue;
-            // Return true to allow the link to work
-            return true;
+            var b64 = base64(format(template.excel, ctx));
+            return createDownloadLink(anchor, b64, 'application/vnd.ms-excel','export.xls');
         },
         /** @export */
         csv: function(anchor, table, delimiter, newLine) {
@@ -81,11 +131,11 @@ window.ExcellentExport = (function() {
             if (newLine !== undefined && newLine) {
                 csvNewLine = newLine;
             }
+
             table = get(table);
             var csvData = tableToCSV(table);
-            var hrefvalue = uri.csv + base64(csvData);
-            anchor.href = hrefvalue;
-            return true;
+            var b64 = base64(csvData);
+            return createDownloadLink(anchor,b64,'application/csv','export.csv');
         }
     };
 
