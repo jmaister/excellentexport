@@ -83,7 +83,7 @@ window.ExcellentExport = (function() {
             }
             table = get(table);
             var csvData = tableToCSV(table);
-            var hrefvalue = uri.csv + base64(csvData);
+            var hrefvalue = uri.csv + '77u/' + base64(csvData);
             anchor.href = hrefvalue;
             return true;
         }
