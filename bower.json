@@ -24,5 +24,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "repository": {
+      "type": "git",
+      "url": "git://github.com/jmaister/excellentexport.git"
+  }
 }

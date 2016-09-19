@@ -1,5 +1,6 @@
 {
 	"name": "jmaister/excellentexport",
+    "version": "1.5.0",
 	"type": "component",
 	"description": "A quick Javascript library to create export to Excel/CSV from HTML tables automatically in the browser. No server required.",
 	"license": "GPLv3",
