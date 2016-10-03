@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Export to excel test</title>
+        <script src="http://requirejs.org/docs/release/2.3.2/minified/require.js"></script>
+        <script>
+            require(['excellentexport.min'], function(ee) {
+                window.ExcellentExport = ee;
+            });
+        </script>
+        <style>
+            table, tr, td {
+                border: 1px black solid;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>ExcellentExport.js</h1>
+        
+        Check on <a href="http://jordiburgos.com">jordiburgos.com</a> and  <a href="https://github.com/jmaister/excellentexport">GitHub</a>.
+        
+        <h3>Test page</h3>
+
+        <br/>
+
+        <a download="somedata.xls" href="#" onclick="return ExcellentExport.excel(this, 'datatable', 'Sheet Name Here');">Export to Excel</a>
+        <br/>
+
+        <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable');">Export to CSV - UTF8</a>
+        <br/>
+        <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable', ';');">Export to CSV - Using semicolon ";" separator - UTF8</a>
+        <br/>
+
+        <table id="datatable">
+            <tr>
+                <th>Column 1</th>
+                <th>Column "cool" 2</th>
+                <th>Column 3</th>
+                <th>Column 4</th>
+            </tr>
+            <tr>
+                <td>100,111</td>
+                <td>200</td>
+                <td>300</td>
+                <td>áéíóú</td>
+            </tr>
+            <tr>
+                <td>400</td>
+                <td>500</td>
+                <td>Chinese chars: 解决导出csv中文乱码问题</td>
+                <td>àèìòù</td>
+            </tr>
+            <tr>
+                <td>Text</td>
+                <td>More text</td>
+                <td>Text with
+                new line</td>
+                <td>ç ñ ÄËÏÖÜ äëïöü</td>
+            </tr>
+        </table>
+    </body>
+</html>

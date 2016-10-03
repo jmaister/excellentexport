@@ -13,22 +13,35 @@ Check my blog page for testing:
 Revision history:
 =================
 
-1.0 Added Excel data export
+### 1.0
 
-1.1 Added CSV data export
+* Added Excel data export
 
-1.3 Added minified version.
+### 1.1
 
-1.4 Add LICENSE.txt with GPL v3.
-    UTF-8 characters fixed.
+* Added CSV data export
 
-1.5 Possibility to select a CSV delimiter.
-    Bower package available.
-    Compose package available.
+### 1.3
 
-2.0 --not released--
-    Minimum IE 11.
-    NPM package available.
+* Added minified version.
+
+### 1.4
+
+* Add LICENSE.txt with GPL v3.
+* UTF-8 characters fixed.
+
+### 1.5
+ 
+* Possibility to select a CSV delimiter.
+* Bower package available.
+* Compose package available.
+
+### 2.0.0 --not released yet--
+
+* Minimum IE 11.
+* Links open with URL.createObjectURL(...).
+* NPM package available.
+* Using Semantic versioning (2.0.0 isstead of 2.0). 
 
 
 Compatibility

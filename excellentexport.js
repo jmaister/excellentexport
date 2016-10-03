@@ -11,9 +11,12 @@
  * CSV: http://en.wikipedia.org/wiki/Comma-separated_values
  */
 /*jslint browser: true, bitwise: true, vars: true, white: true */
+/*global define, exports, module */
 
-window.ExcellentExport = (function() {
-    "use strict";
+(function (global) {
+    'use strict';
+
+var ExcellentExport = (function() {
 
     function b64toBlob(b64Data, contentType, sliceSize) {
         // function taken from http://stackoverflow.com/a/16245768/2591950
@@ -141,3 +144,20 @@ window.ExcellentExport = (function() {
 
     return ee;
 }());
+
+    // AMD support
+    if (typeof define === 'function' && define.amd) {
+        define(function () { return ExcellentExport; });
+    // CommonJS and Node.js module support.
+    } else if (typeof exports !== 'undefined') {
+        // Support Node.js specific `module.exports` (which can be a function)
+        if (typeof module !== 'undefined' && module.exports) {
+            exports = module.exports = ExcellentExport;
+        }
+        // But always support CommonJS module 1.1.1 spec (`exports` cannot be a function)
+        exports.ExcellentExport = ExcellentExport;
+    } else {
+        global.ExcellentExport = ExcellentExport;
+    }
+})(this);
+
