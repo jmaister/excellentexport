@@ -42,7 +42,7 @@ Revision history:
 * Links open with URL.createObjectURL(...).
 * NPM package available.
 * Using Semantic versioning (2.0.0 isstead of 2.0). 
-
+* Module can be loaded standalone or with RequireJS.
 
 Compatibility
 -------------
@@ -116,6 +116,11 @@ Notes
 IE8 or lower do not support *data:* url schema.
 IE9 does not support *data:* url schema on links.
 IE10 and above and Edge are supported via the Microsoft-specific `msOpenOrSaveBlob` method.
+
+Test
+====
+
+    python -m SimpleHTTPServer 8000
 
 Security
 ========
