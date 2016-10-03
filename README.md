@@ -36,13 +36,15 @@ Revision history:
 * Bower package available.
 * Compose package available.
 
-### 2.0.0 --not released yet--
+### 2.0.0
 
+* Now it can export to big files +2MB.
 * Minimum IE 11.
 * Links open with URL.createObjectURL(...).
 * NPM package available.
 * Using Semantic versioning (2.0.0 isstead of 2.0). 
 * Module can be loaded standalone or with RequireJS.
+* Change license to MIT.
 
 Compatibility
 -------------

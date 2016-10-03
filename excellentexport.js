@@ -1,14 +1,10 @@
 /**
- * ExcellentExport.
+ * ExcellentExport 2.0.0
  * A client side Javascript export to Excel.
  *
  * @author: Jordi Burgos (jordiburgos@gmail.com)
+ * @url: https://github.com/jmaister/excellentexport
  *
- * Based on:
- * https://gist.github.com/insin/1031969
- * http://jsfiddle.net/insin/cmewv/
- *
- * CSV: http://en.wikipedia.org/wiki/Comma-separated_values
  */
 /*jslint browser: true, bitwise: true, vars: true, white: true */
 /*global define, exports, module */
