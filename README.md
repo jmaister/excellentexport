@@ -42,7 +42,7 @@ Revision history:
 * Minimum IE 11.
 * Links open with URL.createObjectURL(...).
 * NPM package available.
-* Using Semantic versioning (2.0.0 isstead of 2.0). 
+* Using Semantic versioning (2.0.0 instead of 2.0). 
 * Module can be loaded standalone or with RequireJS.
 * Change license to MIT.
 
