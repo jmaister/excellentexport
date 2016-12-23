@@ -102,7 +102,7 @@ var ExcellentExport = (function() {
             return false;
         } else if(window.URL.createObjectURL) {
             blob = b64toBlob(base64data, exporttype);
-            var blobUrl = window.URL.createObjectURL(blob, exporttype, filename);
+            var blobUrl = window.URL.createObjectURL(blob);
             anchor.href = blobUrl;
         } else {
             var hrefvalue = "data:" + exporttype + ";base64," + base64data;
