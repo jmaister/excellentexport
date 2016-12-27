@@ -46,6 +46,10 @@ Revision history:
 * Module can be loaded standalone or with RequireJS.
 * Change license to MIT.
 
+### 2.0.1
+
+* Fix CSV Chinese characters and other special characters display error in Windows Excel.
+
 Compatibility
 -------------
 
