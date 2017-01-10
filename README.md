@@ -31,7 +31,7 @@ Revision history:
 * UTF-8 characters fixed.
 
 ### 1.5
- 
+
 * Possibility to select a CSV delimiter.
 * Bower package available.
 * Compose package available.
@@ -42,13 +42,14 @@ Revision history:
 * Minimum IE 11.
 * Links open with URL.createObjectURL(...).
 * NPM package available.
-* Using Semantic versioning (2.0.0 instead of 2.0). 
+* Using Semantic versioning (2.0.0 instead of 2.0).
 * Module can be loaded standalone or with RequireJS.
 * Change license to MIT.
 
 ### 2.0.1
 
 * Fix CSV Chinese characters and other special characters display error in Windows Excel.
+* Fix URL.createObjectURL(...) on Firefox.
 
 Compatibility
 -------------
