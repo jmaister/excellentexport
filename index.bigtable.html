@@ -53,5 +53,28 @@
                 <td>ç ñ ÄËÏÖÜ äëïöü</td>
             </tr>
         </table>
+
+
+        <br/>
+        <br/>
+        <a download="bigdata.xls" href="#" onclick="return ExcellentExport.excel(this, 'bigtable', 'Big Data Sheet');">Export to Excel very big table</a><br/>
+        <a download="bigdata.csv" href="#" onclick="return ExcellentExport.csv(this, 'bigtable');">Export to CSV very big table</a>
+        <table id="bigtable">
+        <br/>
+        </table>
+        <script>
+            var table = document.getElementById('bigtable');
+            var n = 5000;
+            var cols = 50;
+            var i, j;
+
+            for (i=0; i < n; i=i+1) {
+                var row = table.insertRow(0);
+                for (j=0; j < cols; j=j+1) {
+                    var cell = row.insertCell(0);
+                    cell.innerHTML = "Test " + Math.random();
+                }
+            }
+        </script>
     </body>
 </html>
