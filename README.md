@@ -51,6 +51,11 @@ Revision history:
 * Fix CSV Chinese characters and other special characters display error in Windows Excel.
 * Fix URL.createObjectURL(...) on Firefox.
 
+### 2.0.3
+
+* Fix export as a module.
+* Changed minifier to UglifyJS.
+
 Compatibility
 -------------
 
