@@ -118,6 +118,11 @@ var ExcellentExport = (function() {
         version: function() {
             return version;
         },
+        blob: function ( table, name){
+            table = get(table);
+            var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
+            return b64toBlob(base64(format(template.excel, ctx)));            
+        },
         excel: function(anchor, table, name) {
             table = get(table);
             var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
