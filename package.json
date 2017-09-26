@@ -19,10 +19,13 @@
     "side"
   ],
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js --progress",
+    "prod": "webpack --config webpack.config.js --progress -p"
   },
   "main": "dist/excellentexport.js",
-  "dependencies": {},
+  "dependencies": {
+    "xlsx": "^0.11.4"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

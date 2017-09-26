@@ -8,6 +8,20 @@
                 border: 1px black solid;
             }
         </style>
+        <script>
+            function newApi(format) {
+                return ExcellentExport.convert({
+                    anchor: 'anchorNewApi-' + format,
+                    filename: 'data_123.' + format,
+                    format: format
+                }, [{
+                    name: 'Sheet Name Here 1',
+                    from: {
+                        table: 'datatable'
+                    }
+                }]);
+            }
+        </script>
     </head>
     <body>
         <h1>ExcellentExport.js</h1>
@@ -25,6 +39,12 @@
         <br/>
         <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable', ';');">Export to CSV - Using semicolon ";" separator - UTF8</a>
         <br/>
+        <h1>NEW API!</h1>
+        <a download="data_123.xls" href="#" id="anchorNewApi-xls" onclick="return newApi('xls');">Export to Excel XLS: </a>
+        <br/>
+        <a download="data_123.xlsx" href="#" id="anchorNewApi-xlsx" onclick="return newApi('xlsx');">Export to Excel: XLSX</a>
+        <br/>
+        <a download="data_123.csv" href="#" id="anchorNewApi-csv" onclick="return newApi('csv');">Export to CSV</a>
 
         <table id="datatable">
             <tr>
