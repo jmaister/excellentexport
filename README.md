@@ -18,6 +18,8 @@ Check my blog page for testing:
 * Define the final API for ExcellentExport.convert(...)
 * Remove rows or columns from a table.
 * Filter and process cell values.
+* Input data from array.
+* Output as a Blob.
 * Set fonts to the sheet.
 * Insert images ?
 

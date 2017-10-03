@@ -136,9 +136,11 @@ const ExcellentExport = function() {
      ]);
 
      Options:
-     - anchor: String/Element
-     - format: 'xlsx'/'xls'/'csv'
-     - filename: String
+     {
+        anchor: String/Element,
+        format: 'xlsx'/'xls'/'csv',
+        filename: String
+     }
 
      Sheet element configuration:
      {
@@ -147,14 +149,37 @@ const ExcellentExport = function() {
             table: String/Element, // Table ID or table element
             array: [...], // Array with data
             arrayHasHeader: true, // Array first row is the header
+            filter: function(row, col, data) {}
         },
         ...
      }
+
+     https://github.com/SheetJS/js-xlsx#utility-functions
+
      */
     const convert = function(options, sheets) {
         console.log(options, sheets);
 
-        const wb = XLSX.utils.table_to_book(get(sheets[0].from.table), {sheet: sheets[0].name});
+        let wb = {
+            SheetNames: [],
+            Sheets: {}
+        };
+        sheets.forEach((sheetConf) => {
+            const name = sheetConf.name;
+            console.log("Sheet name", name);
+            if (!name) {
+                throw new Error('Sheets must have "name".');
+            }
+
+            let ws = null;
+            if (sheetConf.from.table) {
+                ws = XLSX.utils.table_to_sheet(get(sheetConf.from.table), {sheet: name});
+            }
+            wb.SheetNames.push(name);
+            wb.Sheets[name] = ws;
+        });
+
+        // const wb = XLSX.utils.table_to_book(get(sheets[0].from.table), {sheet: sheets[0].name});
         const wbOut = XLSX.write(wb, {bookType:options.format, bookSST:true, type: 'binary'});
         try {
             const blob = new Blob([s2ab(wbOut)], {type:"application/octet-stream"});
