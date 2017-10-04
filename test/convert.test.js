@@ -37,7 +37,6 @@ describe('convert() API', function() {
             let workbook = ExcellentExport.convert(options, sheets);
 
             assert.ok(workbook, 'Result must not be null');
-            console.log('finished');
         });
     });
 });
