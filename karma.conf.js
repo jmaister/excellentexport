@@ -1,4 +1,5 @@
 
+const path = require('path');
 const webpackConfig = require('./webpack.config');
 
 // Karma configuration
@@ -9,24 +10,19 @@ module.exports = function(config) {
 
         // ... normal karma configuration
         files: [
-            // all files ending in "_test"
-            {pattern: 'test/index.js', watched: false}
+            // all files ending in ".test"
+            {pattern: 'test/index.js', watched: false},
             // each file acts as entry point for the webpack configuration
+            {pattern: 'excellentexport.js', watched: true}
         ],
 
         preprocessors: {
             // add webpack as preprocessor
-            'test/index.js': ['webpack', 'sourcemap']
+            'test/index.js': ['webpack', 'sourcemap'],
+            'excellentexport.js': ['webpack', 'sourcemap']
         },
 
-        webpack: webpackConfig /*{
-            // karma watches the test entry points
-            // (you don't need to specify the entry option)
-            // webpack watches dependencies
-
-            // webpack configuration
-            devtool: 'inline-source-map'
-        }*/,
+        webpack: webpackConfig,
 
         webpackMiddleware: {
             // webpack-dev-middleware configuration
@@ -43,10 +39,31 @@ module.exports = function(config) {
             require("karma-webpack"),
             'karma-babel-preprocessor',
             'karma-sourcemap-loader',
-            'karma-coverage',
             'karma-phantomjs-launcher',
+            'karma-chrome-launcher',
             'istanbul-instrumenter-loader',
-            'karma-mocha'
-        ]
+            'karma-mocha',
+            'karma-coverage-istanbul-reporter'
+        ],
+
+        reporters: ['progress', 'coverage-istanbul'],
+        
+        coverageIstanbulReporter: {
+            // reports can be any that are listed here: https://github.com/istanbuljs/istanbul-reports/tree/590e6b0089f67b723a1fdf57bc7ccc080ff189d7/lib 
+            reports: ['html', 'text-summary'],
+            // base output directory. If you include %browser% in the path it will be replaced with the karma browser name 
+            dir: path.join(__dirname, 'coverage'),
+            // if using webpack and pre-loaders, work around webpack breaking the source path 
+            fixWebpackSourcePaths: true,
+            // stop istanbul outputting messages like `File [${filename}] ignored, nothing could be mapped` 
+            skipFilesWithNoCoverage: false,
+
+            'report-config': {
+                // all options available at: https://github.com/istanbuljs/istanbul-reports/blob/590e6b0089f67b723a1fdf57bc7ccc080ff189d7/lib/html/index.js#L135-L137
+                html: {
+                    subdir: 'html'
+                }
+            }
+        }
     });
 };

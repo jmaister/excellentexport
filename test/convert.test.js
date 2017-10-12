@@ -7,7 +7,7 @@ describe('convert() API', function() {
     describe('convert from array', function() {
         it('should create a CSV', function() {
             const options = {
-                // anchor: 'anchorNewApi-csv',
+                anchor: 'anchorNewApi-csv',
                 filename: 'data_123.csv',
                 format: 'csv'
             };
