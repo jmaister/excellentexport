@@ -27,8 +27,11 @@ Check my blog page for testing:
 
 ### 3.0.0 (Work in progress)
 
-* XLSX support. This bumps the build size to 639 KB.
+* XLSX support. This bumps the build size to 640 KB.
 * New API: ExcellentExport.convert(...)
+* Autogenerate download filename.
+* Data input from arrays or HTML Tables.
+* Multiple sheets for XLS or XLSX formats.
 
 ### 2.1.0 (24/09/2017)
 

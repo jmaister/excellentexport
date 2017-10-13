@@ -1,7 +1,7 @@
 const assert = require('assert');
 
 import ExcellentExport from '../excellentexport';
-
+import pkg from '../package.json';
 
 describe('version() API', function() {
     describe('get version', function() {
@@ -9,7 +9,7 @@ describe('version() API', function() {
             const version = ExcellentExport.version();
 
             assert.ok(version, 'Version must be returned');
-            assert.equal("3.0.0", version, "Version must be 3.0.0");
+            assert.equal(pkg.version, version, "Version must be " + pkg.version);
         });
     });
 });

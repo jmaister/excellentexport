@@ -5,11 +5,19 @@ import ExcellentExport from '../excellentexport';
 
 describe('convert() API', function() {
     describe('convert from array', function() {
-        it('should create a CSV', function() {
+
+        beforeEach(() => {
+            const element = document.createElement("div");
+            element.innerHTML = '<a id="anchor">Link</a>';
+
+            document.body.appendChild(element);
+        });
+
+        it('should create a XLSX', function() {
             const options = {
-                anchor: 'anchorNewApi-csv',
-                filename: 'data_123.csv',
-                format: 'csv'
+                anchor: 'anchor',
+                filename: 'data_from_array',
+                format: 'xlsx'
             };
 
             const sheets = [
@@ -18,7 +26,8 @@ describe('convert() API', function() {
                     from: {
                         array: [
                             [1, 2, 3],
-                            ['hello', '2200', 'bye']
+                            ['hello', '2200', 'bye'],
+                            ['quo"te', 'dobl"e qu"ote', 'singl\'e quote']
                         ]
                     }
                 },
@@ -34,10 +43,13 @@ describe('convert() API', function() {
 
             ];
 
-            let workbook = ExcellentExport.convert(options, sheets);
+            const workbook = ExcellentExport.convert(options, sheets);
 
             assert.ok(workbook, 'Result must not be null');
-            console.log('finished');
+
+            const anchor = document.getElementById('anchor');
+            assert.ok(anchor.href, 'Element must have href');
+            assert.ok(anchor.href.startsWith('blob:'), 'Element href myst be a blob:');
         });
     });
 });

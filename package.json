@@ -1,6 +1,6 @@
 {
   "name": "excellentexport",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Client side JavaScript export to Excel or CSV",
   "license": "MIT",
   "homepage": "http://jordiburgos.com/post/2014/excellentexport-javascript-export-to-excel-csv.html",
@@ -21,8 +21,8 @@
   "scripts": {
     "build": "webpack --config webpack.config.js --progress --watch",
     "prod": "webpack --config webpack.config.js --progress -p",
-    "karma": "karma start --single-run --browsers PhantomJS",
-    "test": "karma start --auto-watch --browsers Chrome"
+    "karma": "cross-env NODE_ENV=test karma start --single-run --browsers PhantomJS",
+    "test": "cross-env NODE_ENV=test karma start --auto-watch --browsers Chrome"
   },
   "main": "dist/excellentexport.js",
   "dependencies": {
