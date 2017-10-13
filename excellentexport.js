@@ -158,32 +158,40 @@ const ExcellentExport = function() {
 
      */
     const convert = function(options, sheets) {
-        console.log(options, sheets);
-
-        let wb = {
+        let workbook = {
             SheetNames: [],
             Sheets: {}
         };
+
+        if (options.format === 'csv' && sheets.length > 1) {
+            throw new Error("'csv' format only supports one sheet");
+        }
+
         sheets.forEach((sheetConf) => {
             const name = sheetConf.name;
-            console.log("Sheet name", name);
             if (!name) {
                 throw new Error('Sheets must have "name".');
             }
 
-            let ws = null;
+            let worksheet = null;
             if (sheetConf.from.table) {
-                ws = XLSX.utils.table_to_sheet(get(sheetConf.from.table), {sheet: name});
+                worksheet = XLSX.utils.table_to_sheet(get(sheetConf.from.table), {sheet: name});
+            } else if(sheetConf.from.array) {
+                worksheet = XLSX.utils.aoa_to_sheet(sheetConf.from.array);
+            } else {
+                throw new Error('No data for sheet: [' + name + ']');
             }
-            wb.SheetNames.push(name);
-            wb.Sheets[name] = ws;
+            workbook.SheetNames.push(name);
+            workbook.Sheets[name] = worksheet;
         });
 
-        // const wb = XLSX.utils.table_to_book(get(sheets[0].from.table), {sheet: sheets[0].name});
-        const wbOut = XLSX.write(wb, {bookType:options.format, bookSST:true, type: 'binary'});
+        const wbOut = XLSX.write(workbook, {bookType: options.format, bookSST:true, type: 'binary'});
         try {
             const blob = new Blob([s2ab(wbOut)], {type:"application/octet-stream"});
-            get(options.anchor).href = window.URL.createObjectURL(blob);
+            const anchor = get(options.anchor);
+            anchor.href = window.URL.createObjectURL(blob);
+            anchor.download = (options.filename || 'download') + '.' + options.format;
+
         } catch(e) {
             console.log(e, wbOut);
         }
