@@ -7,6 +7,7 @@ describe('convert() API', function() {
     describe('convert from array', function() {
 
         beforeEach(() => {
+            document.body.innerHTML = '';
             const element = document.createElement("div");
             element.innerHTML = '<a id="anchor">Link</a>';
 
@@ -49,7 +50,7 @@ describe('convert() API', function() {
 
             const anchor = document.getElementById('anchor');
             assert.ok(anchor.href, 'Element must have href');
-            assert.ok(anchor.href.startsWith('blob:'), 'Element href myst be a blob:');
+            assert.ok(anchor.href.indexOf('blob:') === 0, 'Element href myst be a blob:');
         });
     });
 });

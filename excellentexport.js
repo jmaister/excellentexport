@@ -49,7 +49,7 @@ const ExcellentExport = function() {
     let csvDelimiter = ",";
     let csvNewLine = "\r\n";
     const base64 = function(s) {
-        return window.btoa(window.unescape(encodeURIComponent(s)));
+        return window.btoa(window.decodeURI(encodeURIComponent(s)));
     };
     const format = function(s, c) {
         return s.replace(new RegExp("{(\\w+)}", "g"), function(m, p) {
@@ -163,6 +163,9 @@ const ExcellentExport = function() {
             Sheets: {}
         };
 
+        if (!options.format) {
+            throw new Error("'format' option must be defined");
+        }
         if (options.format === 'csv' && sheets.length > 1) {
             throw new Error("'csv' format only supports one sheet");
         }
@@ -174,9 +177,9 @@ const ExcellentExport = function() {
             }
 
             let worksheet = null;
-            if (sheetConf.from.table) {
+            if (sheetConf.from && sheetConf.from.table) {
                 worksheet = XLSX.utils.table_to_sheet(get(sheetConf.from.table), {sheet: name});
-            } else if(sheetConf.from.array) {
+            } else if(sheetConf.from && sheetConf.from.array) {
                 worksheet = XLSX.utils.aoa_to_sheet(sheetConf.from.array);
             } else {
                 throw new Error('No data for sheet: [' + name + ']');
@@ -193,7 +196,7 @@ const ExcellentExport = function() {
             anchor.download = (options.filename || 'download') + '.' + options.format;
 
         } catch(e) {
-            console.log(e, wbOut);
+            throw new Error('Error converting to '+ options.format + '. ' + e);
         }
         return wbOut;
 

@@ -21,8 +21,8 @@
   "scripts": {
     "build": "webpack --config webpack.config.js --progress --watch",
     "prod": "webpack --config webpack.config.js --progress -p",
-    "karma": "cross-env NODE_ENV=test karma start --single-run --browsers PhantomJS",
-    "test": "cross-env NODE_ENV=test karma start --auto-watch --browsers Chrome"
+    "karma": "cross-env NODE_ENV=test karma start --auto-watch --browsers Chrome",
+    "test": "cross-env NODE_ENV=test karma start --single-run --browsers PhantomJS"
   },
   "main": "dist/excellentexport.js",
   "dependencies": {
