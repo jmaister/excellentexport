@@ -25,12 +25,14 @@
             function newApiArray(format) {
                 return ExcellentExport.convert({
                     anchor: 'anchorNewApi-' + format + '-array',
-                    filename: 'data_123.array.' + format,
+                    filename: 'data_123.array',
                     format: format
                 }, [{
                     name: 'Sheet Name Here 1',
                     from: {
-                        array: 'datatable'
+                        array: [['line 1', 1234 , 'CN 你好'],
+                                ['line 2', 1234.56 , 'JP こんにちは']
+                        ]
                     }
                 }]);
             }
@@ -58,8 +60,8 @@
         <a download="data_123.xlsx" href="#" id="anchorNewApi-xlsx" onclick="return newApi('xlsx');">Export to Excel: XLSX format</a>
         <br/>
         <a download="data_123.csv" href="#" id="anchorNewApi-csv" onclick="return newApi('csv');">Export to CSV</a>
-        <h1>NEW API from Arrays!</h1>
-        <a href="#" id="anchorNewApi-xlsx-array" onclick="return newApiArray('xlsx');">Export to XLSX from array</a>
+        <br/>
+        <br/>
 
         <table id="datatable">
             <tr>
@@ -88,5 +90,14 @@
                 <td>ç ñ ÄËÏÖÜ äëïöü</td>
             </tr>
         </table>
+
+        <h1>NEW API from Arrays!</h1>
+
+        <a href="#" id="anchorNewApi-xlsx-array" onclick="return newApiArray('xlsx');">Export to XLSX from array</a>
+        <br>
+        <a href="#" id="anchorNewApi-xls-array" onclick="return newApiArray('xls');">Export to XLS from array</a>
+        <br>
+        <a href="#" id="anchorNewApi-csv-array" onclick="return newApiArray('csv');">Export to CSV from array</a>
+
     </body>
 </html>

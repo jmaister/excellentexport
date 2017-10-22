@@ -25,7 +25,7 @@ Check my blog page for testing:
 
 # Revision history:
 
-### 3.0.0 (Work in progress)
+### 3.0.0 (22/10/2017)
 
 * XLSX support. This bumps the build size to 640 KB.
 * New API: ExcellentExport.convert(...)

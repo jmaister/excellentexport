@@ -181,11 +181,13 @@ const ExcellentExport = function() {
                 worksheet = XLSX.utils.table_to_sheet(get(sheetConf.from.table), {sheet: name});
             } else if(sheetConf.from && sheetConf.from.array) {
                 worksheet = XLSX.utils.aoa_to_sheet(sheetConf.from.array);
+                console.log('a', worksheet);
             } else {
                 throw new Error('No data for sheet: [' + name + ']');
             }
             workbook.SheetNames.push(name);
             workbook.Sheets[name] = worksheet;
+            console.log('b', workbook);
         });
 
         const wbOut = XLSX.write(workbook, {bookType: options.format, bookSST:true, type: 'binary'});
