@@ -2,23 +2,22 @@
 
 JavaScript export to Excel or CSV
 
-A quick JavaScript library to create export to Excel/CSV from HTML tables automatically in the browser. No server required.
+A quick JavaScript library to create export to Excel/CSV from HTML tables in the browser. No server required.
 
-As part of the new version 3.0.0, there is support for XLSX. The drawback is that the library is 600+ KB.
+As part of the new version 3.0.0+, there is support for XLSX. The drawback is that the library is 600+ KB.
 
-If you just need XLS or CSV, use 2.X.X versions.
+If you only need XLS or CSV, use 2.X.X versions.
 
 Check my blog page for testing:
 [JavaScript export to Excel](http://jordiburgos.com/post/2013/javascript-export-to-excel.html)
 
-[ExcellentExport.js update: JavaScript export to Excel and CSV](http://jordiburgos.com/post/2014/excellentexport-javascript-export-to-excel-csv.html)
+[ExcellentExport.js update: JavaScript export to Excel and CSV](http://jordiburgos.com/post/2017/excellentexport-javascript-export-to-excel-csv.html)
 
 # TODO:
 
 * Define the final API for ExcellentExport.convert(...)
 * Remove rows or columns from a table.
 * Filter and process cell values.
-* Input data from array.
 * Output as a Blob.
 * Set fonts to the sheet.
 * Insert images ?
@@ -157,6 +156,8 @@ Import
 
     <a download="somedata.xls" href="#" onclick="return ExcellentExport.excel(this, 'datatable', 'Sheet Name Here');">Export to Excel</a>
     <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable');">Export to CSV</a>
+    <!-- new API, xlsx -->
+    <a download="somedata.xlsx" href="#" onclick="return ExcellentExport.convert({ anchor: this, filename: 'data_123.array', format: 'xlsx'},[{name: 'Sheet Name Here 1', from: {table: 'datatable'}}]);">Export to CSV</a>
 
 
 # Notes
