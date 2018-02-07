@@ -44,12 +44,12 @@ const ExcellentExport = function() {
         });
     };
 
-    const version = "3.0.0";
+    const version = "3.1.0";
     const template = {excel: '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta name=ProgId content=Excel.Sheet> <meta name=Generator content="Microsoft Excel 11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'};
     let csvDelimiter = ",";
     let csvNewLine = "\r\n";
     const base64 = function(s) {
-        return window.btoa(window.decodeURI(encodeURIComponent(s)));
+        return window.btoa(unescape(encodeURIComponent(s)));
     };
     const format = function(s, c) {
         return s.replace(new RegExp("{(\\w+)}", "g"), function(m, p) {
