@@ -24,6 +24,10 @@ Check my blog page for testing:
 
 # Revision history:
 
+### 3.1.0 (in progress)
+
+* Fix old API for base64 and escaping problem.
+
 ### 3.0.0 (22/10/2017)
 
 * XLSX support. This bumps the build size to 640 KB.
@@ -168,7 +172,11 @@ IE10 and above and Edge are supported via the Microsoft-specific `msOpenOrSaveBl
 
 # Test
 
-    python -m SimpleHTTPServer 8000
+    python 2.x:
+        python -m SimpleHTTPServer 8000
+
+    python 3.x:
+        python -m http.server 8000
 
 # Build
 
