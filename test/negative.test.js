@@ -88,6 +88,24 @@ describe('convert() API', function() {
 
         });
 
+        it('should fail if anchor is not defined/valid', function() {
+            const options = {
+                anchor: 'anchor1235d5d5d5d_invalid',
+                filename: 'data_from_array',
+                format: 'csv'
+            };
+
+            const sheets = [{
+                name: 'Sheet Name Here 1',
+                from: {}
+            }];
+
+            assert.throws(() => {
+                ExcellentExport.convert(options, sheets)
+            }, Error);
+
+        });
+
     });
 });
 

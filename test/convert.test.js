@@ -14,7 +14,7 @@ describe('convert() API', function() {
             document.body.appendChild(element);
         });
 
-        it('should create a XLSX', function() {
+        it('should create a XLSX from array', function() {
             const options = {
                 anchor: 'anchor',
                 filename: 'data_from_array',
