@@ -41,6 +41,7 @@ module.exports = function(config) {
             'karma-sourcemap-loader',
             'karma-phantomjs-launcher',
             'karma-chrome-launcher',
+            'karma-firefox-launcher',
             'istanbul-instrumenter-loader',
             'karma-mocha',
             'karma-coverage-istanbul-reporter'
