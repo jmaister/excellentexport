@@ -79,6 +79,15 @@ const ExcellentExport = function() {
         return fixedValue;
     };
 
+    const tableToArray = function(table) {
+        var tableInfo = Array.prototype.map.call(table.querySelectorAll('tr'), function(tr) {
+            return Array.prototype.map.call(tr.querySelectorAll('th,td'), function(td) {
+                return td.innerHTML;
+            });
+        });
+        return tableInfo;
+    };
+
     const tableToCSV = function(table) {
         let data = "";
         let i, j, row, col;
@@ -178,16 +187,15 @@ const ExcellentExport = function() {
 
             let worksheet = null;
             if (sheetConf.from && sheetConf.from.table) {
-                worksheet = XLSX.utils.table_to_sheet(get(sheetConf.from.table), {sheet: name});
+                const dataArray = tableToArray(get(sheetConf.from.table));
+                worksheet = XLSX.utils.aoa_to_sheet(dataArray, {sheet: name});
             } else if(sheetConf.from && sheetConf.from.array) {
-                worksheet = XLSX.utils.aoa_to_sheet(sheetConf.from.array);
-                console.log('a', worksheet);
+                worksheet = XLSX.utils.aoa_to_sheet(sheetConf.from.array, {sheet: name});
             } else {
                 throw new Error('No data for sheet: [' + name + ']');
             }
             workbook.SheetNames.push(name);
             workbook.Sheets[name] = worksheet;
-            console.log('b', workbook);
         });
 
         const wbOut = XLSX.write(workbook, {bookType: options.format, bookSST:true, type: 'binary'});
