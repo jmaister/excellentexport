@@ -24,7 +24,11 @@ Check my blog page for testing:
 
 # Revision history:
 
-### 3.1.0 (in progress)
+### 3.2.0
+
+* Update npm dependencies to fix vulnerabilities
+
+### 3.1.0
 
 * Fix old API for base64 and escaping problem.
 
