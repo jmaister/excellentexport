@@ -24,6 +24,10 @@ Check my blog page for testing:
 
 # Revision history:
 
+### 3.2.1
+
+* Update npm dependencies to fix vulnerabilities
+
 ### 3.2.0
 
 * Update npm dependencies to fix vulnerabilities
