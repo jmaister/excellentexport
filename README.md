@@ -15,14 +15,17 @@ Check my blog page for testing:
 
 # TODO:
 
-* Define the final API for ExcellentExport.convert(...)
-* Remove rows or columns from a table.
 * Filter and process cell values.
-* Output as a Blob.
 * Set fonts to the sheet.
 * Insert images ?
 
 # Revision history:
+
+### 3.3.0
+
+* Remove columns by index
+* Filter rows by value
+* Updated build to Webpack 4.x.x
 
 ### 3.2.1
 
@@ -36,7 +39,7 @@ Check my blog page for testing:
 
 * Fix old API for base64 and escaping problem.
 
-### 3.0.0 (22/10/2017)
+### 3.0.0
 
 * XLSX support. This bumps the build size to 640 KB.
 * New API: ExcellentExport.convert(...)
@@ -44,23 +47,23 @@ Check my blog page for testing:
 * Data input from arrays or HTML Tables.
 * Multiple sheets for XLS or XLSX formats.
 
-### 2.1.0 (24/09/2017)
+### 2.1.0
 
 * Add Webpack build.
 * Create UMD JavaScript module. Library can be loaded as a module (import, RequireJS, AMD, etc...) or standalone as window.ExcelentExport.
 
-### 2.0.3 (21/01/2017)
+### 2.0.3
 
 * Fix export as a module.
 * Changed minifier to UglifyJS.
 
-### 2.0.2 (10/01/2017)
+### 2.0.2
 
 * Fix CSV Chinese characters and other special characters display error in Windows Excel.
 * Fix URL.createObjectURL(...) on Firefox.
 
 
-### 2.0.0 (03/10/2016)
+### 2.0.0
 
 * Now it can export to big files +2MB.
 * Minimum IE 11.
@@ -99,61 +102,39 @@ Firefox, Chrome, Internet Explorer 11+.
 
 # Install
 
+## npm
+
+    npm install excellentexport --save
+
+## yarn
+
+    yarn add excellentexport
+
 ## Bower
 
     bower install excellentexport
-
-
-## npm
-
-    npm install excellentexport
-
-## Composer
-
-Get [Composer](http://getcomposer.org):
-
-	$ curl -s http://getcomposer.org/installer | php
-	$ php composer.phar install
-
-Create a composer.json file for your project:
-
-```JSON
-{
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/jmaister/excellentexport"
-        }
-    ],
-    "require": {
-        "jmaister/excellentexport": "~1.4.0"
-    }
-}
-```
-
-Run `composer install`.
 
 # Load
 
 
 Include script in your HTML:
 
-
-    <script type="text/javascript" src="/components/excellentexport/dist/excellentexport.js"></script>
+    <script type="text/javascript" src="dist/excellentexport.js"></script>
 
 
 Require.js
 
-    <script src="http://requirejs.org/docs/release/2.3.2/minified/require.js"></script>
+    <script src="http://requirejs.org/docs/release/2.3.6/minified/require.js"></script>
     <script>
         require(['dist/excellentexport'], function(ee) {
             window.ExcellentExport = ee;
         });
     </script>
 
-Import
+ES6 import
 
     import ExcellentExport from 'excellentexport';
+
 
 # Usage
 
@@ -171,6 +152,29 @@ Import
     <!-- new API, xlsx -->
     <a download="somedata.xlsx" href="#" onclick="return ExcellentExport.convert({ anchor: this, filename: 'data_123.array', format: 'xlsx'},[{name: 'Sheet Name Here 1', from: {table: 'datatable'}}]);">Export to CSV</a>
 
+# API
+
+     ExcellentExport.convert(options, sheets);
+
+     Options:
+     {
+        anchor: String/Element,
+        format: 'xlsx'/'xls'/'csv',
+        filename: String
+     }
+
+     Sheet element configuration:
+     {
+        name: 'Sheet 1', // Sheet name
+        from: {
+            table: String/Element, // Table ID or table element
+            array: [...], // Array with data
+            arrayHasHeader: true, // Array first row is the header
+            removeColumns: [...], // Array of column indexes (from 0)
+            filterRowFn: function(row) {return true} // Return true to keep
+        },
+        ...
+     }
 
 # Notes
 
@@ -192,9 +196,13 @@ Install dependencies:
 
     npm install
     
-Build dist/excellentexport.js
+Build development version dist/excellentexport.js
 
     npm run build
+
+Build publish version of dist/excellentexport.js
+
+    npm run prod
 
 Publish
 
