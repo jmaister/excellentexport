@@ -1,30 +1,16 @@
-const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
-    context: __dirname + "/",
-    entry: "./excellentexport.js",
+    entry: './excellentexport.js',
     output: {
-        path: __dirname + "/dist",
-        filename: "excellentexport.js",
-        library: "ExcellentExport",
-        libraryTarget: "umd",
-        libraryExport: 'default'
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'excellentexport.js',
+        library: 'ExcellentExport',
+        libraryTarget: 'umd',
+        libraryExport: 'default',
+        auxiliaryComment: 'ExcellentExport.js'
     },
-    module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015']
-                }
-            }
-        ]
-    },
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-        })
-    ]
+    performance: {
+        hints: false
+    }
 };

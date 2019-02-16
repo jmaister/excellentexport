@@ -1,5 +1,5 @@
 /**
- * ExcellentExport 3.0.0
+ * ExcellentExport 3.2.1
  * A client side Javascript export to Excel.
  *
  * @author: Jordi Burgos (jordiburgos@gmail.com)
@@ -48,15 +48,25 @@ const ExcellentExport = function() {
     const template = {excel: '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta name=ProgId content=Excel.Sheet> <meta name=Generator content="Microsoft Excel 11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'};
     let csvDelimiter = ",";
     let csvNewLine = "\r\n";
+    /**
+     * Convert a string to Base64.
+     * 
+     * @param {string} s
+     */
     const base64 = function(s) {
         return window.btoa(unescape(encodeURIComponent(s)));
     };
+
     const format = function(s, c) {
         return s.replace(new RegExp("{(\\w+)}", "g"), function(m, p) {
             return c[p];
         });
     };
-
+    
+    /**
+     * Get element by ID.
+     * @param {*} element 
+     */
     const get = function(element) {
         if (!element.nodeType) {
             return document.getElementById(element);
@@ -64,6 +74,10 @@ const ExcellentExport = function() {
         return element;
     };
 
+    /**
+     * Encode a value for CSV.
+     * @param {*} value 
+     */
     const fixCSVField = function(value) {
         let fixedValue = value;
         const addQuotes = (value.indexOf(csvDelimiter) !== -1) || (value.indexOf('\r') !== -1) || (value.indexOf('\n') !== -1);
@@ -137,12 +151,15 @@ const ExcellentExport = function() {
         }
     };
 
+    const removeColumn = function(arr2d, colIndex) {
+        for (var i = 0; i < arr2d.length; i++) {
+            var row = arr2d[i];
+            row.splice(colIndex, 1);
+        }
+    };
+
     /*
      ExcellentExport.convert(options, sheets);
-
-     ExcellentExport.convert({...}, [
-        {...}, {...},
-     ]);
 
      Options:
      {
@@ -158,13 +175,11 @@ const ExcellentExport = function() {
             table: String/Element, // Table ID or table element
             array: [...], // Array with data
             arrayHasHeader: true, // Array first row is the header
-            filter: function(row, col, data) {}
+            removeColumns: [...], // Array of column indexes (from 0)
+            filterRowFn: function(row) {return true}
         },
         ...
      }
-
-     https://github.com/SheetJS/js-xlsx#utility-functions
-
      */
     const convert = function(options, sheets) {
         let workbook = {
@@ -179,22 +194,42 @@ const ExcellentExport = function() {
             throw new Error("'csv' format only supports one sheet");
         }
 
-        sheets.forEach((sheetConf) => {
+        sheets.forEach((sheetConf, index) => {
             const name = sheetConf.name;
             if (!name) {
-                throw new Error('Sheets must have "name".');
+                throw new Error('Sheet ' + index + ' must have the property "name".');
             }
 
+            // Select data source
             let worksheet = null;
+            let dataArray;
             if (sheetConf.from && sheetConf.from.table) {
-                const dataArray = tableToArray(get(sheetConf.from.table));
-                worksheet = XLSX.utils.aoa_to_sheet(dataArray, {sheet: name});
+                dataArray = tableToArray(get(sheetConf.from.table));
             } else if(sheetConf.from && sheetConf.from.array) {
-                worksheet = XLSX.utils.aoa_to_sheet(sheetConf.from.array, {sheet: name});
+                dataArray = sheetConf.from.array
             } else {
                 throw new Error('No data for sheet: [' + name + ']');
             }
+
+            // Filter data
+            console.log("conf", sheetConf);
+            if (sheetConf.filterRowFn) {
+                if (sheetConf.filterRowFn instanceof Function) {
+                    dataArray = dataArray.filter(sheetConf.filterRowFn);
+                } else {
+                    throw new Error('Parameter "filterRowFn" must be a function.');
+                }
+            }
+            if (sheetConf.removeColumns) {
+                const toRemove = sheetConf.removeColumns.sort().reverse();
+                toRemove.forEach(index => {
+                    removeColumn(dataArray, index);
+                });
+            }
+
+            // Create sheet
             workbook.SheetNames.push(name);
+            worksheet = XLSX.utils.aoa_to_sheet(dataArray, {sheet: name});
             workbook.Sheets[name] = worksheet;
         });
 

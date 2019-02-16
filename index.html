@@ -36,6 +36,27 @@
                     }
                 }]);
             }
+
+            function exportSome() {
+                return ExcellentExport.convert({
+                    anchor: "anchorNewApi-xlsx-some",
+                    filename: "somedata",
+                    format: "xlsx"
+                }, [{
+                    name: 'Sheet number 1',
+                    from: {
+                        table: 'datatable'
+                    },
+                    filterRowFn: function(row) {
+                        if (row[1] == 200) {
+                            return false;
+                        }
+                        return true;
+                    },
+                    removeColumns: [1],
+
+                }])
+            }
         </script>
     </head>
     <body>
@@ -45,24 +66,7 @@
 
         <h3>Test page</h3>
 
-        <br/>
-
-        <a download="somedata.xls" href="#" onclick="return ExcellentExport.excel(this, 'datatable', 'Sheet Name Here');">Export to Excel</a>
-        <br/>
-
-        <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable');">Export to CSV - UTF8</a>
-        <br/>
-        <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable', ';');">Export to CSV - Using semicolon ";" separator - UTF8</a>
-        <br/>
-        <h1>NEW API!</h1>
-        <a download="data_123.xls" href="#" id="anchorNewApi-xls" onclick="return newApi('xls');">Export to Excel: XLS format</a>
-        <br/>
-        <a download="data_123.xlsx" href="#" id="anchorNewApi-xlsx" onclick="return newApi('xlsx');">Export to Excel: XLSX format</a>
-        <br/>
-        <a download="data_123.csv" href="#" id="anchorNewApi-csv" onclick="return newApi('csv');">Export to CSV</a>
-        <br/>
-        <br/>
-
+        Test table:
         <table id="datatable">
             <tr>
                 <th>Column 1</th>
@@ -90,6 +94,26 @@
                 <td>ç ñ ÄËÏÖÜ äëïöü</td>
             </tr>
         </table>
+
+        <br/>
+
+        <a download="somedata.xls" href="#" onclick="return ExcellentExport.excel(this, 'datatable', 'Sheet Name Here');">Export to Excel</a>
+        <br/>
+
+        <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable');">Export to CSV - UTF8</a>
+        <br/>
+        <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable', ';');">Export to CSV - Using semicolon ";" separator - UTF8</a>
+        <br/>
+        <h1>NEW API!</h1>
+        <a download="data_123.xls" href="#" id="anchorNewApi-xls" onclick="return newApi('xls');">Export to Excel: XLS format</a>
+        <br/>
+        <a download="data_123.xlsx" href="#" id="anchorNewApi-xlsx" onclick="return newApi('xlsx');">Export to Excel: XLSX format</a>
+        <br/>
+        <a download="data_123.csv" href="#" id="anchorNewApi-csv" onclick="return newApi('csv');">Export to CSV</a>
+        <br>
+        <a href="#" id="anchorNewApi-xlsx-some" onclick="return exportSome();">Export to Excel: XLSX filtering columns and rows</a>
+        <br/>
+        <br/>
 
         <h1>NEW API from Arrays!</h1>
 
