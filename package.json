@@ -51,7 +51,7 @@
     "mocha-loader": "2.0.0",
     "mocha-webpack": "1.1.0",
     "webdriverio": "4.13.2",
-    "webpack": "4.29.3",
+    "webpack": "4.32.2",
     "webpack-cli": "3.2.3",
     "webpack-dev-server": "3.1.14",
     "webpack-node-externals": "1.7.2",
