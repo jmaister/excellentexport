@@ -36,7 +36,7 @@
     "chai": "4.1.2",
     "cross-env": "5.2.0",
     "html-loader": "0.5.1",
-    "istanbul-instrumenter-loader": "3.0.0",
+    "istanbul-instrumenter-loader": "3.0.1",
     "karma": "4.0.0",
     "karma-babel-preprocessor": "7.0.0",
     "karma-chrome-launcher": "2.2.0",
