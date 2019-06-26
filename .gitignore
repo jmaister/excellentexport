@@ -4,5 +4,6 @@ node_modules
 .tmp
 .idea
 
-
 coverage/*
+/.cache
+
