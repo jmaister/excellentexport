@@ -21,6 +21,11 @@ Check my blog page for testing:
 
 # Revision history:
 
+### 3.4.0
+
+* Configure TravisCI on GitHub
+* Update npm dependencies to fix vulnerabilities
+
 ### 3.3.0
 
 * Remove columns by index
