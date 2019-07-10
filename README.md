@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/jmaister/excellentexport.svg?branch=master)](https://travis-ci.com/jmaister/excellentexport)
+
 # ExcellentExport.js
 
 JavaScript export to Excel or CSV
