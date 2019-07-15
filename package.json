@@ -39,7 +39,7 @@
     "istanbul-instrumenter-loader": "3.0.1",
     "karma": "4.1.0",
     "karma-babel-preprocessor": "7.0.0",
-    "karma-chrome-launcher": "2.2.0",
+    "karma-chrome-launcher": "3.0.0",
     "karma-cli": "2.0.0",
     "karma-coverage-istanbul-reporter": "2.0.4",
     "karma-firefox-launcher": "1.1.0",
