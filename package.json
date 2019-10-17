@@ -37,7 +37,7 @@
     "cross-env": "5.2.0",
     "html-loader": "0.5.1",
     "istanbul-instrumenter-loader": "3.0.1",
-    "karma": "4.1.0",
+    "karma": "4.4.0",
     "karma-babel-preprocessor": "7.0.0",
     "karma-chrome-launcher": "2.2.0",
     "karma-cli": "2.0.0",
