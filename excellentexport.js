@@ -194,7 +194,7 @@ const ExcellentExport = function() {
             throw new Error("'csv' format only supports one sheet");
         }
 
-        sheets.forEach((sheetConf, index) => {
+        sheets.forEach(function(sheetConf, index) {
             const name = sheetConf.name;
             if (!name) {
                 throw new Error('Sheet ' + index + ' must have the property "name".');
@@ -222,8 +222,8 @@ const ExcellentExport = function() {
             }
             if (sheetConf.removeColumns) {
                 const toRemove = sheetConf.removeColumns.sort().reverse();
-                toRemove.forEach(index => {
-                    removeColumn(dataArray, index);
+                toRemove.forEach(function(columnIndex) {
+                    removeColumn(dataArray, columnIndex);
                 });
             }
 
