@@ -235,10 +235,16 @@ const ExcellentExport = function() {
 
         const wbOut = XLSX.write(workbook, {bookType: options.format, bookSST:true, type: 'binary'});
         try {
-            const blob = new Blob([s2ab(wbOut)], {type:"application/octet-stream"});
+            const blob = new Blob([s2ab(wbOut)], { type: "application/octet-stream" });
+            const filename = (options.filename || 'download') + '.' + options.format;
+            // Support for IE.
+            if (window.navigator.msSaveBlob) {
+                window.navigator.msSaveBlob(blob, filename);
+                return false;
+            }
             const anchor = get(options.anchor);
             anchor.href = window.URL.createObjectURL(blob);
-            anchor.download = (options.filename || 'download') + '.' + options.format;
+            anchor.download = filename;
 
         } catch(e) {
             throw new Error('Error converting to '+ options.format + '. ' + e);
