@@ -194,7 +194,7 @@ const ExcellentExport = function() {
             throw new Error("'csv' format only supports one sheet");
         }
 
-        sheets.forEach((sheetConf, index) => {
+        sheets.forEach(function(sheetConf, index) {
             const name = sheetConf.name;
             if (!name) {
                 throw new Error('Sheet ' + index + ' must have the property "name".');
@@ -222,8 +222,8 @@ const ExcellentExport = function() {
             }
             if (sheetConf.removeColumns) {
                 const toRemove = sheetConf.removeColumns.sort().reverse();
-                toRemove.forEach(index => {
-                    removeColumn(dataArray, index);
+                toRemove.forEach(function(columnIndex) {
+                    removeColumn(dataArray, columnIndex);
                 });
             }
 
@@ -235,10 +235,16 @@ const ExcellentExport = function() {
 
         const wbOut = XLSX.write(workbook, {bookType: options.format, bookSST:true, type: 'binary'});
         try {
-            const blob = new Blob([s2ab(wbOut)], {type:"application/octet-stream"});
+            const blob = new Blob([s2ab(wbOut)], { type: "application/octet-stream" });
+            const filename = (options.filename || 'download') + '.' + options.format;
+            // Support for IE.
+            if (window.navigator.msSaveBlob) {
+                window.navigator.msSaveBlob(blob, filename);
+                return false;
+            }
             const anchor = get(options.anchor);
             anchor.href = window.URL.createObjectURL(blob);
-            anchor.download = (options.filename || 'download') + '.' + options.format;
+            anchor.download = filename;
 
         } catch(e) {
             throw new Error('Error converting to '+ options.format + '. ' + e);
