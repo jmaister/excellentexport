@@ -25,7 +25,6 @@
     "test": "cross-env NODE_ENV=test karma start --single-run --browsers FirefoxHeadless"
   },
   "main": "dist/excellentexport.js",
-  "dependencies": {},
   "devDependencies": {
     "babel-core": "6.26.3",
     "babel-loader": "7.1.5",
