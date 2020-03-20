@@ -34,7 +34,7 @@
     "blob-polyfill": "4.0.20190430",
     "chai": "4.2.0",
     "cross-env": "6.0.3",
-    "html-loader": "0.5.5",
+    "html-loader": "1.0.0",
     "istanbul-instrumenter-loader": "3.0.1",
     "karma": "4.4.1",
     "karma-babel-preprocessor": "7.0.0",
