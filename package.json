@@ -50,7 +50,7 @@
     "mocha-loader": "2.0.1",
     "mocha-webpack": "1.1.0",
     "webdriverio": "5.18.5",
-    "webpack": "4.41.5",
+    "webpack": "4.42.1",
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.10.1",
     "webpack-node-externals": "1.7.2",
