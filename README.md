@@ -23,6 +23,10 @@ Check my blog page for testing:
 
 # Revision history:
 
+### 3.4.3
+
+* Update npm dependencies to fix vulnerabilities
+
 ### 3.4.2
 
 * Remove ES6 function syntax to support IE11
