@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/jmaister/excellentexport.svg?branch=master)](https://travis-ci.com/jmaister/excellentexport)
+[![](https://data.jsdelivr.com/v1/package/npm/excellentexport/badge)](https://www.jsdelivr.com/package/npm/excellentexport)
 
 # ExcellentExport.js
 
@@ -136,6 +137,10 @@ Firefox, Chrome, Internet Explorer 11+.
 Include script in your HTML:
 
     <script type="text/javascript" src="dist/excellentexport.js"></script>
+
+Include script in your HTML using CDN:
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/excellentexport@3.4.3/dist/excellentexport.min.js"></script>
 
 
 Require.js
