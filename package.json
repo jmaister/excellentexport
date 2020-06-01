@@ -31,7 +31,7 @@
     "babel-plugin-istanbul": "6.0.0",
     "babel-plugin-rewire": "1.2.0",
     "babel-preset-es2015": "6.24.1",
-    "blob-polyfill": "4.0.20190430",
+    "blob-polyfill": "4.0.20200531",
     "chai": "4.2.0",
     "cross-env": "7.0.2",
     "html-loader": "1.1.0",
