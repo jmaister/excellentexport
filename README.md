@@ -20,7 +20,7 @@ Check my blog page for testing:
 
 ### 3.5.0
 
-* Add fixValue and fixArray functions to configuration
+* Add fixValue and fixArray functions to configuration: these configuration functions can be used to manipulate the values of the cells.
 * Update npm dependencies to fix vulnerabilities
 
 ### 3.4.3
