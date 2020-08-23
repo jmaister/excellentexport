@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Export to excel test</title>
+        <script src="dist/excellentexport.js"></script>
+        <style>
+            table, tr, td {
+                border: 1px black solid;
+            }
+        </style>
+        <script>
+            function newApi(format) {
+                return ExcellentExport.convert({
+                    anchor: 'anchorNewApi-' + format,
+                    filename: 'data_123.' + format,
+                    format: format
+                }, [{
+                    name: 'Sheet Name Here 1',
+                    from: {
+                        table: 'datatable'
+                    },
+                    fixValue: (value, row, col) => {
+                        let v = value.replace(/<br>/gi, "\n");
+                        let strippedString = v.replace(/(<([^>]+)>)/gi, "");
+                        return strippedString;
+                    }
+                }]);
+            }
+        </script>
+    </head>
+    <body>
+        <h1>ExcellentExport.js</h1>
+
+        Check on <a href="http://jordiburgos.com">jordiburgos.com</a> and  <a href="https://github.com/jmaister/excellentexport">GitHub</a>.
+
+        <h3>Test page</h3>
+
+        Test table:
+        <table id="datatable">
+            <tr>
+                <th>Column 1</th>
+                <th>Column 2</th>
+                <th>Column 3</th>
+                <th>Column 4</th>
+            </tr>
+            <tr>
+                <td>hello<br>world</td>
+                <td><span>text in span</span></td>
+                <td>abc</td>
+                <td>def</td>
+            </tr>
+        </table>
+
+        <br/>
+
+        <a href="#" id="anchorNewApi-xlsx" onclick="return newApi('xlsx');">Export to XLSX from array</a>
+        <br>
+        <a href="#" id="anchorNewApi-xls" onclick="return newApi('xls');">Export to XLS from array</a>
+        <br>
+        <a href="#" id="anchorNewApi-csv" onclick="return newApi('csv');">Export to CSV from array</a>
+
+    </body>
+</html>
