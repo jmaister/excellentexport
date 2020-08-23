@@ -16,13 +16,12 @@ Check my blog page for testing:
 
 [ExcellentExport.js update: JavaScript export to Excel and CSV](http://jordiburgos.com/post/2017/excellentexport-javascript-export-to-excel-csv.html)
 
-# TODO:
-
-* Filter and process cell values.
-* Set fonts to the sheet.
-* Insert images ?
-
 # Revision history:
+
+### 3.5.0
+
+* Add fixValue and fixArray functions to configuration
+* Update npm dependencies to fix vulnerabilities
 
 ### 3.4.3
 
@@ -192,10 +191,23 @@ ES6 import
             array: [...], // Array with data
             arrayHasHeader: true, // Array first row is the header
             removeColumns: [...], // Array of column indexes (from 0)
-            filterRowFn: function(row) {return true} // Return true to keep
+            filterRowFn: function(row) {return true}, // Function to decide which rows are returned
+            fixValue: function(value, row, column) {return fixedValue} // Function to fix values, receiving value, row num, column num
+            fixArray: function(array) {return array} // Function to manipulate the whole data array
         },
         ...
      }
+
+## fixValue example
+
+This is an example for the fixValue function to handle HTML tags inside a table cell. It transforms BR to line breaks and then strips all the HTML tags.
+
+                fixValue: (value, row, col) => {
+                    let v = value.replace(/<br>/gi, "\n");
+                    let strippedString = v.replace(/(<([^>]+)>)/gi, "");
+                    return strippedString;
+                }
+
 
 # Notes
 
