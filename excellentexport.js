@@ -176,7 +176,9 @@ const ExcellentExport = function() {
             array: [...], // Array with data
             arrayHasHeader: true, // Array first row is the header
             removeColumns: [...], // Array of column indexes (from 0)
-            filterRowFn: function(row) {return true}
+            filterRowFn: function(row) {return true}, // Function to decide which rows are returned
+            fixValue: function(value, row, column) {return fixedValue} // Function to fix values, receiving value, row num, column num
+            fixArray: function(array) {return array} // Function to manipulate the whole data array
         },
         ...
      }
@@ -211,8 +213,7 @@ const ExcellentExport = function() {
                 throw new Error('No data for sheet: [' + name + ']');
             }
 
-            // Filter data
-            console.log("conf", sheetConf);
+            // Filter rows
             if (sheetConf.filterRowFn) {
                 if (sheetConf.filterRowFn instanceof Function) {
                     dataArray = dataArray.filter(sheetConf.filterRowFn);
@@ -220,11 +221,28 @@ const ExcellentExport = function() {
                     throw new Error('Parameter "filterRowFn" must be a function.');
                 }
             }
+            // Filter columns
             if (sheetConf.removeColumns) {
                 const toRemove = sheetConf.removeColumns.sort().reverse();
                 toRemove.forEach(function(columnIndex) {
                     removeColumn(dataArray, columnIndex);
                 });
+            }
+
+            // Convert data, by value
+            if (sheetConf.fixValue && typeof sheetConf.fixValue === 'function') {
+                const fn = sheetConf.fixValue;
+                dataArray.map((r, rownum) => {
+                    r.map((value, colnum) => {
+                        dataArray[rownum][colnum] = fn(value, rownum, colnum);
+                    });
+                });
+            }
+
+            // Convert data, whole array
+            if (sheetConf.fixArray && typeof sheetConf.fixArray === 'function') {
+                const fn = sheetConf.fixArray;
+                dataArray = fn(dataArray);
             }
 
             // Create sheet
