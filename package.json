@@ -53,7 +53,7 @@
     "webpack": "4.42.1",
     "webpack-cli": "3.3.12",
     "webpack-dev-server": "3.11.0",
-    "webpack-node-externals": "2.5.1",
+    "webpack-node-externals": "2.5.2",
     "xlsx": "0.16.6"
   }
 }
