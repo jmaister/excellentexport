@@ -4,34 +4,34 @@
 
 # ExcellentExport.js
 
-JavaScript export to Excel or CSV
+ - JavaScript export to Excel or CSV.
 
-A quick JavaScript library to create export to Excel/CSV from HTML tables in the browser. No server required.
+ - A quick JavaScript library to create export to Excel/CSV from HTML tables in the browser. No server required.
 
-As part of the new version 3.0.0+, there is support for XLSX. The drawback is that the library is 600+ KB.
+ - As part of the new version 3.0.0+, there is support for _XLSX_. The drawback is that the library is 600+ KB.
 
-If you only need XLS or CSV, use 2.X.X versions.
+ - If you only need _XLS_ or _CSV_, use _2.X.X_ versions.
 
-Check my blog page for testing:
-[JavaScript export to Excel](http://jordiburgos.com/post/2013/javascript-export-to-excel.html)
+ - Check My Blog Page for Testing :
+      [JavaScript export to Excel](http://jordiburgos.com/post/2013/javascript-export-to-excel.html)
 
-[ExcellentExport.js update: JavaScript export to Excel and CSV](http://jordiburgos.com/post/2017/excellentexport-javascript-export-to-excel-csv.html)
+      [ExcellentExport.js update: JavaScript export to Excel and CSV](http://jordiburgos.com/post/2017/excellentexport-javascript-export-to-excel-csv.html)
 
 # Revision history:
 
 ### 3.5.0
 
 * Add fixValue and fixArray functions to configuration: these configuration functions can be used to manipulate the values of the cells.
-* Update npm dependencies to fix vulnerabilities
+* _Update npm dependencies to fix vulnerabilities_
 
 ### 3.4.3
 
-* Update npm dependencies to fix vulnerabilities
+* _Update npm dependencies to fix vulnerabilities_
 
 ### 3.4.2
 
 * Remove ES6 function syntax to support IE11
-* Update npm dependencies to fix vulnerabilities
+* _Update npm dependencies to fix vulnerabilities_
 
 ### 3.4.0
 
@@ -42,15 +42,15 @@ Check my blog page for testing:
 
 * Remove columns by index
 * Filter rows by value
-* Updated build to Webpack 4.x.x
+* _Updated build to Webpack 4.x.x_
 
 ### 3.2.1
 
-* Update npm dependencies to fix vulnerabilities
+* _Update npm dependencies to fix vulnerabilities_
 
 ### 3.2.0
 
-* Update npm dependencies to fix vulnerabilities
+* _Update npm dependencies to fix vulnerabilities_
 
 ### 3.1.0
 
@@ -59,7 +59,7 @@ Check my blog page for testing:
 ### 3.0.0
 
 * XLSX support. This bumps the build size to 640 KB.
-* New API: ExcellentExport.convert(...)
+* New API : ExcellentExport.convert(...)
 * Autogenerate download filename.
 * Data input from arrays or HTML Tables.
 * Multiple sheets for XLS or XLSX formats.
@@ -98,26 +98,28 @@ Check my blog page for testing:
 
 ### 1.4
 
-* Add LICENSE.txt with GPL v3.
+* _Add LICENSE.txt with GPL v3_
 * UTF-8 characters fixed.
 
 ### 1.3
 
-* Added minified version.
+* _Added minified version_
 
 ### 1.1
 
-* Added CSV data export
+* _Added CSV data export_
 
 ### 1.0
 
-* Added Excel data export
+* _Added Excel data export_
 
 ## Compatibility
 
-Firefox, Chrome, Internet Explorer 11+.
+ - Firefox
+ - Chrome
+ - Internet Explorer 11+
 
-# Install
+# Install 
 
 ## npm
 
@@ -127,23 +129,23 @@ Firefox, Chrome, Internet Explorer 11+.
 
     yarn add excellentexport
 
-## Bower
+## bower
 
     bower install excellentexport
 
 # Load
 
 
-Include script in your HTML:
+**Include script in your HTML:**
 
     <script type="text/javascript" src="dist/excellentexport.js"></script>
 
-Include script in your HTML using CDN:
+**Include script in your HTML using CDN:**
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/excellentexport@3.4.3/dist/excellentexport.min.js"></script>
 
 
-Require.js
+**Require.js**
 
     <script src="http://requirejs.org/docs/release/2.3.6/minified/require.js"></script>
     <script>
@@ -152,7 +154,7 @@ Require.js
         });
     </script>
 
-ES6 import
+**ES6 import**
 
     import ExcellentExport from 'excellentexport';
 
@@ -201,7 +203,8 @@ ES6 import
 
 ## fixValue example
 
-This is an example for the fixValue function to handle HTML tags inside a table cell. It transforms BR to line breaks and then strips all the HTML tags.
+This is an example for the _fixValue function_ to handle HTML tags inside a table cell. 
+It transforms BR to line breaks and then strips all the HTML tags.
 
                 fixValue: (value, row, col) => {
                     let v = value.replace(/<br>/gi, "\n");
@@ -212,9 +215,9 @@ This is an example for the fixValue function to handle HTML tags inside a table 
 
 # Notes
 
-IE8 or lower do not support *data:* url schema.
-IE9 does not support *data:* url schema on links.
-IE10 and above and Edge are supported via the Microsoft-specific `msOpenOrSaveBlob` method.
+ - IE8 or lower do not support *data:* url schema.
+ - IE9 does not support *data:* url schema on links.
+ - IE10 and above and Edge are supported via the Microsoft-specific `msOpenOrSaveBlob` method.
 
 # Test
 
@@ -226,18 +229,18 @@ IE10 and above and Edge are supported via the Microsoft-specific `msOpenOrSaveBl
 
 # Build
 
-Install dependencies:
+**Install dependencies:**
 
     npm install
     
-Build development version dist/excellentexport.js
+**Build development version dist/excellentexport.js**
 
     npm run build
 
-Build publish version of dist/excellentexport.js
+**Build publish version of dist/excellentexport.js**
 
     npm run prod
 
-Publish
+**Publish**
 
     npm publish
