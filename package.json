@@ -47,7 +47,7 @@
     "karma-sourcemap-loader": "0.3.8",
     "karma-webpack": "4.0.2",
     "mocha": "5.2.0",
-    "mocha-loader": "5.1.2",
+    "mocha-loader": "5.1.5",
     "mocha-webpack": "1.1.0",
     "webdriverio": "6.0.15",
     "webpack": "4.42.1",
