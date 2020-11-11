@@ -27,7 +27,7 @@
   "main": "dist/excellentexport.js",
   "devDependencies": {
     "babel-core": "6.26.3",
-    "babel-loader": "8.1.0",
+    "babel-loader": "8.2.1",
     "babel-plugin-istanbul": "6.0.0",
     "babel-plugin-rewire": "1.2.0",
     "babel-preset-es2015": "6.24.1",
