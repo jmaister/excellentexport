@@ -51,7 +51,7 @@
     "mocha-webpack": "1.1.0",
     "webdriverio": "6.0.15",
     "webpack": "4.42.1",
-    "webpack-cli": "3.3.12",
+    "webpack-cli": "4.4.0",
     "webpack-dev-server": "3.11.0",
     "webpack-node-externals": "2.5.1",
     "xlsx": "0.16.6"
