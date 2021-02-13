@@ -191,13 +191,12 @@
         name: 'Sheet 1', // Sheet name
         from: {
             table: String/Element, // Table ID or table element
-            array: [...], // Array with data
-            arrayHasHeader: true, // Array first row is the header
-            removeColumns: [...], // Array of column indexes (from 0)
-            filterRowFn: function(row) {return true}, // Function to decide which rows are returned
-            fixValue: function(value, row, column) {return fixedValue} // Function to fix values, receiving value, row num, column num
-            fixArray: function(array) {return array} // Function to manipulate the whole data array
+            array: [...] // Array with data
         },
+        removeColumns: [...], // Array of column indexes (from 0)
+        filterRowFn: function(row) {return true}, // Function to decide which rows are returned
+        fixValue: function(value, row, column) {return fixedValue} // Function to fix values, receiving value, row num, column num
+        fixArray: function(array) {return array} // Function to manipulate the whole data array
         ...
      }
 
