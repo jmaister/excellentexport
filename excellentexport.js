@@ -163,25 +163,30 @@ const ExcellentExport = function() {
 
      Options:
      {
-        anchor: String/Element,
-        format: 'xlsx'/'xls'/'csv',
+        anchor: String or HTML Element,
+        format: 'xlsx' or 'xls' or 'csv',
         filename: String
      }
 
-     Sheet element configuration:
-     {
-        name: 'Sheet 1', // Sheet name
-        from: {
-            table: String/Element, // Table ID or table element
-            array: [...] // Array with data
+     Sheets must be an array of sheet configuration objects. Sheet description:
+     [
+        {
+            name: 'Sheet 1', // Sheet name
+            from: {
+                table: String/Element, // Table ID or table element
+                array: [...] // Array with the data. Array where each element is a row. Every row is an array of the cells.
+            },
+            removeColumns: [...], // Array of column indexes (from 0)
+            filterRowFn: function(row) {return true}, // Function to decide which rows are returned
+            fixValue: function(value, row, column) {return fixedValue} // Function to fix values, receiving value, row num, column num
+            fixArray: function(array) {return array} // Function to manipulate the whole data array
+            ...
         },
-        removeColumns: [...], // Array of column indexes (from 0)
-        filterRowFn: function(row) {return true}, // Function to decide which rows are returned
-        fixValue: function(value, row, column) {return fixedValue} // Function to fix values, receiving value, row num, column num
-        fixArray: function(array) {return array} // Function to manipulate the whole data array
-        ...
-     }
-     */
+        {
+            ...
+        }, ...
+    ]
+    */
     const convert = function(options, sheets) {
         let workbook = {
             SheetNames: [],
