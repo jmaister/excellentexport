@@ -165,7 +165,8 @@ const ExcellentExport = function() {
      {
         anchor: String or HTML Element,
         format: 'xlsx' or 'xls' or 'csv',
-        filename: String
+        filename: String,
+        rtl: boolean (optional), specify if all the workbook has text in RTL mode
      }
 
      Sheets must be an array of sheet configuration objects. Sheet description:
@@ -180,6 +181,7 @@ const ExcellentExport = function() {
             filterRowFn: function(row) {return true}, // Function to decide which rows are returned
             fixValue: function(value, row, column) {return fixedValue} // Function to fix values, receiving value, row num, column num
             fixArray: function(array) {return array} // Function to manipulate the whole data array
+            rtl: boolean // optional: specify if the sheet has text in RTL mode
             ...
         },
         {
@@ -190,7 +192,8 @@ const ExcellentExport = function() {
     const convert = function(options, sheets) {
         let workbook = {
             SheetNames: [],
-            Sheets: {}
+            Sheets: {},
+            Views: []
         };
 
         if (!options.format) {
@@ -233,7 +236,7 @@ const ExcellentExport = function() {
                 });
             }
 
-            // Convert data, by value
+            // Convert data. Function applied to each value independently, receiving (value, rownum, colnum)
             if (sheetConf.fixValue && typeof sheetConf.fixValue === 'function') {
                 const fn = sheetConf.fixValue;
                 dataArray.map((r, rownum) => {
@@ -243,7 +246,7 @@ const ExcellentExport = function() {
                 });
             }
 
-            // Convert data, whole array
+            // Convert data. Function applied to the whole array.
             if (sheetConf.fixArray && typeof sheetConf.fixArray === 'function') {
                 const fn = sheetConf.fixArray;
                 dataArray = fn(dataArray);
@@ -253,6 +256,7 @@ const ExcellentExport = function() {
             workbook.SheetNames.push(name);
             worksheet = XLSX.utils.aoa_to_sheet(dataArray, {sheet: name});
             workbook.Sheets[name] = worksheet;
+            workbook.Views.push({RTL: options.rtl || sheetConf.rtl || false});
         });
 
         const wbOut = XLSX.write(workbook, {bookType: options.format, bookSST:true, type: 'binary'});
