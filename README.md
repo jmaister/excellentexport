@@ -1,4 +1,4 @@
-[:heart: Sponsor](https://github.com/sponsors/jmaister)
+[:heart: Sponsor ExcellentExport.js project:heart:](https://github.com/sponsors/jmaister)
 
 [![Build Status](https://travis-ci.com/jmaister/excellentexport.svg?branch=master)](https://travis-ci.com/jmaister/excellentexport)
 [![](https://data.jsdelivr.com/v1/package/npm/excellentexport/badge)](https://www.jsdelivr.com/package/npm/excellentexport)
