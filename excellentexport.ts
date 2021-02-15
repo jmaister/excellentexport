@@ -7,11 +7,26 @@
  *
  */
 
-import {AOA2SheetOpts, utils, write} from 'xlsx';
-const XLSX = {
-    utils,
-    write
-};
+import * as XLSX from 'xlsx';
+
+export interface ConvertOptions {
+    anchor: (string|HTMLAnchorElement)
+    format: ('csv' | 'xls' | 'xlsx')
+    filename?: string
+}
+export interface FromOptions {
+    table?: (string|HTMLTableElement)
+    array?: any[][]
+}
+export interface SheetOptions {
+    name: string
+    from: FromOptions
+    removeColumns?: number[]
+    filterRowFn?(row:any[]): boolean 
+    fixValue?(value:any, row:number, column:number): any
+    fixArray?(array:any[][]): any[][]
+}
+
 
 const ExcellentExport = function() {
 
@@ -51,14 +66,12 @@ const ExcellentExport = function() {
 
     /**
      * Convert a string to Base64.
-     * 
-     * @param {string} s
      */
-    const base64 = function(s:string) {
+    const base64 = function(s:string) : string {
         return btoa(unescape(encodeURIComponent(s)));
     };
 
-    const format = function(s:string, context:any) {
+    const format = function(s:string, context:any) : string {
         return s.replace(new RegExp("{(\\w+)}", "g"), function(m, p) {
             return context[p];
         });
@@ -68,9 +81,20 @@ const ExcellentExport = function() {
      * Get element by ID.
      * @param {*} element 
      */
-    const get = function(element) {
-        if (!element.nodeType) {
-            return document.getElementById(element);
+    const getTable = function(element :(HTMLTableElement|string)) : HTMLTableElement {
+        if (typeof element === 'string') {
+            return document.getElementById(element) as HTMLTableElement;
+        }
+        return element;
+    };
+
+        /**
+     * Get element by ID.
+     * @param {*} element 
+     */
+    const getAnchor = function(element :(HTMLAnchorElement|string)) : HTMLAnchorElement {
+        if (typeof element === 'string') {
+            return document.getElementById(element) as HTMLAnchorElement;
         }
         return element;
     };
@@ -94,8 +118,8 @@ const ExcellentExport = function() {
         return fixedValue;
     };
 
-    const tableToArray = function(table) {
-        var tableInfo = Array.prototype.map.call(table.querySelectorAll('tr'), function(tr) {
+    const tableToArray = function(table:HTMLTableElement) : any[][] {
+        let tableInfo = Array.prototype.map.call(table.querySelectorAll('tr'), function(tr) {
             return Array.prototype.map.call(tr.querySelectorAll('th,td'), function(td) {
                 return td.innerHTML;
             });
@@ -103,13 +127,12 @@ const ExcellentExport = function() {
         return tableInfo;
     };
 
-    const tableToCSV = function(table) {
+    const tableToCSV = function(table:HTMLTableElement) : string {
         let data = "";
-        let i, j, row, col;
-        for (i = 0; i < table.rows.length; i=i+1) {
-            row = table.rows[i];
-            for (j = 0; j < row.cells.length; j=j+1) {
-                col = row.cells[j];
+        for (let i = 0; i < table.rows.length; i=i+1) {
+            const row = table.rows[i];
+            for (let j = 0; j < row.cells.length; j=j+1) {
+                const col = row.cells[j];
                 data = data + (j ? csvDelimiter : '') + fixCSVField(col.textContent.trim());
             }
             data = data + csvNewLine;
@@ -117,12 +140,12 @@ const ExcellentExport = function() {
         return data;
     };
 
-    const createDownloadLink = function(anchor, base64data, exporttype, filename) {
+    const createDownloadLink = function(anchor:HTMLAnchorElement, base64data:string, exporttype:string, filename:string) : boolean {
         if (window.navigator.msSaveBlob) {
             const blob = b64toBlob(base64data, exporttype);
             window.navigator.msSaveBlob(blob, filename);
             return false;
-        } else if(window.URL.createObjectURL) {
+        } else if (window.URL.createObjectURL) {
             const blob = b64toBlob(base64data, exporttype);
             anchor.href = window.URL.createObjectURL(blob);
         } else {
@@ -144,9 +167,9 @@ const ExcellentExport = function() {
         return buf;
     };
 
-    const removeColumn = function(arr2d, colIndex) {
-        for (var i = 0; i < arr2d.length; i++) {
-            var row = arr2d[i];
+    const removeColumn = function(arr2d:any[][], colIndex:number) {
+        for (let i = 0; i < arr2d.length; i++) {
+            const row = arr2d[i];
             row.splice(colIndex, 1);
         }
     };
@@ -180,8 +203,8 @@ const ExcellentExport = function() {
         }, ...
     ]
     */
-    const convert = function(options, sheets) {
-        let workbook = {
+    const convert = function(options:ConvertOptions, sheets:SheetOptions[]) {
+        const workbook = {
             SheetNames: [],
             Sheets: {}
         };
@@ -193,17 +216,16 @@ const ExcellentExport = function() {
             throw new Error("'csv' format only supports one sheet");
         }
 
-        sheets.forEach(function(sheetConf, index) {
+        sheets.forEach(function(sheetConf:SheetOptions, index:number) {
             const name = sheetConf.name;
             if (!name) {
                 throw new Error('Sheet ' + index + ' must have the property "name".');
             }
 
             // Select data source
-            let worksheet = null;
             let dataArray;
             if (sheetConf.from && sheetConf.from.table) {
-                dataArray = tableToArray(get(sheetConf.from.table));
+                dataArray = tableToArray(getTable(sheetConf.from.table));
             } else if(sheetConf.from && sheetConf.from.array) {
                 dataArray = sheetConf.from.array
             } else {
@@ -244,7 +266,7 @@ const ExcellentExport = function() {
 
             // Create sheet
             workbook.SheetNames.push(name);
-            worksheet = XLSX.utils.aoa_to_sheet(dataArray, {sheet: name} as AOA2SheetOpts);
+            const worksheet = XLSX.utils.aoa_to_sheet(dataArray, {sheet: name} as XLSX.AOA2SheetOpts);
             workbook.Sheets[name] = worksheet;
         });
 
@@ -257,7 +279,7 @@ const ExcellentExport = function() {
                 window.navigator.msSaveBlob(blob, filename);
                 return false;
             }
-            const anchor = get(options.anchor);
+            const anchor = getAnchor(options.anchor);
             anchor.href = window.URL.createObjectURL(blob);
             anchor.download = filename;
 
@@ -269,16 +291,17 @@ const ExcellentExport = function() {
     };
 
     return {
-        version: function() {
+        version: function(): string {
             return version;
         },
-        excel: function(anchor, table, name) {
-            table = get(table);
+        excel: function(anchor:(HTMLAnchorElement|string), table:HTMLTableElement, name:string) {
+            table = getTable(table);
+            anchor = getAnchor(anchor);
             const ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
             const b64 = base64(format(template.excel, ctx));
             return createDownloadLink(anchor, b64, 'application/vnd.ms-excel','export.xls');
         },
-        csv: function(anchor, table, delimiter, newLine) {
+        csv: function(anchor:(HTMLAnchorElement|string), table:HTMLTableElement, delimiter?:string, newLine?:string) {
             if (delimiter !== undefined && delimiter) {
                 csvDelimiter = delimiter;
             }
@@ -286,12 +309,13 @@ const ExcellentExport = function() {
                 csvNewLine = newLine;
             }
 
-            table = get(table);
+            table = getTable(table);
+            anchor = getAnchor(anchor);
             const csvData = "\uFEFF" + tableToCSV(table);
             const b64 = base64(csvData);
-            return createDownloadLink(anchor,b64,'application/csv','export.csv');
+            return createDownloadLink(anchor, b64, 'application/csv', 'export.csv');
         },
-        convert: function(options, sheets) {
+        convert: function(options:ConvertOptions, sheets:SheetOptions[]) {
             return convert(options, sheets);
         }
     };
