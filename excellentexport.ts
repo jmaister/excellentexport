@@ -39,13 +39,11 @@ const ExcellentExport = function() {
         const byteCharacters = atob(b64Data);
         const byteArrays = [];
 
-        let offset;
-        for (offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
             const slice = byteCharacters.slice(offset, offset + sliceSize);
 
             const byteNumbers = new Array(slice.length);
-            let i;
-            for (i = 0; i < slice.length; i = i + 1) {
+            for (let i = 0; i < slice.length; i = i + 1) {
                 byteNumbers[i] = slice.charCodeAt(i);
             }
 
