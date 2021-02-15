@@ -13,13 +13,13 @@ module.exports = function(config) {
             // all files ending in ".test"
             {pattern: 'test/index.js', watched: false},
             // each file acts as entry point for the webpack configuration
-            {pattern: 'excellentexport.js', watched: true}
+            {pattern: 'excellentexport.ts', watched: true}
         ],
 
         preprocessors: {
             // add webpack as preprocessor
             'test/index.js': ['webpack', 'sourcemap'],
-            'excellentexport.js': ['webpack', 'sourcemap']
+            'excellentexport.ts': ['webpack', 'sourcemap']
         },
 
         webpack: webpackConfig,

@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "outDir": "./build",
+      "allowJs": true,
+      "target": "es5",
+      "sourceMap": true,
+      "removeComments": false
+    },
+    "include": [
+      "excellentexport.ts",
+      "test/**/*.{ts,js}"
+    ]
+}
