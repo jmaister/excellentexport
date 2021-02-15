@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './excellentexport.ts',
+    entry: './src/excellentexport.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'excellentexport.js',
