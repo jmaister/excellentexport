@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-import ExcellentExport from '../excellentexport';
+import ExcellentExport, { ConvertOptions } from '../src/excellentexport';
 
 
 describe('convert() API', function() {
@@ -21,7 +21,7 @@ describe('convert() API', function() {
                 anchor: 'anchor',
                 filename: 'data_from_table',
                 format: 'xlsx'
-            };
+            } as ConvertOptions;
 
             const sheets = [
                 {
@@ -36,7 +36,7 @@ describe('convert() API', function() {
 
             assert.ok(workbook, 'Result must not be null');
 
-            const anchor = document.getElementById('anchor');
+            const anchor = document.getElementById('anchor') as HTMLAnchorElement;
             assert.ok(anchor.href, 'Element must have href');
             assert.ok(anchor.href.indexOf('blob:') === 0, 'Element href myst be a blob:');
         });
