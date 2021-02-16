@@ -2,7 +2,7 @@
     "compilerOptions": {
       "outDir": "./dist",
       "allowJs": true,
-      "target": "es5",
+      "target": "ESNext",
       "sourceMap": true,
       "removeComments": false,
       "declaration": true

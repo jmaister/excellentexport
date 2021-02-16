@@ -10,21 +10,21 @@
 import * as XLSX from 'xlsx';
 
 export interface ConvertOptions {
-    anchor: (string|HTMLAnchorElement)
-    format: ('csv' | 'xls' | 'xlsx')
-    filename?: string
+    anchor: (string|HTMLAnchorElement),
+    format: ('csv' | 'xls' | 'xlsx'),
+    filename?: string,
 }
 export interface FromOptions {
-    table?: (string|HTMLTableElement)
-    array?: any[][]
+    table?: (string|HTMLTableElement),
+    array?: any[][],
 }
 export interface SheetOptions {
-    name: string
-    from: FromOptions
-    removeColumns?: number[]
-    filterRowFn?(row:any[]): boolean 
-    fixValue?(value:any, row:number, column:number): any
-    fixArray?(array:any[][]): any[][]
+    name: string,
+    from: FromOptions,
+    removeColumns?: number[],
+    filterRowFn?(row:any[]): boolean ,
+    fixValue?(value:any, row:number, column:number): any,
+    fixArray?(array:any[][]): any[][],
 }
 
 
