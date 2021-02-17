@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "outDir": "./dist",
+      "allowJs": true,
+      "target": "ESNext",
+      "sourceMap": true,
+      "removeComments": false,
+      "declaration": true,
+      "rootDir": "src",
+      "moduleResolution": "node",
+      "esModuleInterop": true
+    },
+    "include": [
+      "src/excellentexport.ts",
+      "test/**/*.{ts,js}"
+    ]
+}

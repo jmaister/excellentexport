@@ -1,12 +1,14 @@
 const assert = require('assert');
 
-import ExcellentExport from '../excellentexport';
+import ExcellentExport, { ConvertOptions, SheetOptions } from '../src/excellentexport';
 
 
 describe('convert() API', function() {
     describe('Negative tests', function() {
 
         beforeEach(() => {
+            window.URL.createObjectURL = () => "blob:fake_URL";
+
             const element = document.createElement("div");
             element.innerHTML = '<a id="anchor">Link</a>';
 
@@ -18,7 +20,7 @@ describe('convert() API', function() {
                 anchor: 'anchor',
                 filename: 'data_from_array',
                 format: 'csv'
-            };
+            } as ConvertOptions;
 
             const sheets = [{
                 name: 'Sheet Name Here 1',
@@ -39,12 +41,12 @@ describe('convert() API', function() {
                 anchor: 'anchor',
                 filename: 'data_from_array',
                 format: 'csv'
-            };
+            } as ConvertOptions;
 
             const sheets = [{
                 // name: 'Sheet Name Here 1',
                 from: {}
-            }];
+            }] as SheetOptions[];
 
             assert.throws(() => {
                 ExcellentExport.convert(options, sheets)
@@ -57,12 +59,12 @@ describe('convert() API', function() {
                 anchor: 'anchor',
                 filename: 'data_from_array',
                 format: 'csv'
-            };
+            } as ConvertOptions;
 
             const sheets = [{
                 name: 'Sheet Name Here 1',
                 // from: {}
-            }];
+            }] as SheetOptions[];
 
             assert.throws(() => {
                 ExcellentExport.convert(options, sheets)
@@ -75,7 +77,7 @@ describe('convert() API', function() {
                 anchor: 'anchor',
                 filename: 'data_from_array',
                 //format: 'csv'
-            };
+            } as ConvertOptions;
 
             const sheets = [{
                 name: 'Sheet Name Here 1',
@@ -93,7 +95,7 @@ describe('convert() API', function() {
                 anchor: 'anchor1235d5d5d5d_invalid',
                 filename: 'data_from_array',
                 format: 'csv'
-            };
+            } as ConvertOptions;
 
             const sheets = [{
                 name: 'Sheet Name Here 1',

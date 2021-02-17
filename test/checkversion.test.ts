@@ -1,7 +1,7 @@
 const assert = require('assert');
 
-import ExcellentExport from '../excellentexport';
-import pkg from '../package.json';
+import ExcellentExport from '../src/excellentexport';
+const pkg = require('../package.json');
 
 describe('version() API', function() {
     describe('get version', function() {
