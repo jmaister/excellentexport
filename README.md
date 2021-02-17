@@ -22,6 +22,13 @@
 
 # Revision history:
 
+### 3.6.0
+
+* Added sponsor link to the project [:heart: Sponsor ExcellentExport.js project:heart:](https://github.com/sponsors/jmaister)
+* Transform the project from JavaScript to TypeScript
+* Configure Jest as test runner
+* _Update npm dependencies to fix vulnerabilities_
+
 ### 3.5.0
 
 * Add fixValue and fixArray functions to configuration: these configuration functions can be used to manipulate the values of the cells.
