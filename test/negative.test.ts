@@ -7,6 +7,8 @@ describe('convert() API', function() {
     describe('Negative tests', function() {
 
         beforeEach(() => {
+            window.URL.createObjectURL = () => "blob:fake_URL";
+
             const element = document.createElement("div");
             element.innerHTML = '<a id="anchor">Link</a>';
 

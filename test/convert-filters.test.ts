@@ -5,7 +5,7 @@ import ExcellentExport, { ConvertOptions, SheetOptions } from '../src/excellente
 
 
 describe('convert() API', function() {
-    describe('convert from HTML table', function() {
+    describe('test sheet options', function() {
 
         beforeEach(() => {
             window.URL.createObjectURL = () => "blob:fake_URL";
@@ -19,7 +19,7 @@ describe('convert() API', function() {
             document.body.appendChild(element);
         });
 
-        test('should create a XLSX from HTML table by #id', function() {
+        test('filterRowFn', function() {
             const options = {
                 anchor: 'anchor',
                 filename: 'data_from_table',
@@ -31,21 +31,22 @@ describe('convert() API', function() {
                     name: 'Sheet Name Here 1',
                     from: {
                         table: 'sometable'
+                    },
+                    filterRowFn: (row) => {
+                        if (row[0] === 'first') {
+                            return true;
+                        }
                     }
                 }
             ] as SheetOptions[];
 
             const workbook = ExcellentExport.convert(options, sheets);
             expect(workbook).not.toBeNull();
-
-            const anchor = document.getElementById('anchor') as HTMLAnchorElement;
-            expect(anchor.href).not.toBeNull();
-            expect(anchor.href).toMatch(/blob:/);
         });
 
-        test('should create a XLSX from HTML table by DOM element', function() {
+        test('removeColumns', function() {
             const options = {
-                anchor: document.getElementById('anchor'),
+                anchor: 'anchor',
                 filename: 'data_from_table',
                 format: 'xlsx'
             } as ConvertOptions;
@@ -54,18 +55,16 @@ describe('convert() API', function() {
                 {
                     name: 'Sheet Name Here 1',
                     from: {
-                        table: document.getElementById('sometable')
-                    }
+                        table: 'sometable'
+                    },
+                    removeColumns: [1]
                 }
             ] as SheetOptions[];
 
             const workbook = ExcellentExport.convert(options, sheets);
             expect(workbook).not.toBeNull();
-
-            const anchor = document.getElementById('anchor') as HTMLAnchorElement;
-            expect(anchor.href).not.toBeNull();
-            expect(anchor.href).toMatch(/blob:/);
         });
+
     });
 });
 

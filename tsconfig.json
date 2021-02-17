@@ -5,7 +5,10 @@
       "target": "ESNext",
       "sourceMap": true,
       "removeComments": false,
-      "declaration": true
+      "declaration": true,
+      "rootDir": "src",
+      "moduleResolution": "node",
+      "esModuleInterop": true
     },
     "include": [
       "src/excellentexport.ts",

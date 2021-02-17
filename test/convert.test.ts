@@ -7,6 +7,8 @@ describe('convert() API', function() {
     describe('convert from array', function() {
 
         beforeEach(() => {
+            window.URL.createObjectURL = () => "blob:fake_URL";
+
             document.body.innerHTML = '';
             const element = document.createElement("div");
             element.innerHTML = '<a id="anchor">Link</a>';
