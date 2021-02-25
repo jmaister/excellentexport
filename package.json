@@ -37,7 +37,7 @@
     "blob-polyfill": "5.0.20210201",
     "coveralls": "3.1.0",
     "cross-env": "7.0.3",
-    "html-loader": "2.0.0",
+    "html-loader": "2.1.1",
     "jest": "26.6.3",
     "jest-puppeteer": "4.4.0",
     "puppeteer": "7.1.0",
