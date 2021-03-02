@@ -29,7 +29,7 @@
     "@babel/core": "7.12.16",
     "@babel/plugin-proposal-class-properties": "7.12.13",
     "@babel/plugin-transform-flow-strip-types": "7.12.13",
-    "@babel/preset-env": "7.12.16",
+    "@babel/preset-env": "7.13.9",
     "@types/jest": "26.0.20",
     "@types/jest-environment-puppeteer": "4.4.1",
     "@types/puppeteer": "5.4.3",
