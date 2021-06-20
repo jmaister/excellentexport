@@ -108,6 +108,22 @@ describe('convert() API', function() {
 
         });
 
+        it('should fail if no anchor and not openAsDownload', function() {
+            const options = {
+                filename: 'data_from_array',
+                format: 'csv'
+            } as ConvertOptions;
+
+            const sheets = [{
+                name: 'Sheet Name Here 1',
+                from: {}
+            }];
+
+            assert.throws(() => {
+                ExcellentExport.convert(options, sheets)
+            }, Error);
+
+        });
     });
 });
 

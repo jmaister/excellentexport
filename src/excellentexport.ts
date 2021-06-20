@@ -1,5 +1,5 @@
 /**
- * ExcellentExport 3.6.0
+ * ExcellentExport 3.7.0
  * A client side Javascript export to Excel.
  *
  * @author: Jordi Burgos (jordiburgos@gmail.com)
@@ -10,7 +10,8 @@
 import * as XLSX from 'xlsx';
 
 export interface ConvertOptions {
-    anchor: (string|HTMLAnchorElement),
+    anchor?: (string|HTMLAnchorElement),
+    openAsDownload?: boolean,
     format: ('csv' | 'xls' | 'xlsx'),
     filename?: string,
 }
@@ -57,7 +58,7 @@ const ExcellentExport = function() {
         });
     };
 
-    const version = "3.6.0";
+    const version = "3.7.0";
     const template = {excel: '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta name=ProgId content=Excel.Sheet> <meta name=Generator content="Microsoft Excel 11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'};
     let csvDelimiter = ",";
     let csvNewLine = "\r\n";
@@ -178,6 +179,7 @@ const ExcellentExport = function() {
      Options:
      {
         anchor: String or HTML Element,
+        openAsDownload: boolean, // Use this options if not using an anchor tag
         format: 'xlsx' or 'xls' or 'csv',
         filename: String
      }
@@ -277,9 +279,20 @@ const ExcellentExport = function() {
                 window.navigator.msSaveBlob(blob, filename);
                 return false;
             }
-            const anchor = getAnchor(options.anchor);
-            anchor.href = window.URL.createObjectURL(blob);
-            anchor.download = filename;
+            if (options.anchor) {
+                const anchor = getAnchor(options.anchor);
+                anchor.href = window.URL.createObjectURL(blob);
+                anchor.download = filename;
+            } else if (options.openAsDownload) {
+                const a = document.createElement("a");
+                a.href = URL.createObjectURL(blob);
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } else {
+                throw new Error('Options should specify an anchor or openAsDownload=true.')
+            }
 
         } catch(e) {
             throw new Error('Error converting to '+ options.format + '. ' + e);
