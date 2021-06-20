@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Export to excel test</title>
+        <script src="dist/excellentexport.js"></script>
+        <style>
+            table, tr, td {
+                border: 1px black solid;
+            }
+        </style>
+        <script>
+
+
+function triggerDownload() { 
+    ExcellentExport.convert({ filename: 'fileTriggeredAutomatically', format: 'xlsx', openAsDownload: true},[{name: 'Sheet 1', from: {array: [[1,2,3],[4,5,6]]}},{name: 'Sheet 2', from: {array: [['this is text'],['this is also text']]}}]);
+}
+
+document.addEventListener("DOMContentLoaded", triggerDownload);
+
+        </script>
+    </head>
+    <body>
+        <h1>ExcellentExport.js</h1>
+
+        Check on <a href="http://jordiburgos.com">jordiburgos.com</a> and  <a href="https://github.com/jmaister/excellentexport">GitHub</a>.
+
+        <h3>Test without anchor tab</h3>
+
+
+    </body>
+</html>

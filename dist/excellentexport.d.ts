@@ -1,5 +1,5 @@
 /**
- * ExcellentExport 3.6.0
+ * ExcellentExport 3.7.0
  * A client side Javascript export to Excel.
  *
  * @author: Jordi Burgos (jordiburgos@gmail.com)
@@ -7,7 +7,8 @@
  *
  */
 export interface ConvertOptions {
-    anchor: (string | HTMLAnchorElement);
+    anchor?: (string | HTMLAnchorElement);
+    openAsDownload?: boolean;
     format: ('csv' | 'xls' | 'xlsx');
     filename?: string;
 }
