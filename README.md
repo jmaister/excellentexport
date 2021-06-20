@@ -23,6 +23,11 @@
 
 # Revision history:
 
+### 3.7.0
+
+* Added option `openAsDownload: boolean`. Use this option to download as a file without using an anchor tag. So download can be triggered from a button.
+* _Update npm dependencies to fix vulnerabilities_
+
 ### 3.6.0
 
 * Added sponsor link to the project [:heart: Sponsor ExcellentExport.js project:heart:](https://github.com/sponsors/jmaister)
