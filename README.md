@@ -23,6 +23,11 @@
 
 # Revision history:
 
+### 3.7.1
+
+* _Update npm dependencies to fix vulnerabilities_
+* Start using Dependabot and get rid of Dependabot-preview
+
 ### 3.7.0
 
 * Added option `openAsDownload: boolean`. Use this option to download as a file without using an anchor tag. So download can be triggered from a button.

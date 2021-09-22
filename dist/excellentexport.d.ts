@@ -1,5 +1,5 @@
 /**
- * ExcellentExport 3.7.0
+ * ExcellentExport 3.7.1
  * A client side Javascript export to Excel.
  *
  * @author: Jordi Burgos (jordiburgos@gmail.com)
