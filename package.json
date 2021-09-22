@@ -44,7 +44,7 @@
     "puppeteer": "9.1.1",
     "ts-jest": "27.0.5",
     "ts-loader": "9.2.6",
-    "ts-node": "10.0.0",
+    "ts-node": "10.2.1",
     "typescript": "4.3.4",
     "webdriverio": "7.13.0",
     "webpack": "5.53.0",
