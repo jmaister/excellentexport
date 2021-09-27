@@ -49,7 +49,7 @@
     "webdriverio": "7.13.0",
     "webpack": "5.53.0",
     "webpack-cli": "4.8.0",
-    "webpack-dev-server": "4.2.1",
+    "webpack-dev-server": "4.3.0",
     "webpack-node-externals": "3.0.0",
     "xlsx": "0.17.2"
   }
