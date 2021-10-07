@@ -32,7 +32,7 @@
     "@babel/preset-env": "7.15.8",
     "@types/jest": "27.0.2",
     "@types/jest-environment-puppeteer": "4.4.1",
-    "@types/node": "15.12.4",
+    "@types/node": "16.10.3",
     "@types/puppeteer": "5.4.4",
     "babel-loader": "8.2.2",
     "blob-polyfill": "5.0.20210201",
