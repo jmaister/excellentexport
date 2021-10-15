@@ -35,7 +35,7 @@
     "@types/node": "16.10.9",
     "@types/puppeteer": "5.4.4",
     "babel-loader": "8.2.2",
-    "blob-polyfill": "5.0.20210201",
+    "blob-polyfill": "6.0.20211015",
     "coveralls": "3.1.1",
     "cross-env": "7.0.3",
     "html-loader": "2.1.2",
