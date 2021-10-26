@@ -23,6 +23,10 @@
 
 # Revision history:
 
+### 3.7.2
+
+* _Update npm dependencies to fix vulnerabilities_
+
 ### 3.7.1
 
 * _Update npm dependencies to fix vulnerabilities_
