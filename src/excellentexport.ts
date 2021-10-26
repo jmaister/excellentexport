@@ -242,8 +242,8 @@ const ExcellentExport = function() {
             }
             // Filter columns
             if (sheetConf.removeColumns) {
-                const toRemove = sheetConf.removeColumns.sort().reverse();
-                toRemove.forEach(function(columnIndex) {
+                const uniqueIndexes = [...new Set(sheetConf.removeColumns)].sort().reverse();
+                uniqueIndexes.forEach(function(columnIndex) {
                     removeColumn(dataArray, columnIndex);
                 });
             }
