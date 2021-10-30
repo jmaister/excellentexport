@@ -22,7 +22,9 @@
     "build": "webpack --config webpack.config.js --progress --mode development --watch",
     "prod": "webpack --config webpack.config.js --progress --mode production",
     "test": "jest --coverage && coveralls < coverage/lcov.info",
-    "jest": "jest --coverage"
+    "jest": "jest --coverage",
+    "j": "jest --watch --testMatch remove",
+    "watch": "jest --watch"
   },
   "main": "dist/excellentexport.js",
   "devDependencies": {
