@@ -3,9 +3,7 @@ const assert = require('assert');
 import { removeColumns } from '../src/utils';
 
 
-describe('Test utility functions', () => {
-    beforeEach(() => {
-    }); 
+describe('Test utility functions: removeColumns', () => {
 
     it('should remove one column correctly', function() {
         const columns = [

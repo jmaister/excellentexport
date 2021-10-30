@@ -37,7 +37,7 @@ export const base64 = function(s:string) : string {
 
 export const format = function(s:string, context:any) : string {
     return s.replace(new RegExp("{(\\w+)}", "g"), function(m, p) {
-        return context[p];
+        return context[p] || "{" + p + "}";
     });
 };
 
@@ -67,7 +67,7 @@ export const getAnchor = function(element :(HTMLAnchorElement|string)) : HTMLAnc
  * Encode a value for CSV.
  * @param {*} value 
  */
- const fixCSVField = function(value:string, csvDelimiter:string) {
+ export const fixCSVField = function(value:string, csvDelimiter:string) : string {
     let fixedValue = value;
     const addQuotes = (value.indexOf(csvDelimiter) !== -1) || (value.indexOf('\r') !== -1) || (value.indexOf('\n') !== -1);
     const replaceDoubleQuotes = (value.indexOf('"') !== -1);

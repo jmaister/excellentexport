@@ -35,7 +35,6 @@ const ExcellentExport = function() {
 
     const version = "3.7.3";
 
-
     /*
      ExcellentExport.convert(options, sheets);
 
