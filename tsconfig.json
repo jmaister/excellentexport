@@ -11,7 +11,7 @@
       "esModuleInterop": true
     },
     "include": [
-      "src/excellentexport.ts",
+      "src/**/*.ts",
       "test/**/*.{ts,js}"
     ]
 }

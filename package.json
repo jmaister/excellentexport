@@ -1,6 +1,6 @@
 {
   "name": "excellentexport",
-  "version": "3.7.2",
+  "version": "3.7.3",
   "description": "Client side JavaScript export to Excel or CSV",
   "license": "MIT",
   "homepage": "http://jordiburgos.com",
@@ -23,7 +23,6 @@
     "prod": "webpack --config webpack.config.js --progress --mode production",
     "test": "jest --coverage && coveralls < coverage/lcov.info",
     "jest": "jest --coverage",
-    "j": "jest --watch --testMatch remove",
     "watch": "jest --watch"
   },
   "main": "dist/excellentexport.js",

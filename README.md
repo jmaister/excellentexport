@@ -23,6 +23,10 @@
 
 # Revision history:
 
+### 3.7.3
+
+* Fix (#591) remove columns parameter. Now it is not affected by repeated column numbers nor its order.
+
 ### 3.7.2
 
 * _Update npm dependencies to fix vulnerabilities_
