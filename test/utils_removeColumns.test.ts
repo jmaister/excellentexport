@@ -84,4 +84,17 @@ describe('Test utility functions', () => {
         expect(columns[0]).toEqual(['b', 'c']);
     });
 
+    it('should remove columns in the correct order', () => {
+        const columns = [
+            ['a', 'b', 'c'],
+            ['d', 'e', 'f'],
+            ['g', 'h', 'i'],
+        ];
+
+        removeColumns(columns, [0, 2]);
+        expect(columns.length).toEqual(3);
+        expect(columns[0]).toEqual(['b']);
+        expect(columns[1]).toEqual(['e']);
+    });
+
 });
