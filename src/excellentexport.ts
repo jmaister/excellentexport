@@ -16,6 +16,7 @@ export interface ConvertOptions {
     openAsDownload?: boolean,
     format: ('csv' | 'xls' | 'xlsx'),
     filename?: string,
+    rtl?: boolean,
 }
 export interface FromOptions {
     table?: (string|HTMLTableElement),
@@ -28,6 +29,7 @@ export interface SheetOptions {
     filterRowFn?(row:any[]): boolean ,
     fixValue?(value:any, row:number, column:number): any,
     fixArray?(array:any[][]): any[][],
+    rtl?: boolean
 }
 
 
@@ -43,7 +45,8 @@ const ExcellentExport = function() {
         anchor: String or HTML Element,
         openAsDownload: boolean, // Use this options if not using an anchor tag
         format: 'xlsx' or 'xls' or 'csv',
-        filename: String
+        filename: String,
+        rtl: boolean (optional), specify if all the workbook has text in RTL mode
      }
 
      Sheets must be an array of sheet configuration objects. Sheet description:
@@ -58,6 +61,7 @@ const ExcellentExport = function() {
             filterRowFn: function(row) {return true}, // Function to decide which rows are returned
             fixValue: function(value, row, column) {return fixedValue} // Function to fix values, receiving value, row num, column num
             fixArray: function(array) {return array} // Function to manipulate the whole data array
+            rtl: boolean // optional: specify if the sheet has text in RTL mode
             ...
         },
         {
@@ -68,7 +72,8 @@ const ExcellentExport = function() {
     const convert = function(options:ConvertOptions, sheets:SheetOptions[]) {
         const workbook = {
             SheetNames: [],
-            Sheets: {}
+            Sheets: {},
+            Views: []
         };
 
         if (!options.format) {
@@ -85,7 +90,7 @@ const ExcellentExport = function() {
             }
 
             // Select data source
-            let dataArray;
+            let dataArray: any[][];
             if (sheetConf.from && sheetConf.from.table) {
                 dataArray = utils.tableToArray(utils.getTable(sheetConf.from.table));
             } else if(sheetConf.from && sheetConf.from.array) {
@@ -107,7 +112,7 @@ const ExcellentExport = function() {
                 utils.removeColumns(dataArray, sheetConf.removeColumns);
             }
 
-            // Convert data, by value
+            // Convert data. Function applied to each value independently, receiving (value, rownum, colnum)
             if (sheetConf.fixValue && typeof sheetConf.fixValue === 'function') {
                 const fn = sheetConf.fixValue;
                 dataArray.map((r, rownum) => {
@@ -127,6 +132,7 @@ const ExcellentExport = function() {
             workbook.SheetNames.push(name);
             const worksheet = XLSX.utils.aoa_to_sheet(dataArray, {sheet: name} as XLSX.AOA2SheetOpts);
             workbook.Sheets[name] = worksheet;
+            workbook.Views.push({RTL: options.rtl || sheetConf.rtl || false});
         });
 
         const wbOut:string = XLSX.write(workbook, {bookType: options.format, bookSST:true, type: 'binary'});

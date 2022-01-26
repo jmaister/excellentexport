@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Export to excel test</title>
+        <script src="dist/excellentexport.js"></script>
+        <style>
+            table, tr, td {
+                border: 1px black solid;
+            }
+        </style>
+        <script>
+            function openFile(format) {
+                return ExcellentExport.convert({
+                    anchor: 'anchorNewApi-' + format,
+                    filename: 'data_123.' + format,
+                    format: format,
+                    rtl: true,
+                }, [{
+                    name: 'Sheet Name Here 1',
+                    from: {
+                        table: 'datatable'
+                    }
+                }]);
+            }
+        </script>
+    </head>
+    <body>
+        <h1>ExcellentExport.js RTL text</h1>
+
+        Check on <a href="http://jordiburgos.com">jordiburgos.com</a> and  <a href="https://github.com/jmaister/excellentexport">GitHub</a>.
+
+        <h3>Test page</h3>
+
+        Test table
+        <table id="datatable">
+            <thead>
+               <tr>
+                 <th>االلغة</th>
+                 <th>عدد الأحرف</th>
+                 <th>Country</th>
+                 <th>miص-ص</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr>
+                 <td>العربية</td>
+                 <td>٢٨</td>
+                 <td>Earth</td>
+                 <td>ن0ن</td>
+               </tr>
+               <tr>
+                 <td>العبرية</td>
+                 <td>٢٢</td>
+                 <td>Isreal</td>
+                 <td>ضSض</td>
+               </tr>
+             </tbody>
+           </table>
+
+        <br/>
+
+        <a download="data_123.xls" href="#" id="anchorNewApi-xls" onclick="return openFile('xls');">Export to Excel: XLS format</a>
+        <br/>
+        <a download="data_123.xlsx" href="#" id="anchorNewApi-xlsx" onclick="return openFile('xlsx');">Export to Excel: XLSX format</a>
+        <br/>
+        <a download="data_123.csv" href="#" id="anchorNewApi-csv" onclick="return openFile('csv');">Export to CSV</a>
+
+    </body>
+</html>
