@@ -23,6 +23,11 @@
 
 # Revision history:
 
+### 3.8.0
+
+* Allow RTL options on the whole file or sheet.
+* _Update npm dependencies to fix vulnerabilities_
+
 ### 3.7.3
 
 * Fix (#591) remove columns parameter. Now it is not affected by repeated column numbers nor its order.
@@ -212,7 +217,8 @@
      {
         anchor: String or HTML Element,
         format: 'xlsx' or 'xls' or 'csv',
-        filename: String
+        filename: String,
+        rtl: Use Right-to-left characters, boolean (optional)
      }
 
      Sheets must be an array of sheet configuration objects. Sheet description:
@@ -227,6 +233,7 @@
             filterRowFn: function(row) {return true}, // Function to decide which rows are returned
             fixValue: function(value, row, column) {return fixedValue} // Function to fix values, receiving value, row num, column num
             fixArray: function(array) {return array} // Function to manipulate the whole data array
+            rtl: Use Right-to-left characters, boolean (optional)
             ...
         },
         {
