@@ -17,6 +17,11 @@ export declare const getTable: (element: (HTMLTableElement | string)) => HTMLTab
  * @param {*} element
  */
 export declare const getAnchor: (element: (HTMLAnchorElement | string)) => HTMLAnchorElement;
+/**
+ * Encode a value for CSV.
+ * @param {*} value
+ */
+export declare const fixCSVField: (value: string, csvDelimiter: string) => string;
 export declare const tableToArray: (table: HTMLTableElement) => any[][];
 export declare const tableToCSV: (table: HTMLTableElement, csvDelimiter?: string, csvNewLine?: string) => string;
 export declare const createDownloadLink: (anchor: HTMLAnchorElement, base64data: string, exporttype: string, filename: string) => boolean;

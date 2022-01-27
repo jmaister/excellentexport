@@ -11,6 +11,7 @@ export interface ConvertOptions {
     openAsDownload?: boolean;
     format: ('csv' | 'xls' | 'xlsx');
     filename?: string;
+    rtl?: boolean;
 }
 export interface FromOptions {
     table?: (string | HTMLTableElement);
@@ -23,6 +24,7 @@ export interface SheetOptions {
     filterRowFn?(row: any[]): boolean;
     fixValue?(value: any, row: number, column: number): any;
     fixArray?(array: any[][]): any[][];
+    rtl?: boolean;
 }
 declare const ExcellentExport: {
     version: () => string;
