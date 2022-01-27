@@ -135,7 +135,7 @@ const ExcellentExport = function() {
             workbook.Views.push({RTL: options.rtl || sheetConf.rtl || false});
         });
 
-        const wbOut:string = XLSX.write(workbook, {bookType: options.format, bookSST:true, type: 'binary'});
+        const wbOut:string = XLSX.write(workbook, {bookType: options.format, bookSST:true, type: 'binary', compression: true});
         try {
             const blob = new Blob([utils.string2ArrayBuffer(wbOut)], { type: "application/octet-stream" });
             const filename = (options.filename || 'download') + '.' + options.format;

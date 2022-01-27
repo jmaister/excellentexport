@@ -2,63 +2,38 @@
     <head>
         <meta charset="utf-8">
         <title>Export to excel test</title>
-        <script src="excellentexport.js"></script>
+        <script src="dist/excellentexport.js"></script>
         <style>
             table, tr, td {
                 border: 1px black solid;
             }
         </style>
+        <script>
+            function action(format) {
+                return ExcellentExport.convert({
+                    anchor: 'bigdata-' + format,
+                    filename: 'big_table.' + format,
+                    format: format
+                }, [{
+                    name: 'Big Table',
+                    from: {
+                        table: 'bigtable'
+                    }
+                }]);
+            }
+        </script>
     </head>
     <body>
         <h1>ExcellentExport.js</h1>
 
         Check on <a href="http://jordiburgos.com">jordiburgos.com</a> and  <a href="https://github.com/jmaister/excellentexport">GitHub</a>.
 
-        <h3>Test page</h3>
-
-        <br/>
-
-        <a download="somedata.xls" href="#" onclick="return ExcellentExport.excel(this, 'datatable', 'Sheet Name Here');">Export to Excel</a>
-        <br/>
-
-        <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable');">Export to CSV - UTF8</a>
-        <br/>
-        <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable', ';');">Export to CSV - Using semicolon ";" separator - UTF8</a>
-        <br/>
-
-        <table id="datatable">
-            <tr>
-                <th>Column 1</th>
-                <th>Column "cool" 2</th>
-                <th>Column 3</th>
-                <th>Column 4</th>
-            </tr>
-            <tr>
-                <td>100,111</td>
-                <td>200</td>
-                <td>300</td>
-                <td>áéíóú</td>
-            </tr>
-            <tr>
-                <td>400</td>
-                <td>500</td>
-                <td>Chinese chars: 解决导出csv中文乱码问题</td>
-                <td>àèìòù</td>
-            </tr>
-            <tr>
-                <td>Text</td>
-                <td>More text</td>
-                <td>Text with
-                new line</td>
-                <td>ç ñ ÄËÏÖÜ äëïöü</td>
-            </tr>
-        </table>
+        <h3>Big Table Test page</h3>
 
 
-        <br/>
-        <br/>
-        <a download="bigdata.xls" href="#" onclick="return ExcellentExport.excel(this, 'bigtable', 'Big Data Sheet');">Export to Excel very big table</a><br/>
-        <a download="bigdata.csv" href="#" onclick="return ExcellentExport.csv(this, 'bigtable');">Export to CSV very big table</a>
+        <a id="bigdata-xlsx" download="bigdata.xlsx" href="#" onclick="return action('xlsx')">Export to XLSX very big table</a><br/>
+        <a id="bigdata-xls"  download="bigdata.xls" href="#" onclick="return action('xls')">Export to XLS very big table</a><br/>
+        <a id="bigdata-csv"  download="bigdata.csv" href="#" onclick="return action('csv')">Export to CSV very big table</a>
         <table id="bigtable">
         <br/>
         </table>

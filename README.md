@@ -23,6 +23,10 @@
 
 # Revision history:
 
+### Next
+
+* Activate XLSX compression by default. The example of index.bigtable.html went from 18Mb to 3Mb.
+
 ### 3.8.0
 
 * Allow RTL options on the whole file or sheet.
