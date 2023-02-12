@@ -11,6 +11,13 @@ import * as XLSX from 'xlsx';
 
 import * as utils from './utils';
 
+// Fix for IE11: https://stackoverflow.com/questions/69485778/new-typescript-version-does-not-include-window-navigator-mssaveblob
+declare global {
+    interface Navigator {
+        msSaveBlob?: (blob: any, defaultName?: string) => boolean
+    }
+}
+
 export interface ConvertOptions {
     anchor?: (string|HTMLAnchorElement),
     openAsDownload?: boolean,
@@ -35,7 +42,7 @@ export interface SheetOptions {
 
 const ExcellentExport = function() {
 
-    const version = "3.8.0";
+    const version = "3.8.1";
 
     /*
      ExcellentExport.convert(options, sheets);
