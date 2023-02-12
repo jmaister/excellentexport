@@ -28,6 +28,7 @@
 * Activate XLSX compression by default. The example of index.bigtable.html went from 18Mb to 3Mb.
 * _Update npm dependencies to fix vulnerabilities_
 * Update to latest version of TypeScript
+* Reduced size of the library from 912 KB to 277 KB!!!
 
 ### 3.8.0
 
