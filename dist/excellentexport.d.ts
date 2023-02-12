@@ -6,6 +6,11 @@
  * @url: https://github.com/jmaister/excellentexport
  *
  */
+declare global {
+    interface Navigator {
+        msSaveBlob?: (blob: any, defaultName?: string) => boolean;
+    }
+}
 export interface ConvertOptions {
     anchor?: (string | HTMLAnchorElement);
     openAsDownload?: boolean;
