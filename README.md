@@ -12,7 +12,7 @@
 
  - A quick JavaScript library to create export to Excel/CSV from HTML tables in the browser. No server required.
 
- - As part of the new version 3.0.0+, there is support for _XLSX_. The drawback is that the library is 600+ KB.
+ - As part of the new version 3.0.0+, there is support for _XLSX_. The drawback is that the library is 200+ KB.
 
  - If you only need _XLS_ or _CSV_, use _2.X.X_ versions.
 
@@ -160,7 +160,7 @@
  - Chrome
  - Internet Explorer 11+
 
-# Install 
+# Install
 
 ## npm
 
@@ -250,7 +250,7 @@
 
 ## fixValue example
 
-This is an example for the _fixValue function_ to handle HTML tags inside a table cell. 
+This is an example for the _fixValue function_ to handle HTML tags inside a table cell.
 It transforms BR to line breaks and then strips all the HTML tags.
 
                 fixValue: (value, row, col) => {
@@ -279,7 +279,7 @@ It transforms BR to line breaks and then strips all the HTML tags.
 **Install dependencies:**
 
     npm install
-    
+
 **Build development version dist/excellentexport.js**
 
     npm run build
