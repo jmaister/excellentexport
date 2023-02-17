@@ -6,6 +6,7 @@
  * @url: https://github.com/jmaister/excellentexport
  *
  */
+import { FormatDefinition } from './format';
 declare global {
     interface Navigator {
         msSaveBlob?: (blob: any, defaultName?: string) => boolean;
@@ -30,9 +31,11 @@ export interface SheetOptions {
     fixValue?(value: any, row: number, column: number): any;
     fixArray?(array: any[][]): any[][];
     rtl?: boolean;
+    formats?: (FormatDefinition | null)[];
 }
 declare const ExcellentExport: {
     version: () => string;
+    formats: import("./format").CellFormats;
     excel: (anchor: (HTMLAnchorElement | string), table: HTMLTableElement, name: string) => boolean;
     csv: (anchor: (HTMLAnchorElement | string), table: HTMLTableElement, delimiter?: string, newLine?: string) => boolean;
     convert: (options: ConvertOptions, sheets: SheetOptions[]) => string | false;

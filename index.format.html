@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Export to excel test</title>
+        <script src="dist/excellentexport.js"></script>
+        <style>
+            table, tr, td {
+                border: 1px black solid;
+            }
+        </style>
+        <script>
+            function newApi(format) {
+                return ExcellentExport.convert({
+                    anchor: 'anchorNewApi-' + format,
+                    filename: 'data',
+                    format: format
+                }, [{
+                    name: 'Formatted Sheet',
+                    from: {
+                        table: 'datatable'
+                    },
+                    formats: [
+                        { range: "A2:A10", format: ExcellentExport.formats.INTEGER },
+                        { range: "B2:B10", format: ExcellentExport.formats.TEXT },
+                        { range: "C2:C10", format: ExcellentExport.formats.DATE },
+                        { range: "D2:D10", format: ExcellentExport.formats.DECIMAL },
+                        { range: "E2:E10", format: ExcellentExport.formats.BOOLEAN },
+                        { range: "A5:E5", format: ExcellentExport.formats.TEXT },
+                        { range: "A6", format: ExcellentExport.formats.DECIMAL },
+                    ],
+                }]);
+            }
+        </script>
+    </head>
+    <body>
+        <h1>ExcellentExport.js</h1>
+
+        <h3>Test page</h3>
+
+        Test table:
+        <table id="datatable">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Birthdate</th>
+                <th>Salary</th>
+                <th>Active</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>John</td>
+                <td>1980-12-10</td>
+                <td>2000.55</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Peter</td>
+                <td>1978-01-23</td>
+                <td>2500.43</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>George</td>
+                <td>1985-11-30</td>
+                <td>1800.98</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>End</td>
+                <td>End</td>
+                <td>End</td>
+                <td>End</td>
+                <td>End</td>
+            </tr>
+            <tr>
+                <td>9876543.21</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+        <br/>
+
+        <a href="#" id="anchorNewApi-xlsx" onclick="return newApi('xlsx');">Export</a>
+
+    </body>
+</html>

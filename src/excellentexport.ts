@@ -8,6 +8,7 @@
  */
 
 import * as XLSX from 'xlsx';
+import { CellType, FormatDefinition, PredefinedFormat } from './format';
 
 import * as utils from './utils';
 
@@ -29,6 +30,9 @@ export interface FromOptions {
     table?: (string|HTMLTableElement),
     array?: any[][],
 }
+
+
+
 export interface SheetOptions {
     name: string,
     from: FromOptions,
@@ -36,9 +40,9 @@ export interface SheetOptions {
     filterRowFn?(row:any[]): boolean ,
     fixValue?(value:any, row:number, column:number): any,
     fixArray?(array:any[][]): any[][],
-    rtl?: boolean
+    rtl?: boolean,
+    formats?: (FormatDefinition | null)[],
 }
-
 
 const ExcellentExport = function() {
 
@@ -138,6 +142,35 @@ const ExcellentExport = function() {
             // Create sheet
             workbook.SheetNames.push(name);
             const worksheet = XLSX.utils.aoa_to_sheet(dataArray, {sheet: name} as XLSX.AOA2SheetOpts);
+            
+            // Apply format
+            if (sheetConf.formats) {
+                sheetConf.formats.forEach(f => {
+                    const range = XLSX.utils.decode_range(f.range);
+                    for (let R = range.s.r; R <= range.e.r; ++R) {
+                        for (let C = range.s.c; C <= range.e.c; ++C) {
+                            const cell = worksheet[XLSX.utils.encode_cell({r: R, c: C})];
+                            if (cell && utils.hasContent(cell.v)) {
+                                // type
+                                cell.t = f.format.type;
+
+                                // type fix
+                                if (f.format?.type == CellType.BOOLEAN) {
+                                    const v = cell.v.toString().toLowerCase();
+                                    if (v == 'true' || v == '1') cell.v = true;
+                                    if (v == 'false' || v == '0') cell.v = false;
+                                }
+                                // pattern
+                                if (f.format?.pattern) {
+                                    cell.z = f.format.pattern;
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+                
+                
             workbook.Sheets[name] = worksheet;
             workbook.Views.push({RTL: options.rtl || sheetConf.rtl || false});
         });
@@ -177,6 +210,7 @@ const ExcellentExport = function() {
         version: function(): string {
             return version;
         },
+        formats: PredefinedFormat,
         excel: function(anchor:(HTMLAnchorElement|string), table:HTMLTableElement, name:string) {
             table = utils.getTable(table);
             anchor = utils.getAnchor(anchor);
