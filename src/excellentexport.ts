@@ -44,7 +44,7 @@ export interface SheetOptions {
 
 const ExcellentExport = function() {
 
-    const version = "3.8.1";
+    const version = "3.9.0";
 
     /*
      ExcellentExport.convert(options, sheets);
