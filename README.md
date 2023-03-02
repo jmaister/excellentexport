@@ -14,14 +14,16 @@
 
  - As part of the new version 3.0.0+, there is support for _XLSX_. The drawback is that the library is 200+ KB.
 
- - If you only need _XLS_ or _CSV_, use _2.X.X_ versions.
-
  - Check My Blog Page for Testing :
       [JavaScript export to Excel](http://jordiburgos.com/post/2013/javascript-export-to-excel.html)
 
       [ExcellentExport.js update: JavaScript export to Excel and CSV](http://jordiburgos.com/post/2017/excellentexport-javascript-export-to-excel-csv.html)
 
 # Revision history:
+
+### 3.9.0
+
+* Cell types and formats!!! Now you can define the cell type and format. For example, you can define a cell as a date or a number. You can also define the format of the cell. For example, you can define a cell as a date with the format "dd/mm/yyyy" or a number with the format "#,##0.00".
 
 ### 3.8.1
 
@@ -241,6 +243,7 @@
             fixValue: function(value, row, column) {return fixedValue} // Function to fix values, receiving value, row num, column num
             fixArray: function(array) {return array} // Function to manipulate the whole data array
             rtl: Use Right-to-left characters, boolean (optional)
+            formats: [...] // Array of formats for each column. See formats below.
             ...
         },
         {
@@ -259,6 +262,47 @@ It transforms BR to line breaks and then strips all the HTML tags.
                     return strippedString;
                 }
 
+## Formats
+
+You can specify an array with the formats for a specific cell range (i.e. A1:A100, A1:D100, A1:H1, etc).
+
+Each element in the format array consists on:
+
+```json
+{
+    "range": "A1:A100", // Range of cells to apply the format, mandatory
+    "format": {
+        "type": "<cell_type>", // Type of format, mandatory
+        "pattern": "<pattern>" // Pattern, optional
+    }
+}
+```
+
+`format` can be used from one of the predefined types if you use TypeScript
+
+```typescript
+{
+    "range": "A1:A100",
+    "format": PredefinedFormat.INTEGER
+}
+```
+
+`cell_type` can be one of the followint:
+
+    's': String
+    'n': Number
+    'd': Date
+    'b': Boolean
+
+`pattern` is a string with the format pattern used in Excel. For example:
+
+    '0' // Integer
+    '0.00' // 2 decimals
+    'dd/mm/yyyy' // Date
+    'dd/mm/yyyy hh:mm:ss' // Date and time
+    '0.00%' // Percentage
+    '0.00e+00' // Scientific notation
+    '@' // Text
 
 # Notes
 

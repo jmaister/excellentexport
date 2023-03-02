@@ -139,3 +139,7 @@ export const removeColumns = function(dataArray:any[][], columnIndexes:number[])
         });
     });
 };
+
+export const hasContent = function(value:any) : boolean {
+    return value !== undefined && value !== null && value !== "";
+}
