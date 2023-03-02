@@ -31,8 +31,6 @@ export interface FromOptions {
     array?: any[][],
 }
 
-
-
 export interface SheetOptions {
     name: string,
     from: FromOptions,
