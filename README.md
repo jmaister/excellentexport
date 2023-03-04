@@ -21,6 +21,10 @@
 
 # Revision history:
 
+### 3.9.3
+
+* Fix TypeScript exported types
+
 ### 3.9.0
 
 * Cell types and formats!!! Now you can define the cell type and format. For example, you can define a cell as a date or a number. You can also define the format of the cell. For example, you can define a cell as a date with the format "dd/mm/yyyy" or a number with the format "#,##0.00".
@@ -278,14 +282,27 @@ Each element in the format array consists on:
 }
 ```
 
-`format` can be used from one of the predefined types if you use TypeScript
+Example:
 
 ```typescript
-{
-    "range": "A1:A100",
-    "format": PredefinedFormat.INTEGER
-}
+          formats: [
+            {
+              range: "C2:C20",
+              format: {
+                type: "n",
+                pattern: "0.00",
+              },
+            },
+            {
+              range: "C2:C20",
+              format: ExcellentExport.formats.NUMBER,
+            }
+          ],
+
 ```
+
+`format` can be used from one of the predefined types if you use TypeScript
+
 
 `cell_type` can be one of the followint:
 

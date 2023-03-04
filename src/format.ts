@@ -1,12 +1,14 @@
 
-export enum CellType {
+// Constants for cell types
+export enum CellTypes {
     TEXT = 's',
     NUMBER = 'n',
     DATE = 'd',
     BOOLEAN = 'b',
 }
 
-export enum CellPattern {
+// Constants for cell patterns
+export enum CellPatterns {
     INTEGER = '0',
     DECIMAL = '0.00',
     DATE = 'dd/mm/yyyy',
@@ -18,9 +20,11 @@ export enum CellPattern {
     TEXT = '@',
 }
 
+export type CellType = 's' | 'n' | 'd' | 'b';
+
 export interface CellFormat {
     type: CellType,
-    pattern?: CellPattern,
+    pattern?: string,
 }
 
 // Define structure for predefined formats
@@ -28,21 +32,21 @@ export interface CellFormats {
     [key: string]: CellFormat
 }
 export const PredefinedFormat : CellFormats = {
-    NUMBER: { type: CellType.NUMBER},
-    INTEGER: { type: CellType.NUMBER, pattern: CellPattern.INTEGER },
-    DECIMAL: { type: CellType.NUMBER, pattern: CellPattern.DECIMAL },
-    CURRENCY: { type: CellType.NUMBER, pattern: CellPattern.CURRENCY },
-    PERCENTAGE: { type: CellType.NUMBER, pattern: CellPattern.PERCENTAGE },
-    EXPONENT: { type: CellType.NUMBER, pattern: CellPattern.EXPONENT },
+    NUMBER: { type: CellTypes.NUMBER},
+    INTEGER: { type: CellTypes.NUMBER, pattern: CellPatterns.INTEGER },
+    DECIMAL: { type: CellTypes.NUMBER, pattern: CellPatterns.DECIMAL },
+    CURRENCY: { type: CellTypes.NUMBER, pattern: CellPatterns.CURRENCY },
+    PERCENTAGE: { type: CellTypes.NUMBER, pattern: CellPatterns.PERCENTAGE },
+    EXPONENT: { type: CellTypes.NUMBER, pattern: CellPatterns.EXPONENT },
 
-    DATE: { type: CellType.DATE, pattern: CellPattern.DATE },
+    DATE: { type: CellTypes.DATE, pattern: CellPatterns.DATE },
 
-    TIME: { type: CellType.DATE, pattern: CellPattern.TIME },
-    DATETIME: { type: CellType.DATE, pattern: CellPattern.DATETIME },
+    TIME: { type: CellTypes.DATE, pattern: CellPatterns.TIME },
+    DATETIME: { type: CellTypes.DATE, pattern: CellPatterns.DATETIME },
 
-    TEXT: { type: CellType.TEXT, pattern: CellPattern.TEXT },
+    TEXT: { type: CellTypes.TEXT, pattern: CellPatterns.TEXT },
 
-    BOOLEAN: { type: CellType.BOOLEAN },
+    BOOLEAN: { type: CellTypes.BOOLEAN },
 }
 
 export interface FormatDefinition {

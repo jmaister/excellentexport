@@ -8,7 +8,7 @@
  */
 
 import * as XLSX from 'xlsx';
-import { CellType, FormatDefinition, PredefinedFormat } from './format';
+import { CellTypes, FormatDefinition, PredefinedFormat, CellFormats, CellPatterns } from './format';
 
 import * as utils from './utils';
 
@@ -42,9 +42,19 @@ export interface SheetOptions {
     formats?: (FormatDefinition | null)[],
 }
 
+/*
+export type ExcellentExportType = {
+    version: () => string,
+    formats: CellFormats,
+    excel: (anchor:(HTMLAnchorElement|string), table:HTMLTableElement, name:string) => void,
+    csv: (anchor:(HTMLAnchorElement|string), table:HTMLTableElement, delimiter?:string, newLine?:string) => void,
+    convert: (options:ConvertOptions, sheets:SheetOptions[]) => void,
+}
+*/
+
 const ExcellentExport = function() {
 
-    const version = "3.9.0";
+    const version = "3.9.3";
 
     /*
      ExcellentExport.convert(options, sheets);
@@ -153,7 +163,7 @@ const ExcellentExport = function() {
                                 cell.t = f.format.type;
 
                                 // type fix
-                                if (f.format?.type == CellType.BOOLEAN) {
+                                if (f.format?.type == CellTypes.BOOLEAN) {
                                     const v = cell.v.toString().toLowerCase();
                                     if (v == 'true' || v == '1') cell.v = true;
                                     if (v == 'false' || v == '0') cell.v = false;
@@ -208,7 +218,6 @@ const ExcellentExport = function() {
         version: function(): string {
             return version;
         },
-        formats: PredefinedFormat,
         excel: function(anchor:(HTMLAnchorElement|string), table:HTMLTableElement, name:string) {
             table = utils.getTable(table);
             anchor = utils.getAnchor(anchor);
@@ -235,7 +244,10 @@ const ExcellentExport = function() {
         },
         convert: function(options:ConvertOptions, sheets:SheetOptions[]) {
             return convert(options, sheets);
-        }
+        },
+        formats: PredefinedFormat,
+        cellTypes: CellTypes,
+        cellPatterns: CellPatterns,
     };
 }();
 

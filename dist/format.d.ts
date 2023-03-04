@@ -1,10 +1,10 @@
-export declare enum CellType {
+export declare enum CellTypes {
     TEXT = "s",
     NUMBER = "n",
     DATE = "d",
     BOOLEAN = "b"
 }
-export declare enum CellPattern {
+export declare enum CellPatterns {
     INTEGER = "0",
     DECIMAL = "0.00",
     DATE = "dd/mm/yyyy",
@@ -15,9 +15,10 @@ export declare enum CellPattern {
     EXPONENT = "0.00E+00",
     TEXT = "@"
 }
+export type CellType = 's' | 'n' | 'd' | 'b';
 export interface CellFormat {
     type: CellType;
-    pattern?: CellPattern;
+    pattern?: string;
 }
 export interface CellFormats {
     [key: string]: CellFormat;
