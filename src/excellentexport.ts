@@ -151,34 +151,48 @@ const ExcellentExport = function() {
             workbook.SheetNames.push(name);
             const worksheet = XLSX.utils.aoa_to_sheet(dataArray, {sheet: name} as XLSX.AOA2SheetOpts);
             
-            // Apply format
+            // Apply formats
             if (sheetConf.formats) {
-                sheetConf.formats.forEach(f => {
-                    const range = XLSX.utils.decode_range(f.range);
-                    for (let R = range.s.r; R <= range.e.r; ++R) {
-                        for (let C = range.s.c; C <= range.e.c; ++C) {
-                            const cell = worksheet[XLSX.utils.encode_cell({r: R, c: C})];
-                            if (cell && utils.hasContent(cell.v)) {
-                                // type
-                                cell.t = f.format.type;
+                // Column type and pattern
+                sheetConf.formats
+                    .filter(f => Object.keys(f).includes('format'))
+                    .forEach(f => {
+                        const range = XLSX.utils.decode_range(f.range);
+                        for (let R = range.s.r; R <= range.e.r; ++R) {
+                            for (let C = range.s.c; C <= range.e.c; ++C) {
+                                const cell = worksheet[XLSX.utils.encode_cell({r: R, c: C})];
+                                if (cell && utils.hasContent(cell.v)) {
+                                    // type
+                                    cell.t = f.format.type;
 
-                                // type fix
-                                if (f.format?.type == CellTypes.BOOLEAN) {
-                                    const v = cell.v.toString().toLowerCase();
-                                    if (v == 'true' || v == '1') cell.v = true;
-                                    if (v == 'false' || v == '0') cell.v = false;
-                                }
-                                // pattern
-                                if (f.format?.pattern) {
-                                    cell.z = f.format.pattern;
+                                    // type fix
+                                    if (f.format?.type == CellTypes.BOOLEAN) {
+                                        const v = cell.v.toString().toLowerCase();
+                                        if (v == 'true' || v == '1') cell.v = true;
+                                        if (v == 'false' || v == '0') cell.v = false;
+                                    }
+                                    // pattern
+                                    if (f.format?.pattern) {
+                                        cell.z = f.format.pattern;
+                                    }
                                 }
                             }
                         }
-                    }
-                });
+                    });
+                // Set column widths
+                const columnInfo = [];
+                sheetConf.formats
+                    .filter(f => Object.keys(f).includes('width'))
+                    .forEach(f => {
+                        const range = XLSX.utils.decode_range(f.range);
+                        for (let C = range.s.c; C <= range.e.c; ++C) {
+                            columnInfo[C] = {wch: f.width};
+                        }
+                    });
+                worksheet['!cols'] = columnInfo;
             }
-                
-                
+
+            
             workbook.Sheets[name] = worksheet;
             workbook.Views.push({RTL: options.rtl || sheetConf.rtl || false});
         });

@@ -52,5 +52,6 @@ export const PredefinedFormat : CellFormats = {
 export interface FormatDefinition {
     range: string,
     format?: CellFormat,
+    width?: number,
 }
 
