@@ -28,4 +28,4 @@ jobs:
 
     - run: yarn install
 
-    - run: yarn jest
+    - run: yarn coveralls
