@@ -54,7 +54,7 @@ export type ExcellentExportType = {
 
 const ExcellentExport = function() {
 
-    const version = "3.9.4";
+    const version = "3.9.5";
 
     /*
      ExcellentExport.convert(options, sheets);

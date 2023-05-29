@@ -21,6 +21,10 @@
 
 # Revision history:
 
+### 3.9.5
+
+* _Update npm dependencies to fix vulnerabilities_
+
 ### 3.9.4
 
 * _Update npm dependencies to fix vulnerabilities_
