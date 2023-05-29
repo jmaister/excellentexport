@@ -53,8 +53,5 @@
     "webpack-dev-server": "4.15.0",
     "webpack-node-externals": "3.0.0",
     "xlsx": "0.18.5"
-  },
-  "resolutions": {
-    "json-schema": "0.4.0"
   }
 }
