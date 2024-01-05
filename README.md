@@ -20,6 +20,11 @@
 
 # Revision history:
 
+### 3.9.7
+
+* _Update npm dependencies to fix vulnerabilities_
+* xlsx package loaded from CDN
+
 ### 3.9.6
 
 * Got a license from IntelliJ and helped to fix some things in the code
@@ -365,3 +370,7 @@ Example:
 **Publish**
 
     npm publish
+
+## Dependencies
+
+- XLSX is not available from NPM anymore. Use https://cdn.sheetjs.com/ to install it.
