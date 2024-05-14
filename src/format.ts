@@ -5,6 +5,7 @@ export enum CellTypes {
     NUMBER = 'n',
     DATE = 'd',
     BOOLEAN = 'b',
+    FORMULA = 'str',
 }
 
 // Constants for cell patterns
@@ -47,6 +48,7 @@ export const PredefinedFormat : CellFormats = {
     TEXT: { type: CellTypes.TEXT, pattern: CellPatterns.TEXT },
 
     BOOLEAN: { type: CellTypes.BOOLEAN },
+    FORMULA: { type: CellTypes.FORMULA },
 }
 
 export interface FormatDefinition {
