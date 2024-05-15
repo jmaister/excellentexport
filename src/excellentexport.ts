@@ -150,7 +150,17 @@ const ExcellentExport = function() {
             // Create sheet
             workbook.SheetNames.push(name);
             const worksheet = XLSX.utils.aoa_to_sheet(dataArray, {sheet: name} as XLSX.AOA2SheetOpts);
-            
+            for (var cellName in worksheet) {
+                if (utils.hasContent(worksheet[cellName])) {
+                    var cell = worksheet[cellName];
+                    if (utils.hasContent(cell.v)) {
+                        if(cell.v[0] == '=') {
+                            cell.f = cell.v.toString().substring(1)
+                            delete cell.v
+                        }
+                    }
+                }
+            }
             // Apply format
             if (sheetConf.formats) {
                 sheetConf.formats.forEach(f => {
