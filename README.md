@@ -1,7 +1,6 @@
 
 [![Node CI](https://github.com/jmaister/excellentexport/actions/workflows/webpack.yml/badge.svg?branch=master)](https://github.com/jmaister/excellentexport/actions/workflows/webpack.yml)
 [![](https://data.jsdelivr.com/v1/package/npm/excellentexport/badge)](https://www.jsdelivr.com/package/npm/excellentexport)
-[![Rate on Openbase](https://badges.openbase.io/js/rating/excellentexport.svg)](https://openbase.io/js/excellentexport?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 [![Coverage Status](https://coveralls.io/repos/github/jmaister/excellentexport/badge.svg?branch=master)](https://coveralls.io/github/jmaister/excellentexport?branch=master)
 
 # ExcellentExport.js
@@ -20,6 +19,18 @@
       [ExcellentExport.js update: JavaScript export to Excel and CSV](http://jordiburgos.com/post/2017/excellentexport-javascript-export-to-excel-csv.html)
 
 # Revision history:
+
+### 3.9.7
+
+* _Update npm dependencies to fix vulnerabilities_
+* xlsx package loaded from CDN [SheetJS CDN](https://cdn.sheetjs.com/)
+* Moving to npm build (package-lock.json), yarn does not support "audit fix" command to fix dependencies vulnerabilities automatically.
+
+### 3.9.6
+
+* Remove references to openbase.io
+* Fix typos
+* _Update npm dependencies to fix vulnerabilities_
 
 ### 3.9.5
 
@@ -122,7 +133,7 @@
 ### 2.1.0
 
 * Add Webpack build.
-* Create UMD JavaScript module. Library can be loaded as a module (import, RequireJS, AMD, etc...) or standalone as window.ExcelentExport.
+* Create UMD JavaScript module. Library can be loaded as a module (import, RequireJS, AMD, etc...) or standalone as window.ExcellentExport.
 
 ### 2.0.3
 
@@ -280,8 +291,8 @@ You can specify an array with the formats for a specific cell range (i.e. A1:A10
 
 Each element in the format array consists on:
 
-```json
-{
+```typescript
+const sheet01 = {
     "range": "A1:A100", // Range of cells to apply the format, mandatory
     "format": {
         "type": "<cell_type>", // Type of format, mandatory
@@ -305,8 +316,7 @@ Example:
               range: "C2:C20",
               format: ExcellentExport.formats.NUMBER,
             }
-          ],
-
+          ]
 ```
 
 `format` can be used from one of the predefined types if you use TypeScript
@@ -360,3 +370,7 @@ Example:
 **Publish**
 
     npm publish
+
+## Dependencies
+
+- XLSX is not available from NPM anymore. Use https://cdn.sheetjs.com/ to install it.
