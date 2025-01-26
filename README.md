@@ -20,11 +20,15 @@
 
 # Revision history:
 
+### 3.9.8
+
+* _Update npm dependencies to fix vulnerabilities_
+* Moving to npm build (package-lock.json), yarn does not support "audit fix" command to fix dependencies vulnerabilities automatically.
+
 ### 3.9.7
 
 * _Update npm dependencies to fix vulnerabilities_
 * xlsx package loaded from CDN [SheetJS CDN](https://cdn.sheetjs.com/)
-* Moving to npm build (package-lock.json), yarn does not support "audit fix" command to fix dependencies vulnerabilities automatically.
 
 ### 3.9.6
 
