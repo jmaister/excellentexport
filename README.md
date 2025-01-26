@@ -20,6 +20,10 @@
 
 # Revision history:
 
+### 3.9.9
+
+* Remove unused dependencies (there was a lot of them).
+
 ### 3.9.8
 
 * _Update npm dependencies to fix vulnerabilities_
