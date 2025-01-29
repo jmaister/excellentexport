@@ -1,7 +1,7 @@
 
 [![Node CI](https://github.com/jmaister/excellentexport/actions/workflows/webpack.yml/badge.svg?branch=master)](https://github.com/jmaister/excellentexport/actions/workflows/webpack.yml)
 [![](https://data.jsdelivr.com/v1/package/npm/excellentexport/badge)](https://www.jsdelivr.com/package/npm/excellentexport)
-[![Coverage Status](https://coveralls.io/repos/github/jmaister/excellentexport/badge.svg?branch=master)](https://coveralls.io/github/jmaister/excellentexport?branch=master)
+
 
 # ExcellentExport.js
 
@@ -23,6 +23,7 @@
 ### 3.9.9
 
 * Remove unused dependencies (there was a lot of them).
+* Removed coveralls, the library used was too old and has many vulnerabilities.
 
 ### 3.9.8
 
