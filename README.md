@@ -1,7 +1,7 @@
 
 [![Node CI](https://github.com/jmaister/excellentexport/actions/workflows/webpack.yml/badge.svg?branch=master)](https://github.com/jmaister/excellentexport/actions/workflows/webpack.yml)
 [![](https://data.jsdelivr.com/v1/package/npm/excellentexport/badge)](https://www.jsdelivr.com/package/npm/excellentexport)
-
+[![codecov](https://codecov.io/gh/jmaister/excellentexport/graph/badge.svg?token=CMhCN0GnmY)](https://codecov.io/gh/jmaister/excellentexport)
 
 # ExcellentExport.js
 
@@ -22,8 +22,9 @@
 
 ### 3.9.9
 
+* Configure codecov to track code coverage.
+* Removed coveralls, the library used is too old, not updated in years and has many vulnerabilities.
 * Remove unused dependencies (there was a lot of them).
-* Removed coveralls, the library used was too old and has many vulnerabilities.
 
 ### 3.9.8
 
