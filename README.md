@@ -1,7 +1,7 @@
 
 [![Node CI](https://github.com/jmaister/excellentexport/actions/workflows/webpack.yml/badge.svg?branch=master)](https://github.com/jmaister/excellentexport/actions/workflows/webpack.yml)
 [![](https://data.jsdelivr.com/v1/package/npm/excellentexport/badge)](https://www.jsdelivr.com/package/npm/excellentexport)
-[![Coverage Status](https://coveralls.io/repos/github/jmaister/excellentexport/badge.svg?branch=master)](https://coveralls.io/github/jmaister/excellentexport?branch=master)
+[![codecov](https://codecov.io/gh/jmaister/excellentexport/graph/badge.svg?token=CMhCN0GnmY)](https://codecov.io/gh/jmaister/excellentexport)
 
 # ExcellentExport.js
 
@@ -19,6 +19,12 @@
       [ExcellentExport.js update: JavaScript export to Excel and CSV](http://jordiburgos.com/post/2017/excellentexport-javascript-export-to-excel-csv.html)
 
 # Revision history:
+
+### 3.9.9
+
+* Configure codecov to track code coverage.
+* Removed coveralls, the library used is too old, not updated in years and has many vulnerabilities.
+* Remove unused dependencies (there was a lot of them).
 
 ### 3.9.8
 
