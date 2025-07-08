@@ -20,6 +20,11 @@
 
 # Revision history:
 
+### 3.9.10
+
+* Add ts-node dependency for TypeScript development support.
+* _Update npm dependencies to fix vulnerabilities_
+
 ### 3.9.9
 
 * Configure codecov to track code coverage.
