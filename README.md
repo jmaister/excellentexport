@@ -20,6 +20,10 @@
 
 # Revision history:
 
+### 3.9.11
+
+* _Update npm dependencies to fix vulnerabilities_
+
 ### 3.9.10
 
 * Add ts-node dependency for TypeScript development support.
