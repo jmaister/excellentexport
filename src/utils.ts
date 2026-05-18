@@ -82,13 +82,77 @@ export const getAnchor = function(element :(HTMLAnchorElement|string)) : HTMLAnc
     return fixedValue;
 };
 
-export const tableToArray = function(table:HTMLTableElement) : any[][] {
-    let tableInfo = Array.prototype.map.call(table.querySelectorAll('tr'), function(tr) {
-        return Array.prototype.map.call(tr.querySelectorAll('th,td'), function(td) {
-            return td.innerHTML;
+/**
+ * Parse an HTML table into a data array and a list of merge ranges,
+ * honouring colspan and rowspan attributes.
+ */
+export const parseTable = function(table: HTMLTableElement): { data: any[][], merges: {s: {r: number, c: number}, e: {r: number, c: number}}[] } {
+    const rows = Array.prototype.slice.call(table.querySelectorAll('tr')) as HTMLTableRowElement[];
+    const numRows = rows.length;
+
+    // grid[r][c] holds the cell value; undefined means "not yet placed"
+    const grid: any[][] = [];
+    // occupied[r][c] = true when the slot has been claimed by a span
+    const occupied: boolean[][] = [];
+    const merges: {s: {r: number, c: number}, e: {r: number, c: number}}[] = [];
+
+    for (let r = 0; r < numRows; r++) {
+        if (!grid[r]) grid[r] = [];
+        if (!occupied[r]) occupied[r] = [];
+
+        const cells = Array.prototype.slice.call(rows[r].querySelectorAll('th,td')) as HTMLTableCellElement[];
+        let c = 0;
+
+        cells.forEach(function(cell) {
+            // Advance past columns already occupied by a previous rowspan
+            while (occupied[r] && occupied[r][c]) {
+                c++;
+            }
+
+            const colspan = cell.colSpan || 1;
+            const rowspan = cell.rowSpan || 1;
+            const value = cell.innerHTML;
+
+            grid[r][c] = value;
+
+            // Mark all spanned cells as occupied
+            for (let dr = 0; dr < rowspan; dr++) {
+                for (let dc = 0; dc < colspan; dc++) {
+                    if (!occupied[r + dr]) occupied[r + dr] = [];
+                    occupied[r + dr][c + dc] = true;
+                }
+            }
+
+            // Record the merge range when spanning more than one cell
+            if (colspan > 1 || rowspan > 1) {
+                merges.push({
+                    s: { r: r, c: c },
+                    e: { r: r + rowspan - 1, c: c + colspan - 1 }
+                });
+            }
+
+            c += colspan;
+        });
+    }
+
+    // Normalise grid to a rectangular array
+    let numCols = 0;
+    grid.forEach(function(row) { if (row.length > numCols) numCols = row.length; });
+    const data = grid.map(function(row) {
+        return Array.from({ length: numCols }, function(_, i) {
+            return row[i] !== undefined ? row[i] : '';
         });
     });
-    return tableInfo;
+
+    return { data, merges };
+};
+
+export const tableToArray = function(table:HTMLTableElement) : any[][] {
+    return parseTable(table).data;
+};
+
+export const tableToMerges = function(table:HTMLTableElement) : {s: {r: number, c: number}, e: {r: number, c: number}}[] {
+    return parseTable(table).merges;
 };
 
 export const tableToCSV = function(table:HTMLTableElement, csvDelimiter:string = ',', csvNewLine:string = '\n') : string {

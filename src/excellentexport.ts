@@ -110,8 +110,12 @@ const ExcellentExport = function() {
 
             // Select data source
             let dataArray: any[][];
+            let tableMerges: {s: {r: number, c: number}, e: {r: number, c: number}}[] | null = null;
             if (sheetConf.from && sheetConf.from.table) {
-                dataArray = utils.tableToArray(utils.getTable(sheetConf.from.table));
+                const tableEl = utils.getTable(sheetConf.from.table);
+                const parsed = utils.parseTable(tableEl);
+                dataArray = parsed.data;
+                tableMerges = parsed.merges;
             } else if(sheetConf.from && sheetConf.from.array) {
                 dataArray = sheetConf.from.array
             } else {
@@ -150,6 +154,11 @@ const ExcellentExport = function() {
             // Create sheet
             workbook.SheetNames.push(name);
             const worksheet = XLSX.utils.aoa_to_sheet(dataArray, {sheet: name} as XLSX.AOA2SheetOpts);
+
+            // Apply merged cells from table colspan/rowspan
+            if (tableMerges && tableMerges.length > 0) {
+                worksheet['!merges'] = tableMerges;
+            }
             
             // Apply format
             if (sheetConf.formats) {
