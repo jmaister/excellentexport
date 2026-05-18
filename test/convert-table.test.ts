@@ -156,7 +156,7 @@ describe('convert() API', function() {
             expect(ws['B2'].v).toBe('D');
             // No merges
             const merges = ws['!merges'];
-            expect(!merges || merges.length === 0).toBe(true);
+            expect(merges ?? []).toHaveLength(0);
         });
     });
 });
