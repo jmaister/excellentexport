@@ -1,5 +1,5 @@
 
-import 'expect-puppeteer';
+
 
 import * as XLSX from 'xlsx';
 import ExcellentExport, { ConvertOptions, SheetOptions } from '../src/excellentexport';
@@ -13,7 +13,7 @@ describe('convert() API', function() {
 
             document.body.innerHTML = '';
             const element = document.createElement("div");
-            element.innerHTML = 
+            element.innerHTML =
                 '<table id="sometable"><tr><th>first</th><th>second</th></tr><tr><td>1234</td><td>123.56</td></tr></table>' +
                 '<a id="anchor">Link</a>';
 
@@ -107,7 +107,7 @@ describe('convert() API', function() {
             // Merged region should cover A1:B1
             expect(ws['!merges']).toBeDefined();
             expect(ws['!merges']).toHaveLength(1);
-            expect(ws['!merges'][0]).toEqual({ s: { r: 0, c: 0 }, e: { r: 0, c: 1 } });
+            expect(ws['!merges']![0]).toEqual({ s: { r: 0, c: 0 }, e: { r: 0, c: 1 } });
         });
 
         test('should produce merged cells for rowspan=2', function() {
@@ -123,7 +123,7 @@ describe('convert() API', function() {
             expect(ws['B2'].v).toBe('Bottom');
             expect(ws['!merges']).toBeDefined();
             expect(ws['!merges']).toHaveLength(1);
-            expect(ws['!merges'][0]).toEqual({ s: { r: 0, c: 0 }, e: { r: 1, c: 0 } });
+            expect(ws['!merges']![0]).toEqual({ s: { r: 0, c: 0 }, e: { r: 1, c: 0 } });
         });
 
         test('should produce merged cells for combined colspan=2 rowspan=2', function() {
@@ -141,7 +141,7 @@ describe('convert() API', function() {
             expect(ws['A3'].v).toBe('R2C0');
             expect(ws['!merges']).toBeDefined();
             expect(ws['!merges']).toHaveLength(1);
-            expect(ws['!merges'][0]).toEqual({ s: { r: 0, c: 0 }, e: { r: 1, c: 1 } });
+            expect(ws['!merges']![0]).toEqual({ s: { r: 0, c: 0 }, e: { r: 1, c: 1 } });
         });
 
         test('should produce no merges for a table without spans', function() {

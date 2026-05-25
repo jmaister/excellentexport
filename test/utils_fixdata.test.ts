@@ -3,6 +3,7 @@ const assert = require('assert');
 import { fixCSVField } from '../src/utils';
 
 
+
 describe('Test utility functions: csv functions', () => {
 
     it('should keep the value if not delimiter found', () => {

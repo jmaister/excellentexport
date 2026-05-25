@@ -90,9 +90,9 @@ const ExcellentExport = function() {
     */
     const convert = function(options:ConvertOptions, sheets:SheetOptions[]) {
         const workbook = {
-            SheetNames: [],
-            Sheets: {},
-            Views: []
+            SheetNames: [] as string[],
+            Sheets: {} as {[key: string]: XLSX.WorkSheet},
+            Views: [] as {RTL: boolean}[]
         };
 
         if (!options.format) {
@@ -159,26 +159,27 @@ const ExcellentExport = function() {
             if (tableMerges && tableMerges.length > 0) {
                 worksheet['!merges'] = tableMerges;
             }
-            
+
             // Apply format
             if (sheetConf.formats) {
                 sheetConf.formats.forEach(f => {
+                    if (!f) return;
                     const range = XLSX.utils.decode_range(f.range);
                     for (let R = range.s.r; R <= range.e.r; ++R) {
                         for (let C = range.s.c; C <= range.e.c; ++C) {
                             const cell = worksheet[XLSX.utils.encode_cell({r: R, c: C})];
-                            if (cell && utils.hasContent(cell.v)) {
+                            if (cell && utils.hasContent(cell.v) && f.format) {
                                 // type
                                 cell.t = f.format.type;
 
                                 // type fix
-                                if (f.format?.type == CellTypes.BOOLEAN) {
+                                if (f.format.type == CellTypes.BOOLEAN) {
                                     const v = cell.v.toString().toLowerCase();
                                     if (v == 'true' || v == '1') cell.v = true;
                                     if (v == 'false' || v == '0') cell.v = false;
                                 }
                                 // pattern
-                                if (f.format?.pattern) {
+                                if (f.format.pattern) {
                                     cell.z = f.format.pattern;
                                 }
                             }
@@ -186,8 +187,7 @@ const ExcellentExport = function() {
                     }
                 });
             }
-                
-                
+
             workbook.Sheets[name] = worksheet;
             workbook.Views.push({RTL: options.rtl || sheetConf.rtl || false});
         });
