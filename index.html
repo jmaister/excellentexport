@@ -123,5 +123,33 @@
         <br>
         <a href="#" id="anchorNewApi-csv-array" onclick="return newApiArray('csv');">Export to CSV from array</a>
 
+        <h1>Colspan and Rowspan</h1>
+
+        Table with merged cells (colspan and rowspan):
+        <table id="spantable">
+            <tr>
+                <th colspan="2">Merged Header (colspan=2)</th>
+                <th>Column 3</th>
+            </tr>
+            <tr>
+                <td rowspan="2">Merged Cell (rowspan=2)</td>
+                <td>B2</td>
+                <td>C2</td>
+            </tr>
+            <tr>
+                <td>B3</td>
+                <td>C3</td>
+            </tr>
+            <tr>
+                <td>A4</td>
+                <td colspan="2">Merged Cell (colspan=2)</td>
+            </tr>
+        </table>
+
+        <br/>
+        <a href="#" id="anchorSpan-xlsx" onclick="return ExcellentExport.convert({ anchor: 'anchorSpan-xlsx', filename: 'span_export', format: 'xlsx' }, [{ name: 'Span Sheet', from: { table: 'spantable' } }]);">Export colspan/rowspan to XLSX</a>
+        <br/>
+        <a href="#" id="anchorSpan-csv" onclick="return ExcellentExport.convert({ anchor: 'anchorSpan-csv', filename: 'span_export', format: 'csv' }, [{ name: 'Span Sheet', from: { table: 'spantable' } }]);">Export colspan/rowspan to CSV</a>
+
     </body>
 </html>

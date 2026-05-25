@@ -7,11 +7,10 @@
       "removeComments": false,
       "declaration": true,
       "rootDir": "src",
-      "moduleResolution": "node",
+      "moduleResolution": "bundler",
       "esModuleInterop": true
     },
     "include": [
-      "src/**/*.ts",
-      "test/**/*.{ts,js}"
+      "src/**/*.ts"
     ]
 }
