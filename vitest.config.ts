@@ -18,5 +18,8 @@ export default defineConfig({
                 { browser: 'chromium' },
             ],
         },
+        coverage: {
+            reporter: ['text', 'lcov'],
+        },
     },
 })
