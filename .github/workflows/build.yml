@@ -31,8 +31,8 @@ jobs:
     - name: Install Playwright browsers
       run: npx playwright install --with-deps chromium
 
-    - name: Run Vitest
-      run: npx vitest run
+    - name: npm test - Vitest
+      run: npm test
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v7
