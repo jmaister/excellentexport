@@ -1,5 +1,5 @@
 /**
- * ExcellentExport 3.9.11
+ * ExcellentExport 3.9.15
  * A client side Javascript export to Excel.
  *
  * @author: Jordi Burgos (jordiburgos@gmail.com)
@@ -55,7 +55,7 @@ export type ExcellentExportType = {
 
 const ExcellentExport = function() {
 
-    const version = "3.9.11";
+    const version = "3.9.15";
 
     /*
      ExcellentExport.convert(options, sheets);

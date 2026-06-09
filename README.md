@@ -20,6 +20,12 @@
 
 # Revision history:
 
+### 3.9.15
+
+* Moved build to Vite 8 and Vitest. Test went from 12 seconds to 0.5 seconds!!!
+* Added support for rowspan and colspan. Now you can export tables with merged cells.
+* _Update npm dependencies to fix vulnerabilities_
+
 ### 3.9.11
 
 * _Update npm dependencies to fix vulnerabilities_
