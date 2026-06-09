@@ -1,6 +1,7 @@
-const assert = require('assert');
+import { describe, expect, test, beforeEach, it, assert } from 'vitest'
 
 import { fixCSVField } from '../src/utils';
+
 
 
 describe('Test utility functions: csv functions', () => {

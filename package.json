@@ -19,28 +19,24 @@
     "side"
   ],
   "scripts": {
-    "build": "webpack --config webpack.config.js --progress --mode development --watch",
-    "prod": "webpack --config webpack.config.js --progress --mode production",
-    "test": "jest --coverage",
-    "watch": "jest --watch",
+    "build": "vite",
+    "prod": "vite build",
+    "test": "vitest run --coverage",
     "postinstall": "node scripts/postinstall.js"
   },
   "main": "dist/excellentexport.js",
   "devDependencies": {
-    "@types/jest": "30.0.0",
-    "@types/jest-environment-puppeteer": "5.0.6",
-    "@types/node": "25.0.3",
-    "jest": "30.2.0",
-    "jest-environment-jsdom": "30.2.0",
-    "jest-puppeteer": "11.0.0",
-    "puppeteer": "24.34.0",
-    "ts-jest": "29.4.6",
-    "ts-loader": "9.5.4",
+    "@types/node": "25.9.2",
+    "@vitest/browser-playwright": "4.1.8",
+    "@vitest/coverage-v8": "4.1.8",
+    "puppeteer": "25.1.0",
+    "ts-loader": "9.6.0",
     "ts-node": "10.9.2",
-    "typescript": "5.9.3",
-    "webpack": "5.104.1",
-    "webpack-cli": "6.0.1",
-    "webpack-dev-server": "5.2.2",
+    "typescript": "6.0.3",
+    "vite": "8.0.16",
+    "vite-plugin-dts": "5.0.2",
+    "vite-tsconfig-paths": "6.1.1",
+    "vitest": "4.1.8",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   }
 }

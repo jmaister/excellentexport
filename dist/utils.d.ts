@@ -22,7 +22,34 @@ export declare const getAnchor: (element: (HTMLAnchorElement | string)) => HTMLA
  * @param {*} value
  */
 export declare const fixCSVField: (value: string, csvDelimiter: string) => string;
+/**
+ * Parse an HTML table into a data array and a list of merge ranges,
+ * honouring colspan and rowspan attributes.
+ */
+export declare const parseTable: (table: HTMLTableElement) => {
+    data: any[][];
+    merges: {
+        s: {
+            r: number;
+            c: number;
+        };
+        e: {
+            r: number;
+            c: number;
+        };
+    }[];
+};
 export declare const tableToArray: (table: HTMLTableElement) => any[][];
+export declare const tableToMerges: (table: HTMLTableElement) => {
+    s: {
+        r: number;
+        c: number;
+    };
+    e: {
+        r: number;
+        c: number;
+    };
+}[];
 export declare const tableToCSV: (table: HTMLTableElement, csvDelimiter?: string, csvNewLine?: string) => string;
 export declare const createDownloadLink: (anchor: HTMLAnchorElement, base64data: string, exporttype: string, filename: string) => boolean;
 export declare const string2ArrayBuffer: (s: string) => ArrayBuffer;

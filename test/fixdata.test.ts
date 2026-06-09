@@ -1,4 +1,4 @@
-const assert = require('assert');
+import { describe, expect, test, beforeEach, it, assert } from 'vitest'
 
 import ExcellentExport, { ConvertOptions } from '../src/excellentexport';
 
@@ -29,7 +29,7 @@ describe('Fix data', function() {
                         ['hello', '<td>hello</td>', 'bye'],
                     ]
                 },
-                fixValue: (value, row, col) => {
+                fixValue: (value: any, row: number, col: number) => {
                     let v = value.replace(/<br>/gi, "\n");
                     let strippedString = v.replace(/(<([^>]+)>)/gi, "");
                     return strippedString;
@@ -56,9 +56,9 @@ describe('Fix data', function() {
                         ['hello', '<td>hello</td>', 'bye'],
                     ]
                 },
-                fixData: (array) => {
-                    return array.map(r => {
-                        return r.map(v => {
+                fixArray: (array: any[][]) => {
+                    return array.map((r: any[]) => {
+                        return r.map((v: any) => {
                             return "fixed-" + v;
                         })
                     });

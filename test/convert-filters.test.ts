@@ -1,5 +1,5 @@
 
-import 'expect-puppeteer';
+import { describe, expect, test, beforeEach, it, assert } from 'vitest'
 
 import ExcellentExport, { ConvertOptions, SheetOptions } from '../src/excellentexport';
 
@@ -12,7 +12,7 @@ describe('convert() API', function() {
 
             document.body.innerHTML = '';
             const element = document.createElement("div");
-            element.innerHTML = 
+            element.innerHTML =
                 '<table id="sometable"><tr><th>first</th><th>second</th></tr><tr><td>1234</td><td>123.56</td></tr></table>' +
                 '<a id="anchor">Link</a>';
 

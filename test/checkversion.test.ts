@@ -1,7 +1,8 @@
-const assert = require('assert');
+import { describe, expect, test, beforeEach, it, assert } from 'vitest'
 
 import ExcellentExport from '../src/excellentexport';
-const pkg = require('../package.json');
+
+import pkg from '../package.json';
 
 describe('version() API', function() {
     describe('get version', function() {

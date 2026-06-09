@@ -1,6 +1,7 @@
-const assert = require('assert');
+import { describe, expect, test, beforeEach, it, assert } from 'vitest'
 
 import ExcellentExport, { ConvertOptions, SheetOptions } from '../src/excellentexport';
+
 
 
 describe('convert() API', function() {
