@@ -28,6 +28,9 @@ jobs:
 
     - run: npm install
 
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps chromium
+
     - name: Run Vitest
       run: npx vitest run
 
