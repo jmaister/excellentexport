@@ -28,6 +28,14 @@ jobs:
 
     - run: npm install
 
+    - name: Cache Playwright browsers
+      uses: actions/cache@v5
+      with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
     - name: Install Playwright browsers
       run: npx playwright install --with-deps chromium
 
