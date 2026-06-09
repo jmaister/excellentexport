@@ -8,7 +8,8 @@
  */
 
 import * as XLSX from 'xlsx';
-import { CellTypes, FormatDefinition, PredefinedFormat, CellFormats, CellPatterns } from './format';
+import { CellTypes, PredefinedFormat, CellPatterns } from './format';
+import type {CellFormats, FormatDefinition} from './format';
 
 import * as utils from './utils';
 

@@ -1,16 +1,35 @@
 {
-    "compilerOptions": {
-      "outDir": "./dist",
-      "allowJs": true,
-      "target": "ESNext",
-      "sourceMap": true,
-      "removeComments": false,
-      "declaration": true,
-      "rootDir": "src",
-      "moduleResolution": "bundler",
-      "esModuleInterop": true
-    },
-    "include": [
-      "src/**/*.ts"
-    ]
+  "compilerOptions": {
+    /* Base Options */
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ESNext", "DOM"],
+
+    /* Strict Type Checking - CRITICAL */
+    "strict": true,
+
+    /* Modern Best Practices */
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+
+    /* Output & Emit */
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "sourceMap": true,
+    "declaration": true,
+    "allowJs": true,
+
+    /* Integration */
+    "types": ["node"],
+
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+      "src/**/*"
+  ]
 }

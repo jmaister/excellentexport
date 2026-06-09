@@ -3,7 +3,14 @@
   "compilerOptions": {
     "rootDir": "..",
     "noEmit": true,
-    "types": ["jest", "node"]
+    "types": ["node"],
+    "module": "commonjs",
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": false,
+    "lib": ["ESNext", "DOM"],
+    "paths": {
+        "@/*": ["../src/*"]
+    }
   },
   "include": [
     "../src/**/*.ts",

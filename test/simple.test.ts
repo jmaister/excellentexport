@@ -1,4 +1,4 @@
-const assert = require('assert');
+import { describe, expect, test, beforeEach, it, assert } from 'vitest'
 
 
 describe('Array', function() {

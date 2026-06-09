@@ -1,12 +1,4 @@
-/**
- * ExcellentExport 3.9.11
- * A client side Javascript export to Excel.
- *
- * @author: Jordi Burgos (jordiburgos@gmail.com)
- * @url: https://github.com/jmaister/excellentexport
- *
- */
-import { CellTypes, FormatDefinition, CellFormats, CellPatterns } from './format';
+import { CellTypes, CellPatterns, CellFormats, FormatDefinition } from './format';
 declare global {
     interface Navigator {
         msSaveBlob?: (blob: any, defaultName?: string) => boolean;
